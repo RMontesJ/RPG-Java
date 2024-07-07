@@ -3,14 +3,16 @@ package modelo;
 public class Hechizo {
 	private String nombre;
 	private int ataque;
+	private int energia;
 
 	public Hechizo() {
 
 	}
 
-	public Hechizo(String nombre, int ataque) {
+	public Hechizo(String nombre, int ataque, int energia) {
 		this.nombre = nombre;
 		this.ataque = ataque;
+		this.energia = energia;
 	}
 
 	public String getNombre() {
@@ -27,6 +29,14 @@ public class Hechizo {
 
 	public void setAtaque(int ataque) {
 		this.ataque = ataque;
+	}
+
+	public int getEnergia() {
+		return energia;
+	}
+
+	public void setEnergia(int energia) {
+		this.energia = energia;
 	}
 
 	@Override

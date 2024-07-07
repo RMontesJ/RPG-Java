@@ -72,6 +72,7 @@ public class Pelea {
 		
 		if(bestia.getVida() <= 0) {
 			humano.setVida(50);
+			humano.setEnergia(30);
 		}
 		
 	}
@@ -98,6 +99,7 @@ public class Pelea {
 		if(humano.hechizos.get(posicion).getNombre().equals("Hipnosis")) {
 			monstruo.setFuerza(monstruo.getFuerza() - 1);
 		}
+		humano.setEnergia(humano.getEnergia() - humano.hechizos.get(posicion).getEnergia());
 		System.out.println(humano);
 		System.out.println(monstruo);
 	}

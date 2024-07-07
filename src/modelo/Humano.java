@@ -8,6 +8,7 @@ public class Humano {
 	private int vida;
 	private int fuerza;
 	private Arma arma;
+	private int energia;
 	public ArrayList<Hechizo> hechizos;
 	public boolean transformacion;
 	public String habilidad;
@@ -16,14 +17,16 @@ public class Humano {
 		this.nombre = "Gregory";
 		this.vida = 50;
 		this.fuerza = 5;
+		this.energia = 30;
 		hechizos = new ArrayList<Hechizo>();
 		this.transformacion = false;
 		this.habilidad = "Intimidacion";
 	}
 
-	public Humano(int fuerza, int vida, boolean transformacion, String habiliidad) {
+	public Humano(int fuerza, int vida, int energia, boolean transformacion, String habiliidad) {
 		this.fuerza = fuerza;
 		this.vida = vida;
+		this.energia = energia;
 		hechizos = new ArrayList<Hechizo>();
 		this.transformacion = transformacion;
 		this.habilidad = habiliidad;
@@ -43,6 +46,14 @@ public class Humano {
 
 	public void setFuerza(int fuerza) {
 		this.fuerza = fuerza;
+	}
+
+	public int getEnergia() {
+		return energia;
+	}
+
+	public void setEnergia(int energia) {
+		this.energia = energia;
 	}
 
 	public int getVida() {
@@ -99,10 +110,6 @@ public class Humano {
 		}
 	}
 
-	public void lanzarHechizo(int opcion) {
-
-	}
-
 	public void crearHechizos(Hechizo h) {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Nombre del hechizo");
@@ -151,9 +158,9 @@ public class Humano {
 
 	@Override
 	public String toString() {
-
-		return "Humano\n" + "nombre: " + nombre + "\n" + "vida: " + vida + "\n" + "fuerza: " + fuerza + "\n" + "arma: "
-				+ arma + "\n" + "hechizos: " + hechizos + "\n" + "transformacion: " + transformacion + "\n"
-				+ "habilidad: " + habilidad;
+		return "Humano:\n" + "Nombre: " + nombre + "\n" + "Vida: " + vida + "\n" + "Fuerza: " + fuerza + "\n" + "Arma: "
+				+ arma + "\n" + "Energia: " + energia + "\n" + "Hechizos: " + hechizos + "\n" + "Transformacion: "
+				+ transformacion + "\n" + "Habilidad: " + habilidad + "\n";
 	}
+
 }

@@ -21,6 +21,7 @@ public class Bestia {
 			this.aguante = aguante;
 		}
 		
+		
 		public int getFuerza() {
 			return fuerza;
 		}
