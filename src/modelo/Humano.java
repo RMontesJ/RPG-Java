@@ -134,24 +134,24 @@ public class Humano {
 
 	public void elegirHabilidad(Humano humano) {
 		Scanner sc = new Scanner(System.in);
-		int habilidad = 0;
-		while (habilidad != 1 && habilidad != 2 && habilidad != 3) {
+		String habilidad = "";
+		while (!habilidad.equals("1") && !habilidad.equals("2") && !habilidad.equals("3")) {
 			System.out.println("Eligue una habilidad");
 			System.out.println("1- Intimidación");
 			System.out.println("2- Saludable");
 			System.out.println("3- Potencia");
-			habilidad = sc.nextInt();
+			habilidad = sc.nextLine();
 		}
 
-		if (habilidad == 1) {
+		if (habilidad.equals("1")) {
 			humano.setHabilidad("Intimidación");
 		}
 
-		else if (habilidad == 2) {
+		else if (habilidad.equals("2")) {
 			humano.setHabilidad("Saludable");
 		}
 
-		else if (habilidad == 3) {
+		else if (habilidad.equals("3")) {
 			humano.setHabilidad("Potencia");
 		}
 	}

@@ -61,7 +61,7 @@ public class Pelea {
 			}
 			
 			else if(opcion.equals("2")) {
-				hechizo(humano, hechizo, bestia);
+				usarHechizo(humano, hechizo, bestia);
 			}
 			
 			else if(opcion.equals("3")) {
@@ -79,14 +79,14 @@ public class Pelea {
 	
 	public void ataque(Humano humano, Monstruo monstruo) {
 		monstruo.setVida(monstruo.getVida() - humano.getFuerza());
-		System.out.println("El "+ monstruo.getNombre() + " ha perdido " + humano.getFuerza() + " puntos de vida");
+		System.out.println(monstruo.getNombre() + " ha perdido " + humano.getFuerza() + " puntos de vida");
 		humano.setVida(humano.getVida() - monstruo.getFuerza());
 		System.out.println("Has perdido " + monstruo.getFuerza() + " puntos de vida");
 		System.out.println(humano);
 		System.out.println(monstruo);
 	}
 	
-	public void hechizo(Humano humano, Hechizo hechizo, Monstruo monstruo) {
+	public void usarHechizo(Humano humano, Hechizo hechizo, Monstruo monstruo) {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("¿Que hechizo quieres usar?");
 		humano.verHechizos();
@@ -94,12 +94,18 @@ public class Pelea {
 		
 		System.out.println();
 		System.out.println("Lanzas " + humano.hechizos.get(posicion).getNombre());
-		System.out.println("El" + monstruo.getNombre() + " ha perdido " + humano.hechizos.get(posicion).getAtaque() + " puntos de vida");
+		System.out.println(monstruo.getNombre() + " ha perdido " + humano.hechizos.get(posicion).getAtaque() + " puntos de vida");
 		monstruo.setVida(monstruo.getVida() - humano.hechizos.get(posicion).getAtaque());
 		if(humano.hechizos.get(posicion).getNombre().equals("Hipnosis")) {
 			monstruo.setFuerza(monstruo.getFuerza() - 1);
 		}
-		humano.setEnergia(humano.getEnergia() - humano.hechizos.get(posicion).getEnergia());
+		if(humano.hechizos.get(posicion).getNombre().equals("Gota vital")) {
+			humano.setVida(humano.getVida() + 10);
+		}
+		humano.setEnergia(humano.getEnergia() - humano.hechizos.get(posicion).getCoste());
+		System.out.println("El enemigo te ataca.");
+		humano.setVida(humano.getVida() - monstruo.getFuerza());
+		System.out.println("Has perdido " + monstruo.getFuerza() + " puntos de vida");
 		System.out.println(humano);
 		System.out.println(monstruo);
 	}
@@ -120,7 +126,7 @@ public class Pelea {
 			}
 			
 			else if(opcion.equals("2")) {
-				hechizo(humano, hechizo, monstruo);
+				usarHechizo(humano, hechizo, monstruo);
 			}
 			else if(opcion.equals("3")) {
 				transformacion(humano);

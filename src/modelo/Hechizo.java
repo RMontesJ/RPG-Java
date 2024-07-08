@@ -3,16 +3,16 @@ package modelo;
 public class Hechizo {
 	private String nombre;
 	private int ataque;
-	private int energia;
+	private int coste;
 
 	public Hechizo() {
 
 	}
 
-	public Hechizo(String nombre, int ataque, int energia) {
+	public Hechizo(String nombre, int ataque, int coste) {
 		this.nombre = nombre;
 		this.ataque = ataque;
-		this.energia = energia;
+		this.coste = coste;
 	}
 
 	public String getNombre() {
@@ -31,17 +31,18 @@ public class Hechizo {
 		this.ataque = ataque;
 	}
 
-	public int getEnergia() {
-		return energia;
+	public int getCoste() {
+		return coste;
 	}
 
-	public void setEnergia(int energia) {
-		this.energia = energia;
+	public void setCoste(int coste) {
+		this.coste = coste;
 	}
 
 	@Override
 	public String toString() {
-		return "Hechizo [nombre=" + nombre + ", ataque=" + ataque + "]";
+		return "Hechizo [nombre=" + nombre + ", ataque=" + ataque + ", coste=" + coste + "]";
 	}
+
 
 }
