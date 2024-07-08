@@ -5,13 +5,15 @@ public class Hechizo {
 	private int ataque;
 	private int coste;
 
-	public Hechizo() {
-
-	}
-
 	public Hechizo(String nombre, int ataque, int coste) {
 		this.nombre = nombre;
 		this.ataque = ataque;
+		this.coste = coste;
+	}
+	
+	// para hechizos que no tienen daño
+	public Hechizo(String nombre, int coste) {
+		this.nombre = nombre;
 		this.coste = coste;
 	}
 
@@ -41,7 +43,7 @@ public class Hechizo {
 
 	@Override
 	public String toString() {
-		return "[nombre=" + nombre + ", ataque=" + ataque + ", coste=" + coste + "]";
+		return "[nombre=" + nombre + " ataque=" + ataque + " coste=" + coste + "]" + "\n";
 	}
 
 

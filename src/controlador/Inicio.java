@@ -7,14 +7,13 @@ public class Inicio {
 	public static void main(String[] args) {
 		
 		Humano persona = new Humano();
-		Monstruo monstruo = new Monstruo("Gigante", 40, 10);
-		Monstruo criatura = new Monstruo("Manticora", 60, 20);
+		Monstruo monstruo = new Monstruo();
 		
 		Pelea combate = new Pelea(persona, monstruo);
 		
 		Hechizo explosion = new Hechizo("Explosion", 10, 10);
 		Hechizo hipnosis = new Hechizo("Hipnosis", 5, 5);
-		Hechizo gotaVital = new Hechizo("Gota vital", 0, 5);
+		Hechizo gotaVital = new Hechizo("Gota vital", 5);
 		
 		Arma martillo = new Arma("Martillo", 5);
 		
@@ -26,10 +25,16 @@ public class Inicio {
 		
 		persona.ponerNombre(persona);
 		
-		persona.elegirHabilidad(persona);
+		persona.elegirHabilidad(persona, monstruo);
 		
-		combate.enfrentamiento(persona, monstruo, explosion);
-		combate.enfrentamiento2(persona, criatura, explosion);
+		int numeroCombate = 1;
+		
+		while(persona.getVida() >= 0) {
+			combate.enfrentamiento(persona, monstruo, explosion, numeroCombate);
+			monstruo.setVida(monstruo.getVidaLimite());
+			numeroCombate++;
+			monstruo.ganarExperiencia(monstruo);
+		}
 
 	}
 
