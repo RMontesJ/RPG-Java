@@ -7,8 +7,8 @@ public class Inicio {
 	public static void main(String[] args) {
 		
 		Humano persona = new Humano();
-		Monstruo monstruo = new Monstruo("Gigante", 10, 40, 10);
-		Monstruo criatura = new Monstruo("Manticora", 15, 55, 20);
+		Monstruo monstruo = new Monstruo("Gigante", 40, 10);
+		Monstruo criatura = new Monstruo("Manticora", 60, 20);
 		
 		Pelea combate = new Pelea(persona, monstruo);
 		

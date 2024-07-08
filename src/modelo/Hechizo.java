@@ -41,7 +41,7 @@ public class Hechizo {
 
 	@Override
 	public String toString() {
-		return "Hechizo [nombre=" + nombre + ", ataque=" + ataque + ", coste=" + coste + "]";
+		return "[nombre=" + nombre + ", ataque=" + ataque + ", coste=" + coste + "]";
 	}
 
 

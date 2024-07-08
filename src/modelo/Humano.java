@@ -12,6 +12,8 @@ public class Humano {
 	public ArrayList<Hechizo> hechizos;
 	public boolean transformacion;
 	public String habilidad;
+	private int nivel;
+	private int experiencia;
 
 	public Humano() {
 		this.nombre = "Gregory";
@@ -21,6 +23,8 @@ public class Humano {
 		hechizos = new ArrayList<Hechizo>();
 		this.transformacion = false;
 		this.habilidad = "Intimidacion";
+		this.nivel = 1;
+		this.experiencia = 0;
 	}
 
 	public Humano(int fuerza, int vida, int energia, boolean transformacion, String habiliidad) {
@@ -96,6 +100,22 @@ public class Humano {
 		this.habilidad = habilidad;
 	}
 
+	public int getNivel() {
+		return nivel;
+	}
+
+	public void setNivel(int nivel) {
+		this.nivel = nivel;
+	}
+
+	public int getExperiencia() {
+		return experiencia;
+	}
+
+	public void setExperiencia(int experiencia) {
+		this.experiencia = experiencia;
+	}
+
 	// permite guardar hechizos
 
 	public void meterHechizo(Hechizo a) {
@@ -156,11 +176,47 @@ public class Humano {
 		}
 	}
 
+	public void ganarExperiencia(Humano humano) {
+
+		humano.setExperiencia(humano.getExperiencia() + 10);
+
+		if (humano.getExperiencia() == 10) {
+			subirNivel(humano);
+			
+		} else if (humano.getExperiencia() == 25) {
+			subirNivel(humano);
+		}
+
+	}
+
+	public void subirNivel(Humano humano) {
+
+		humano.setNivel(humano.getNivel() + 1);
+		System.out.println("Has subido al nivel " + humano.getNivel());
+		subirEstadisticas(humano);
+		
+	}
+	
+	public void subirEstadisticas(Humano humano) {
+		
+		humano.setVida(humano.getVida() + 5);
+		humano.setFuerza(humano.getFuerza() + 5);
+		humano.setEnergia(humano.getEnergia() + 5);
+		
+		if(humano.habilidad.equals("Saludable")) {
+			humano.setVida(humano.getVida() + 10);
+		}
+		
+		System.out.println(humano);
+		
+	}
+
 	@Override
 	public String toString() {
 		return "Humano:\n" + "Nombre: " + nombre + "\n" + "Vida: " + vida + "\n" + "Fuerza: " + fuerza + "\n" + "Arma: "
 				+ arma + "\n" + "Energia: " + energia + "\n" + "Hechizos: " + hechizos + "\n" + "Transformacion: "
-				+ transformacion + "\n" + "Habilidad: " + habilidad + "\n";
+				+ transformacion + "\n" + "Habilidad: " + habilidad + "\n" + "nivel: " + nivel + "\n" + "experiencia: "
+				+ experiencia + "\n";
 	}
 
 }

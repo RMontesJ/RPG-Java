@@ -73,8 +73,43 @@ public class Pelea {
 		if(bestia.getVida() <= 0) {
 			humano.setVida(50);
 			humano.setEnergia(30);
+			humano.ganarExperiencia(humano);
+			if(humano.habilidad.equals("Saludable")) {
+				humano.setVida(60);
+			}
 		}
 		
+		else if(humano.getVida() <= 0) {
+			System.out.println("Has muerto. Fin de la partida");
+		}
+		
+	}
+	
+	public void enfrentamiento2(Humano humano,Monstruo monstruo, Hechizo hechizo){
+		System.out.println("Inicio del combate 2");
+		Scanner sc = new Scanner(System.in);
+		while(humano.getVida() > 0 && monstruo.getVida() > 0) {
+			System.out.println("1- Atacar");
+			System.out.println("2- Usar hechizo");
+			System.out.println("3- Transformarse");
+			System.out.println("4- Informacion de " + humano.getNombre());
+			String opcion = "";
+			opcion = sc.nextLine();
+			if(opcion.equals("1") ) {
+				ataque(humano, monstruo);
+			}
+			
+			else if(opcion.equals("2")) {
+				usarHechizo(humano, hechizo, monstruo);
+			}
+			else if(opcion.equals("3")) {
+				transformacion(humano);
+			}
+			else if(opcion.equals("4")) {
+				System.out.println(humano);
+			}
+			
+		}
 	}
 	
 	public void ataque(Humano humano, Monstruo monstruo) {
@@ -108,34 +143,6 @@ public class Pelea {
 		System.out.println("Has perdido " + monstruo.getFuerza() + " puntos de vida");
 		System.out.println(humano);
 		System.out.println(monstruo);
-	}
-	
-	
-	public void enfrentamiento2(Humano humano,Monstruo monstruo, Hechizo hechizo){
-		System.out.println("Inicio del combate 2");
-		Scanner sc = new Scanner(System.in);
-		while(humano.getVida() > 0 && monstruo.getVida() > 0) {
-			System.out.println("1- Atacar");
-			System.out.println("2- Usar hechizo");
-			System.out.println("3- Transformarse");
-			System.out.println("4- Informacion de " + humano.getNombre());
-			String opcion = "";
-			opcion = sc.nextLine();
-			if(opcion.equals("1") ) {
-				ataque(humano, monstruo);
-			}
-			
-			else if(opcion.equals("2")) {
-				usarHechizo(humano, hechizo, monstruo);
-			}
-			else if(opcion.equals("3")) {
-				transformacion(humano);
-			}
-			else if(opcion.equals("4")) {
-				System.out.println(humano);
-			}
-			
-		}
 	}
 	
 	public void transformacion(Humano humano) {
