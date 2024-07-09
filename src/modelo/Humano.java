@@ -6,11 +6,11 @@ import java.util.Scanner;
 public class Humano {
 	private String nombre;
 	private int vida;
-	private int vidaLimite;
+	private int vidaMaxima;
 	private int fuerza;
 	private Arma arma;
 	private int energia;
-	private int energiaLimite;
+	private int energiaMaxima;
 	public ArrayList<Hechizo> hechizos;
 	public String habilidad;
 	private int nivel;
@@ -20,10 +20,10 @@ public class Humano {
 	public Humano() {
 		this.nombre = "Gregory";
 		this.vida = 50;
-		this.vidaLimite = 50;
+		this.vidaMaxima = 50;
 		this.fuerza = 5;
 		this.energia = 30;
-		this.energiaLimite = 30;
+		this.energiaMaxima = 30;
 		hechizos = new ArrayList<Hechizo>();
 		this.nivel = 1;
 		this.experiencia = 0;
@@ -54,12 +54,12 @@ public class Humano {
 		this.energia = energia;
 	}
 
-	public int getEnergiaLimite() {
-		return energiaLimite;
+	public int getEnergiaMaxima() {
+		return energiaMaxima;
 	}
 
-	public void setEnergiaLimite(int energiaLimite) {
-		this.energiaLimite = energiaLimite;
+	public void setEnergiaMaxima(int energiaMaxima) {
+		this.energiaMaxima = energiaMaxima;
 	}
 
 	public int getVida() {
@@ -70,12 +70,12 @@ public class Humano {
 		this.vida = vida;
 	}
 
-	public int getVidaLimite() {
-		return vidaLimite;
+	public int getVidaMaxima() {
+		return vidaMaxima;
 	}
 
-	public void setVidaLimite(int vidaLimite) {
-		this.vidaLimite = vidaLimite;
+	public void setVidaMaxima(int vidaMaxima) {
+		this.vidaMaxima = vidaMaxima;
 	}
 
 	public Arma getArma() {
@@ -135,9 +135,11 @@ public class Humano {
 	// permite ver todos los hechizos
 
 	public void verHechizos() {
+		System.out.println("---------------------------------------------");
 		for (int i = 0; i < hechizos.size(); i++) {
 			System.out.println(i + ":" + hechizos.get(i));
 		}
+		System.out.println("---------------------------------------------");
 	}
 
 	public void crearHechizos(Hechizo h) {
@@ -181,8 +183,8 @@ public class Humano {
 
 		else if (habilidad.equals("2")) {
 			humano.setHabilidad("Saludable");
-			humano.setVida(humano.getVida() + 10);
-			humano.setVidaLimite(humano.getVidaLimite() + 10);
+			humano.setVidaMaxima(humano.getVidaMaxima() + 10);
+			humano.setVida(humano.getVidaMaxima());
 			System.out.println("Tu habilidad te ofrece mas vida");
 		}
 
@@ -215,20 +217,20 @@ public class Humano {
 	public void subirEstadisticas(Humano humano, Hechizo hechizo) {
 
 		humano.setVida(humano.getVida() + 5);
-		humano.setVidaLimite(humano.getVidaLimite() + 5);
+		humano.setVidaMaxima(humano.getVidaMaxima() + 5);
 		humano.setFuerza(humano.getFuerza() + 5);
 		humano.setEnergia(humano.getEnergia() + 5);
 		for(int i = 0; i < hechizos.size(); i++) {
 			
 			hechizos.get(i).setAtaque(hechizo.getAtaque() + 5);
+			if(hechizos.get(i).getTipo() == TipoHechizo.Curativo) {
+				hechizos.get(i).setAtaque(0);
+			}
 			
 		}
-		humano.setEnergiaLimite(humano.getEnergiaLimite() + 5);
+		
+		humano.setEnergiaMaxima(humano.getEnergiaMaxima() + 5);
 		humano.setExperienciaLimite(humano.getExperienciaLimite() + 10);
-
-		if (humano.habilidad.equals("Saludable")) {
-			humano.setVidaLimite(humano.getVidaLimite() + 10);
-		}
 
 		System.out.println(humano);
 
@@ -239,11 +241,11 @@ public class Humano {
 	    return "Humano {" + 
 	           "\n  Nombre= " + nombre + 
 	           "\n  Vida= " + vida + 
-	           "\n  Vida total= " + vidaLimite + 
+	           "\n  Vida total= " + vidaMaxima + 
 	           "\n  Fuerza= " + fuerza + 
 	           "\n  Arma= " + arma + 
 	           "\n  Energia= " + energia + 
-	           "\n  Energia total= " + energiaLimite + 
+	           "\n  Energia total= " + energiaMaxima + 
 	           "\n  Hechizos= " + hechizos + 
 	           "\n  Habilidad= " + habilidad + 
 	           "\n  Nivel= " + nivel + 

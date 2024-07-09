@@ -2,18 +2,20 @@ package modelo;
 
 public class Hechizo {
 	private String nombre;
+	private TipoHechizo tipo;
 	private int ataque;
 	private int coste;
 
-	public Hechizo(String nombre, int ataque, int coste) {
+	public Hechizo(String nombre, TipoHechizo tipo, int ataque, int coste) {
 		this.nombre = nombre;
+		this.tipo = tipo;
 		this.ataque = ataque;
 		this.coste = coste;
 	}
 	
-	// para hechizos que no tienen daño
-	public Hechizo(String nombre, int coste) {
+	public Hechizo(String nombre, TipoHechizo tipo, int coste) {
 		this.nombre = nombre;
+		this.tipo = tipo;
 		this.coste = coste;
 	}
 
@@ -23,6 +25,14 @@ public class Hechizo {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+
+	public TipoHechizo getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(TipoHechizo tipo) {
+		this.tipo = tipo;
 	}
 
 	public int getAtaque() {
@@ -43,8 +53,9 @@ public class Hechizo {
 
 	@Override
 	public String toString() {
-		return "[nombre=" + nombre + " ataque=" + ataque + " coste=" + coste + "]" + "\n";
+		return "Hechizo [nombre=" + nombre + ", tipo=" + tipo + ", ataque=" + ataque + ", coste=" + coste + "\n" + "]";
 	}
 
+	
 
 }
