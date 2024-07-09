@@ -12,13 +12,11 @@ public class Inicio {
 		Pelea combate = new Pelea(persona, monstruo);
 		
 		Hechizo explosion = new Hechizo("Explosion", TipoHechizo.Ofensivo, 10, 10);
-		Hechizo hipnosis = new Hechizo("Hipnosis", TipoHechizo.Ofensivo, 5, 5);
 		Hechizo gotaVital = new Hechizo("Gota vital", TipoHechizo.Curativo, 5);
 		
 		Arma martillo = new Arma("Martillo", 5);
 		
 		persona.meterHechizo(explosion);
-		persona.meterHechizo(hipnosis);
 		persona.meterHechizo(gotaVital);
 		
 		persona.equiparArma(persona, martillo);

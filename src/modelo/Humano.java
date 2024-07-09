@@ -15,6 +15,7 @@ public class Humano {
 	public String habilidad;
 	private int nivel;
 	private int experiencia;
+	private int gananciaExperiencia;
 	private int experienciaLimite;
 
 	public Humano() {
@@ -27,6 +28,7 @@ public class Humano {
 		hechizos = new ArrayList<Hechizo>();
 		this.nivel = 1;
 		this.experiencia = 0;
+		this.gananciaExperiencia = 5;
 		this.experienciaLimite = 10;
 	}
 
@@ -118,6 +120,14 @@ public class Humano {
 		this.experiencia = experiencia;
 	}
 
+	public int getGananciaExperiencia() {
+		return gananciaExperiencia;
+	}
+
+	public void setGananciaExperiencia(int gananciaExperiencia) {
+		this.gananciaExperiencia = gananciaExperiencia;
+	}
+
 	public int getExperienciaLimite() {
 		return experienciaLimite;
 	}
@@ -197,7 +207,7 @@ public class Humano {
 
 	public void ganarExperiencia(Humano humano, Hechizo hechizo) {
 
-		humano.setExperiencia(humano.getExperiencia() + 10);
+		humano.setExperiencia(humano.getExperiencia() + humano.getGananciaExperiencia());
 
 		if (humano.getExperiencia() >= humano.experienciaLimite) {
 			subirNivel(humano, hechizo);
@@ -220,6 +230,8 @@ public class Humano {
 		humano.setVidaMaxima(humano.getVidaMaxima() + 5);
 		humano.setFuerza(humano.getFuerza() + 5);
 		humano.setEnergia(humano.getEnergia() + 5);
+		humano.setEnergiaMaxima(humano.getEnergiaMaxima() + 5);
+		
 		for(int i = 0; i < hechizos.size(); i++) {
 			
 			hechizos.get(i).setAtaque(hechizo.getAtaque() + 5);
@@ -229,7 +241,6 @@ public class Humano {
 			
 		}
 		
-		humano.setEnergiaMaxima(humano.getEnergiaMaxima() + 5);
 		humano.setExperienciaLimite(humano.getExperienciaLimite() + 10);
 
 		System.out.println(humano);
@@ -250,6 +261,7 @@ public class Humano {
 	           "\n  Habilidad= " + habilidad + 
 	           "\n  Nivel= " + nivel + 
 	           "\n  EXP= " + experiencia + 
+	           "\n  Ganacia de EXP= " + gananciaExperiencia + 
 	           "\n  EXP para siguiente nivel= " + experienciaLimite + 
 	           "\n}";
 	}

@@ -98,9 +98,7 @@ public class Pelea {
 		System.out.println("Lanzas " + humano.hechizos.get(posicion).getNombre());
 		System.out.println(monstruo.getNombre() + " ha perdido " + humano.hechizos.get(posicion).getAtaque() + " puntos de vida");
 		monstruo.setVida(monstruo.getVida() - humano.hechizos.get(posicion).getAtaque());
-		if (humano.hechizos.get(posicion).getNombre().equals("Hipnosis")) {
-			monstruo.setFuerza(monstruo.getFuerza() - 1);
-		}
+		
 		if (humano.hechizos.get(posicion).getNombre().equals("Gota vital")) {
 			humano.setVida(humano.getVida() + 10);
 		}
