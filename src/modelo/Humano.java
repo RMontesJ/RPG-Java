@@ -12,7 +12,7 @@ public class Humano {
 	private int energia;
 	private int energiaMaxima;
 	public ArrayList<Hechizo> hechizos;
-	public String habilidad;
+	public Habilidad habilidad;
 	private int nivel;
 	private int experiencia;
 	private int gananciaExperiencia;
@@ -96,11 +96,11 @@ public class Humano {
 		this.hechizos = hechizos;
 	}
 
-	public String getHabilidad() {
+	public Habilidad getHabilidad() {
 		return habilidad;
 	}
 
-	public void setHabilidad(String habilidad) {
+	public void setHabilidad(Habilidad habilidad) {
 		this.habilidad = habilidad;
 	}
 
@@ -177,6 +177,9 @@ public class Humano {
 	public void elegirHabilidad(Humano humano, Monstruo bestia) {
 		Scanner sc = new Scanner(System.in);
 		String habilidad = "";
+		Habilidad intimidación = new Habilidad("Intimidación", 1, "Reduce el ataque del enemigo", 5);
+		Habilidad saludable = new Habilidad("Saludable", 1, "Aumenta tu salud maxima", 5);
+		Habilidad potencia = new Habilidad("Potencia", 1, "Aumenta tu ataque", 5);
 		while (!habilidad.equals("1") && !habilidad.equals("2") && !habilidad.equals("3")) {
 			System.out.println("Eligue una habilidad");
 			System.out.println("1- Intimidación");
@@ -186,23 +189,39 @@ public class Humano {
 		}
 
 		if (habilidad.equals("1")) {
-			humano.setHabilidad("Intimidación");
-			bestia.setFuerza(bestia.getFuerza() - 5);
-			System.out.println("Tu habilidad ha bajado el ataque del enemigo");
+			humano.setHabilidad(intimidación);
+			equiparHabilidad(humano, bestia);
 		}
 
 		else if (habilidad.equals("2")) {
-			humano.setHabilidad("Saludable");
+			humano.setHabilidad(saludable);
+			equiparHabilidad(humano, bestia);
+		}
+
+		else if (habilidad.equals("3")) {
+			humano.setHabilidad(potencia);
+			equiparHabilidad(humano, bestia);
+		}
+	}
+	
+	public void equiparHabilidad(Humano humano, Monstruo bestia) {
+		
+		if(humano.habilidad.getNombre().equals("Intimidación")) {
+			bestia.setFuerza(bestia.getFuerza() - humano.habilidad.getIntensidad());
+			System.out.println("Tu habilidad ha bajado el ataque del enemigo");
+		}
+		
+		else if(humano.habilidad.getNombre().equals("Saludable")) {
 			humano.setVidaMaxima(humano.getVidaMaxima() + 10);
 			humano.setVida(humano.getVidaMaxima());
 			System.out.println("Tu habilidad te ofrece mas vida");
 		}
-
-		else if (habilidad.equals("3")) {
-			humano.setHabilidad("Potencia");
+		
+		else if(humano.habilidad.getNombre().equals("Potencia")) {
 			humano.setFuerza(humano.getFuerza() + 5);
 			System.out.println("Tu habilidad ha aumentado tu ataque");
 		}
+		
 	}
 
 	public void ganarExperiencia(Humano humano, Hechizo hechizo) {
