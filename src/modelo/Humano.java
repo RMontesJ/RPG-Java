@@ -212,13 +212,13 @@ public class Humano {
 		}
 		
 		else if(humano.habilidad.getNombre().equals("Saludable")) {
-			humano.setVidaMaxima(humano.getVidaMaxima() + 10);
+			humano.setVidaMaxima(humano.getVidaMaxima() + humano.habilidad.getIntensidad());
 			humano.setVida(humano.getVidaMaxima());
 			System.out.println("Tu habilidad te ofrece mas vida");
 		}
 		
 		else if(humano.habilidad.getNombre().equals("Potencia")) {
-			humano.setFuerza(humano.getFuerza() + 5);
+			humano.setFuerza(humano.getFuerza() + humano.habilidad.getIntensidad());
 			System.out.println("Tu habilidad ha aumentado tu ataque");
 		}
 		
