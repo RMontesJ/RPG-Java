@@ -52,7 +52,7 @@ public class Pelea {
 			}
 
 			else if (opcion.equals("2")) {
-				usarHechizo(humano, bestia);
+				usarHechizo(humano, hechizo, bestia);
 			}
 
 			else if (opcion.equals("3")) {
@@ -91,11 +91,18 @@ public class Pelea {
 
 	}
 
-	public void usarHechizo(Humano humano, Monstruo monstruo) {
+	public void usarHechizo(Humano humano, Hechizo hechizo, Monstruo monstruo) {
 		Scanner sc = new Scanner(System.in);
+		
 		System.out.println("¿Que hechizo quieres usar?");
 		humano.verHechizos();
 		int posicion = sc.nextInt();
+		
+		while(posicion < 0 || posicion > humano.hechizos.size()) {
+			System.out.println("¿Que hechizo quieres usar?");
+			humano.verHechizos();
+			posicion = sc.nextInt();
+		}
 
 		System.out.println();
 
@@ -103,22 +110,26 @@ public class Pelea {
 			System.out.println("Lanzas " + humano.hechizos.get(posicion).getNombre());
 			humano.setVida(humano.getVida() + humano.hechizos.get(posicion).getFuerza());
 			System.out.println("Te has curado " + humano.hechizos.get(posicion).getFuerza() + " puntos de vida");
-			
-		} 
-		
+
+		}
+
 		else {
 			System.out.println("Lanzas " + humano.hechizos.get(posicion).getNombre());
 			System.out.println(monstruo.getNombre() + " ha perdido " + humano.hechizos.get(posicion).getFuerza()
 					+ " puntos de vida");
 			monstruo.setVida(monstruo.getVida() - humano.hechizos.get(posicion).getFuerza());
 		}
-		
+
 		humano.setEnergia(humano.getEnergia() - humano.hechizos.get(posicion).getCoste());
 		System.out.println("El enemigo te ataca.");
 		humano.setVida(humano.getVida() - monstruo.getFuerza());
 		System.out.println("Has perdido " + monstruo.getFuerza() + " puntos de vida");
 		System.out.println("Vida de " + humano.getNombre() + ": " + humano.getVida());
 		System.out.println("Vida de " + monstruo.getNombre() + ": " + monstruo.getVida());
+
+		if (humano.getEnergia() < hechizo.getCoste()) {
+			System.out.println("No tienes energia suficiente para lanzar " + hechizo.getNombre());
+		}
 
 	}
 
@@ -174,6 +185,9 @@ public class Pelea {
 
 			else if (recompensaElegida.getNombre().equals("Polvo magico")) {
 				humano.setEnergia(humano.getEnergia() + polvoMagico.getEfecto());
+				if (humano.getEnergia() > humano.getEnergiaMaxima()) {
+					humano.setEnergia(humano.getEnergiaMaxima());
+				}
 			}
 
 			else if (recompensaElegida.getNombre().equals("Martillo de herrero")) {

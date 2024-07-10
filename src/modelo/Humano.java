@@ -19,9 +19,8 @@ public class Humano {
 	private int experienciaLimite;
 
 	public Humano() {
-		this.nombre = "Gregory";
-		this.vida = 50;
-		this.vidaMaxima = 50;
+		this.vida = 60;
+		this.vidaMaxima = 60;
 		this.fuerza = 0;
 		this.energia = 30;
 		this.energiaMaxima = 30;
@@ -147,7 +146,7 @@ public class Humano {
 	public void verHechizos() {
 		System.out.println("---------------------------------------------");
 		for (int i = 0; i < hechizos.size(); i++) {
-			System.out.println("Tecla " +i + ":" + hechizos.get(i));
+			System.out.println("Tecla " + i + ":" + hechizos.get(i));
 		}
 		System.out.println("---------------------------------------------");
 	}
@@ -194,25 +193,25 @@ public class Humano {
 			equiparHabilidad(humano, bestia);
 		}
 	}
-	
+
 	public void equiparHabilidad(Humano humano, Monstruo bestia) {
-		
-		if(humano.habilidad.getNombre().equals("Intimidación")) {
+
+		if (humano.habilidad.getNombre().equals("Intimidación")) {
 			bestia.setFuerza(bestia.getFuerza() - humano.habilidad.getIntensidad());
 			System.out.println("Tu habilidad ha bajado el ataque del enemigo");
 		}
-		
-		else if(humano.habilidad.getNombre().equals("Saludable")) {
+
+		else if (humano.habilidad.getNombre().equals("Saludable")) {
 			humano.setVidaMaxima(humano.getVidaMaxima() + humano.habilidad.getIntensidad());
 			humano.setVida(humano.getVidaMaxima());
 			System.out.println("Tu habilidad te ofrece mas vida");
 		}
-		
-		else if(humano.habilidad.getNombre().equals("Potencia")) {
+
+		else if (humano.habilidad.getNombre().equals("Potencia")) {
 			humano.setFuerza(humano.getFuerza() + humano.habilidad.getIntensidad());
 			System.out.println("Tu habilidad ha aumentado tu ataque");
 		}
-		
+
 	}
 
 	public void ganarExperiencia(Humano humano, Hechizo hechizo) {
@@ -241,18 +240,13 @@ public class Humano {
 		humano.setFuerza(humano.getFuerza() + 5);
 		humano.setEnergia(humano.getEnergia() + 5);
 		humano.setEnergiaMaxima(humano.getEnergiaMaxima() + 5);
-		
-		for(int i = 0; i < hechizos.size(); i++) {
-			
-			if(hechizos.get(i).getTipo().equals("Curativo")) {
-				hechizos.get(i).setFuerza(hechizo.getFuerza());
-			}
-			else {
-				hechizos.get(i).setFuerza(hechizo.getFuerza() + 5);
-			}
-	
+
+		for (int i = 0; i < hechizos.size(); i++) {
+
+		hechizos.get(i).setFuerza(hechizo.getFuerza() + 5);
+
 		}
-		
+
 		humano.setExperienciaLimite(humano.getExperienciaLimite() + 10);
 
 		System.out.println(humano);
@@ -261,22 +255,11 @@ public class Humano {
 
 	@Override
 	public String toString() {
-	    return "Humano {" + 
-	           "\n  Nombre= " + nombre + 
-	           "\n  Vida= " + vida + 
-	           "\n  Vida total= " + vidaMaxima + 
-	           "\n  Fuerza= " + fuerza + 
-	           "\n  Arma= " + arma + 
-	           "\n  Energia= " + energia + 
-	           "\n  Energia total= " + energiaMaxima + 
-	           "\n  Hechizos= " + hechizos + 
-	           "\n  Habilidad= " + habilidad + 
-	           "\n  Nivel= " + nivel + 
-	           "\n  EXP= " + experiencia + 
-	           "\n  Ganacia de EXP= " + gananciaExperiencia + 
-	           "\n  EXP para siguiente nivel= " + experienciaLimite + 
-	           "\n}";
+		return "Humano {" + "\n  Nombre= " + nombre + "\n  Vida= " + vida + "\n  Vida total= " + vidaMaxima
+				+ "\n  Fuerza= " + fuerza + "\n  Arma= " + arma + "\n  Energia= " + energia + "\n  Energia total= "
+				+ energiaMaxima + "\n  Hechizos= " + hechizos + "\n  Habilidad= " + habilidad + "\n  Nivel= " + nivel
+				+ "\n  EXP= " + experiencia + "\n  Ganacia de EXP= " + gananciaExperiencia
+				+ "\n  EXP para siguiente nivel= " + experienciaLimite + "\n}";
 	}
-
 
 }

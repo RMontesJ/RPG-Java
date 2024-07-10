@@ -68,7 +68,7 @@ public class Hechizo {
 	public void subirNivel(Hechizo hechizo) {
 
 		hechizo.setNivel(hechizo.getNivel() + 1);
-		System.out.println("El hechizo" + hechizo.getNombre() + " ha subido al nivel " + hechizo.getNivel());
+		System.out.println("El hechizo " + hechizo.getNombre() + " ha subido al nivel " + hechizo.getNivel());
 		subirEstadisticas(hechizo);
 
 	}

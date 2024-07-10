@@ -14,7 +14,7 @@ public class Monstruo {
 	public Monstruo() {
 		this.vida = 20;
 		this.vidaMaxima = 20;
-		this.fuerza = 5;
+		this.fuerza = 10;
 		this.fuerzaMaxima = 10;
 		this.nivel = 1;
 		this.experiencia = 0;
@@ -131,7 +131,7 @@ public class Monstruo {
 	           "\n  vida=" + vida + 
 	           "\n  vida Maxima=" + vidaMaxima + 
 	           "\n  fuerza=" + fuerza + 
-	           "\n  fuerzaLimite=" + fuerzaMaxima + 
+	           "\n  fuerza maxima=" + fuerzaMaxima + 
 	           "\n  nivel=" + nivel + 
 	           "\n  EXP= " + experiencia + 
 	           "\n  EXP para siguiente nivel= " + experienciaLimite + 
