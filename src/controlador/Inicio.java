@@ -14,7 +14,7 @@ public class Inicio {
 		Hechizo bolaDeFuego = new Hechizo("Bola de fuego", 1, TipoHechizo.Ofensivo, 10, 10, "Lanza una bola de fuego");
 		Hechizo gotaVital = new Hechizo("Gota vital", 1, TipoHechizo.Curativo, 5, 5, "Cubrete de un liquido magico que cura tus heridas");
 		
-		Arma martillo = new Arma("Martillo", 5);
+		Arma martillo = new Arma("Martillo", 1, 5);
 		
 		persona.meterHechizo(bolaDeFuego);
 		persona.meterHechizo(gotaVital);
@@ -32,7 +32,7 @@ public class Inicio {
 			combate.enfrentamiento(persona, monstruo, bolaDeFuego, numeroCombate);
 			
 			if(persona.getVida() > 0) {
-				combate.elegirRecompensa(combate);
+				combate.elegirRecompensa(combate, persona, martillo, bolaDeFuego);
 				monstruo.ganarExperiencia(monstruo);
 				monstruo.setVida(monstruo.getVidaMaxima());
 				numeroCombate++;

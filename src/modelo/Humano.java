@@ -244,7 +244,12 @@ public class Humano {
 		
 		for(int i = 0; i < hechizos.size(); i++) {
 			
-			hechizos.get(i).setFuerza(hechizo.getFuerza() + 5);
+			if(hechizos.get(i).getTipo().equals("Curativo")) {
+				hechizos.get(i).setFuerza(hechizo.getFuerza());
+			}
+			else {
+				hechizos.get(i).setFuerza(hechizo.getFuerza() + 5);
+			}
 	
 		}
 		
