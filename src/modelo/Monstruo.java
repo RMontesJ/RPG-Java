@@ -12,10 +12,9 @@ public class Monstruo {
 	
 
 	public Monstruo() {
-		this.nombre = "Gigante";
 		this.vida = 20;
 		this.vidaMaxima = 20;
-		this.fuerza = 10;
+		this.fuerza = 5;
 		this.fuerzaMaxima = 10;
 		this.nivel = 1;
 		this.experiencia = 0;
@@ -84,6 +83,16 @@ public class Monstruo {
 
 	public void setExperienciaLimite(int experienciaLimite) {
 		this.experienciaLimite = experienciaLimite;
+	}
+	
+	public void ponerNombre(Monstruo enemigo) {
+		
+		String nombre [] = {"Dragon", "Minotauro", "Gigante", "Leviatan", "Quimera", "Escorpion"};
+		
+		int aleatorio = (int) (Math.random() * nombre.length);
+		
+		enemigo.setNombre(nombre[aleatorio]);
+		
 	}
 	
 	public void ganarExperiencia(Monstruo enemigo) {

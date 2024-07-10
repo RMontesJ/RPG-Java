@@ -22,7 +22,7 @@ public class Humano {
 		this.nombre = "Gregory";
 		this.vida = 50;
 		this.vidaMaxima = 50;
-		this.fuerza = 5;
+		this.fuerza = 0;
 		this.energia = 30;
 		this.energiaMaxima = 30;
 		hechizos = new ArrayList<Hechizo>();
@@ -147,18 +147,9 @@ public class Humano {
 	public void verHechizos() {
 		System.out.println("---------------------------------------------");
 		for (int i = 0; i < hechizos.size(); i++) {
-			System.out.println(i + ":" + hechizos.get(i));
+			System.out.println("Tecla " +i + ":" + hechizos.get(i));
 		}
 		System.out.println("---------------------------------------------");
-	}
-
-	public void crearHechizos(Hechizo h) {
-		Scanner sc = new Scanner(System.in);
-		System.out.println("Nombre del hechizo");
-		h.setNombre(sc.nextLine());
-		System.out.println("Daño del hechizo");
-		h.setAtaque(sc.nextInt());
-		hechizos.add(h);
 	}
 
 	public void equiparArma(Humano humano, Arma arma) {
@@ -253,11 +244,8 @@ public class Humano {
 		
 		for(int i = 0; i < hechizos.size(); i++) {
 			
-			hechizos.get(i).setAtaque(hechizo.getAtaque() + 5);
-			if(hechizos.get(i).getTipo() == TipoHechizo.Curativo) {
-				hechizos.get(i).setAtaque(0);
-			}
-			
+			hechizos.get(i).setFuerza(hechizo.getFuerza() + 5);
+	
 		}
 		
 		humano.setExperienciaLimite(humano.getExperienciaLimite() + 10);

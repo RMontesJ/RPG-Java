@@ -1,19 +1,22 @@
 package modelo;
 
-import java.util.Scanner;
+import java.util.*;
 
 public class Pelea {
 
 	private Humano humano;
 	private Monstruo monstruo;
+	public ArrayList<Recompensa> recompensas;
 
+	
 	public Pelea() {
-
+		recompensas = new ArrayList<Recompensa>();
 	}
 
 	public Pelea(Humano humano, Monstruo monstruo) {
 		this.humano = humano;
 		this.monstruo = monstruo;
+		recompensas = new ArrayList<Recompensa>();
 	}
 
 	public Humano getHumano() {
@@ -85,6 +88,8 @@ public class Pelea {
 		System.out.println(monstruo.getNombre() + " ha perdido " + humano.getFuerza() + " puntos de vida");
 		humano.setVida(humano.getVida() - monstruo.getFuerza());
 		System.out.println("Has perdido " + monstruo.getFuerza() + " puntos de vida");
+		System.out.println("Vida de " + humano.getNombre() + ": " + humano.getVida());
+		System.out.println("Vida de " + monstruo.getNombre() + ": " + monstruo.getVida());
 
 	}
 
@@ -96,17 +101,64 @@ public class Pelea {
 
 		System.out.println();
 		System.out.println("Lanzas " + humano.hechizos.get(posicion).getNombre());
-		System.out.println(monstruo.getNombre() + " ha perdido " + humano.hechizos.get(posicion).getAtaque() + " puntos de vida");
-		monstruo.setVida(monstruo.getVida() - humano.hechizos.get(posicion).getAtaque());
-		
+		System.out.println(
+				monstruo.getNombre() + " ha perdido " + humano.hechizos.get(posicion).getFuerza() + " puntos de vida");
+		monstruo.setVida(monstruo.getVida() - humano.hechizos.get(posicion).getFuerza());
+
 		if (humano.hechizos.get(posicion).getNombre().equals("Gota vital")) {
-			humano.setVida(humano.getVida() + 10);
+			humano.setVida(humano.getVida() + humano.hechizos.get(posicion).getFuerza());
+			System.out.println("Te has curado " + humano.hechizos.get(posicion).getFuerza() + " puntos de vida");
 		}
 		humano.setEnergia(humano.getEnergia() - humano.hechizos.get(posicion).getCoste());
 		System.out.println("El enemigo te ataca.");
 		humano.setVida(humano.getVida() - monstruo.getFuerza());
 		System.out.println("Has perdido " + monstruo.getFuerza() + " puntos de vida");
+		System.out.println("Vida de " + humano.getNombre() + ": " + humano.getVida());
+		System.out.println("Vida de " + monstruo.getNombre() + ": " + monstruo.getVida());
 
+	}
+
+	public void elegirRecompensa(Pelea combate) {
+		Scanner sc = new Scanner(System.in);
+
+		Recompensa pocion = new Recompensa("Pocion", "Recupera salud", 20);
+		Recompensa polvoMagico = new Recompensa("Polvo magico", "Recupera energia", 15);
+		Recompensa martilloDeHerrero = new Recompensa("Martillo de herrero", "Aumenta el nivel de tu arma", 1);
+		Recompensa maestriaMagica = new Recompensa("Maestria magica", "Aumenta el nivel de uno de tus hechizos", 1);
+
+		combate.insertarRecompensa(pocion);
+		combate.insertarRecompensa(polvoMagico);
+		combate.insertarRecompensa(martilloDeHerrero);
+		combate.insertarRecompensa(maestriaMagica);
+
+		int aleatorio1 = (int) (Math.random() * recompensas.size());
+		int aleatorio2 = (int) (Math.random() * recompensas.size());
+		int aleatorio3 = (int) (Math.random() * recompensas.size());
+
+		Recompensa recompensa1 = combate.recompensas.get(aleatorio1);
+		Recompensa recompensa2 = combate.recompensas.get(aleatorio2);
+		Recompensa recompensa3 = combate.recompensas.get(aleatorio3);
+
+		String eleccion = "";
+
+		while (!eleccion.equals("1") && !eleccion.equals("2") && !eleccion.equals("3")) {
+
+			System.out.println("Elige tu recompensa");
+
+			System.out.println(recompensa1);
+			System.out.println(recompensa2);
+			System.out.println(recompensa3);
+
+			eleccion = sc.nextLine();
+			
+			
+
+		}
+
+	}
+
+	public void insertarRecompensa(Recompensa premio) {
+		recompensas.add(premio);
 	}
 
 	@Override

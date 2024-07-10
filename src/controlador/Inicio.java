@@ -11,12 +11,12 @@ public class Inicio {
 		
 		Pelea combate = new Pelea(persona, monstruo);
 		
-		Hechizo explosion = new Hechizo("Explosion", TipoHechizo.Ofensivo, 10, 10);
-		Hechizo gotaVital = new Hechizo("Gota vital", TipoHechizo.Curativo, 5);
+		Hechizo bolaDeFuego = new Hechizo("Bola de fuego", 1, TipoHechizo.Ofensivo, 10, 10, "Lanza una bola de fuego");
+		Hechizo gotaVital = new Hechizo("Gota vital", 1, TipoHechizo.Curativo, 5, 5, "Cubrete de un liquido magico que cura tus heridas");
 		
 		Arma martillo = new Arma("Martillo", 5);
 		
-		persona.meterHechizo(explosion);
+		persona.meterHechizo(bolaDeFuego);
 		persona.meterHechizo(gotaVital);
 		
 		persona.equiparArma(persona, martillo);
@@ -28,9 +28,11 @@ public class Inicio {
 		int numeroCombate = 1;
 		
 		while(persona.getVida() > 0) {
-			combate.enfrentamiento(persona, monstruo, explosion, numeroCombate);
+			monstruo.ponerNombre(monstruo);
+			combate.enfrentamiento(persona, monstruo, bolaDeFuego, numeroCombate);
 			
 			if(persona.getVida() > 0) {
+				combate.elegirRecompensa(combate);
 				monstruo.ganarExperiencia(monstruo);
 				monstruo.setVida(monstruo.getVidaMaxima());
 				numeroCombate++;

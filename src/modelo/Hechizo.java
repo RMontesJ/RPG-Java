@@ -2,21 +2,19 @@ package modelo;
 
 public class Hechizo {
 	private String nombre;
+	private int nivel;
 	private TipoHechizo tipo;
-	private int ataque;
+	private int fuerza;
 	private int coste;
+	private String descripción;
 
-	public Hechizo(String nombre, TipoHechizo tipo, int ataque, int coste) {
+	public Hechizo(String nombre, int nivel, TipoHechizo tipo, int fuerza, int coste, String descripción) {
 		this.nombre = nombre;
+		this.nivel = nivel;
 		this.tipo = tipo;
-		this.ataque = ataque;
+		this.fuerza = fuerza;
 		this.coste = coste;
-	}
-	
-	public Hechizo(String nombre, TipoHechizo tipo, int coste) {
-		this.nombre = nombre;
-		this.tipo = tipo;
-		this.coste = coste;
+		this.descripción = descripción;
 	}
 
 	public String getNombre() {
@@ -27,6 +25,14 @@ public class Hechizo {
 		this.nombre = nombre;
 	}
 
+	public int getNivel() {
+		return nivel;
+	}
+
+	public void setNivel(int nivel) {
+		this.nivel = nivel;
+	}
+
 	public TipoHechizo getTipo() {
 		return tipo;
 	}
@@ -35,12 +41,12 @@ public class Hechizo {
 		this.tipo = tipo;
 	}
 
-	public int getAtaque() {
-		return ataque;
+	public int getFuerza() {
+		return fuerza;
 	}
 
-	public void setAtaque(int ataque) {
-		this.ataque = ataque;
+	public void setFuerza(int fuerza) {
+		this.fuerza = fuerza;
 	}
 
 	public int getCoste() {
@@ -51,11 +57,18 @@ public class Hechizo {
 		this.coste = coste;
 	}
 
-	@Override
-	public String toString() {
-		return "Hechizo [nombre=" + nombre + ", tipo=" + tipo + ", ataque=" + ataque + ", coste=" + coste + "\n" + "]";
+	public String getDescripción() {
+		return descripción;
 	}
 
-	
+	public void setDescripción(String descripción) {
+		this.descripción = descripción;
+	}
+
+	@Override
+	public String toString() {
+		return "Hechizo [nombre=" + nombre + "nivel=" + nivel + ", tipo=" + tipo + ", fuerza=" + fuerza + ", coste=" + coste
+				+ "\n" + ", descripción=" + descripción + "]" + "\n";
+	}
 
 }
