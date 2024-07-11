@@ -243,7 +243,7 @@ public class Humano {
 
 		for (int i = 0; i < hechizos.size(); i++) {
 
-		hechizos.get(i).setFuerza(hechizo.getFuerza() + 5);
+		humano.hechizos.get(i).setFuerza(humano.hechizos.get(i).getFuerza() + 5);
 
 		}
 

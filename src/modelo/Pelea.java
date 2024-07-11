@@ -39,13 +39,16 @@ public class Pelea {
 		System.out.println("Inicio del combate " + numeroCombate);
 
 		Scanner sc = new Scanner(System.in);
-		while (humano.getVida() > 0 && bestia.getVida() > 0) {
+		
+		String opcion = "";
+		
+		while (humano.getVida() > 0 && bestia.getVida() > 0 || !opcion.equals("1") &&  !opcion.equals("2") && !opcion.equals("3")) {
 			System.out.println("---------------------------------------------");
 			System.out.println("1- Atacar");
 			System.out.println("2- Usar hechizo");
 			System.out.println("3- Informacion de la partida");
 			System.out.println("---------------------------------------------");
-			String opcion = "";
+			
 			opcion = sc.nextLine();
 			if (opcion.equals("1")) {
 				ataque(humano, bestia);
@@ -69,6 +72,8 @@ public class Pelea {
 			}
 
 		}
+		
+		
 
 	}
 
@@ -160,7 +165,7 @@ public class Pelea {
 
 		while (!eleccion.equals("1") && !eleccion.equals("2") && !eleccion.equals("3")) {
 
-			System.out.println("Elige tu recompensa");
+			System.out.println("Has ganado.Elige tu recompensa");
 
 			System.out.println("1. " + recompensa1);
 			System.out.println("2. " + recompensa2);
