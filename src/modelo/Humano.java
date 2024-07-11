@@ -11,8 +11,10 @@ public class Humano {
 	private Arma arma;
 	private int energia;
 	private int energiaMaxima;
+	private int defensa;
 	public ArrayList<Hechizo> hechizos;
 	public Habilidad habilidad;
+	public ArrayList<Habilidad> habilidades;
 	private int nivel;
 	private int experiencia;
 	private int gananciaExperiencia;
@@ -24,7 +26,9 @@ public class Humano {
 		this.fuerza = 0;
 		this.energia = 30;
 		this.energiaMaxima = 30;
+		this.defensa = 5;
 		hechizos = new ArrayList<Hechizo>();
+		habilidades = new ArrayList<Habilidad>();
 		this.nivel = 1;
 		this.experiencia = 0;
 		this.gananciaExperiencia = 5;
@@ -37,30 +41,6 @@ public class Humano {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
-	}
-
-	public int getFuerza() {
-		return fuerza;
-	}
-
-	public void setFuerza(int fuerza) {
-		this.fuerza = fuerza;
-	}
-
-	public int getEnergia() {
-		return energia;
-	}
-
-	public void setEnergia(int energia) {
-		this.energia = energia;
-	}
-
-	public int getEnergiaMaxima() {
-		return energiaMaxima;
-	}
-
-	public void setEnergiaMaxima(int energiaMaxima) {
-		this.energiaMaxima = energiaMaxima;
 	}
 
 	public int getVida() {
@@ -79,12 +59,44 @@ public class Humano {
 		this.vidaMaxima = vidaMaxima;
 	}
 
+	public int getFuerza() {
+		return fuerza;
+	}
+
+	public void setFuerza(int fuerza) {
+		this.fuerza = fuerza;
+	}
+
 	public Arma getArma() {
 		return arma;
 	}
 
 	public void setArma(Arma arma) {
 		this.arma = arma;
+	}
+
+	public int getEnergia() {
+		return energia;
+	}
+
+	public void setEnergia(int energia) {
+		this.energia = energia;
+	}
+
+	public int getEnergiaMaxima() {
+		return energiaMaxima;
+	}
+
+	public void setEnergiaMaxima(int energiaMaxima) {
+		this.energiaMaxima = energiaMaxima;
+	}
+
+	public int getDefensa() {
+		return defensa;
+	}
+
+	public void setDefensa(int defensa) {
+		this.defensa = defensa;
 	}
 
 	public ArrayList<Hechizo> getHechizos() {
@@ -135,10 +147,18 @@ public class Humano {
 		this.experienciaLimite = experienciaLimite;
 	}
 
-	// permite guardar hechizos
+	public void meterHechizo(Hechizo a, Humano humano) {
 
-	public void meterHechizo(Hechizo a) {
-		hechizos.add(a);
+		if (humano.hechizos.size() > 4) {
+			System.out.println("Solo puedes llevar 4 hechizos como maximo, has llegado al limite");
+		} else {
+			hechizos.add(a);
+		}
+
+	}
+
+	public void meterHabilidad(Habilidad a) {
+		habilidades.add(a);
 	}
 
 	// permite ver todos los hechizos
@@ -151,8 +171,17 @@ public class Humano {
 		System.out.println("---------------------------------------------");
 	}
 
+	public void verHabilidades() {
+		System.out.println("---------------------------------------------");
+		for (int i = 0; i < habilidades.size(); i++) {
+			System.out.println("Tecla " + i + ":" + habilidades.get(i));
+		}
+		System.out.println("---------------------------------------------");
+	}
+
 	public void equiparArma(Humano humano, Arma arma) {
 		humano.setFuerza(arma.getDaño() + humano.getFuerza());
+		humano.setEnergia(humano.getEnergia() - arma.getPeso());
 		humano.setArma(arma);
 	}
 
@@ -166,32 +195,37 @@ public class Humano {
 
 	public void elegirHabilidad(Humano humano, Monstruo bestia) {
 		Scanner sc = new Scanner(System.in);
-		String habilidad = "";
+
 		Habilidad intimidación = new Habilidad("Intimidación", 1, "Reduce el ataque del enemigo", 5);
 		Habilidad saludable = new Habilidad("Saludable", 1, "Aumenta tu salud maxima", 5);
 		Habilidad potencia = new Habilidad("Potencia", 1, "Aumenta tu ataque", 5);
-		while (!habilidad.equals("1") && !habilidad.equals("2") && !habilidad.equals("3")) {
-			System.out.println("Eligue una habilidad");
-			System.out.println("1- Intimidación");
-			System.out.println("2- Saludable");
-			System.out.println("3- Potencia");
-			habilidad = sc.nextLine();
-		}
 
-		if (habilidad.equals("1")) {
-			humano.setHabilidad(intimidación);
+		humano.meterHabilidad(intimidación);
+		humano.meterHabilidad(saludable);
+		humano.meterHabilidad(potencia);
+
+		System.out.println("Elige una habilidad");
+
+		verHabilidades();
+
+		int habilidad = sc.nextInt();
+
+		while (habilidad < 0 || habilidad > humano.habilidades.size()) {
+			System.out.println("Elige una habilidad valida");
+
+			verHabilidades();
+
+			habilidad = sc.nextInt();
+
+			humano.setHabilidad(humano.habilidades.get(habilidad));
+
 			equiparHabilidad(humano, bestia);
 		}
 
-		else if (habilidad.equals("2")) {
-			humano.setHabilidad(saludable);
-			equiparHabilidad(humano, bestia);
-		}
+		humano.setHabilidad(humano.habilidades.get(habilidad));
 
-		else if (habilidad.equals("3")) {
-			humano.setHabilidad(potencia);
-			equiparHabilidad(humano, bestia);
-		}
+		equiparHabilidad(humano, bestia);
+
 	}
 
 	public void equiparHabilidad(Humano humano, Monstruo bestia) {
@@ -211,6 +245,14 @@ public class Humano {
 			humano.setFuerza(humano.getFuerza() + humano.habilidad.getIntensidad());
 			System.out.println("Tu habilidad ha aumentado tu ataque");
 		}
+
+	}
+
+	public void mejorarHabilidad(Habilidad habilidad) {
+
+		habilidad.setNivel(habilidad.getNivel() + 1);
+
+		habilidad.setIntensidad(habilidad.getIntensidad() + 5);
 
 	}
 
@@ -243,7 +285,7 @@ public class Humano {
 
 		for (int i = 0; i < hechizos.size(); i++) {
 
-		humano.hechizos.get(i).setFuerza(humano.hechizos.get(i).getFuerza() + 5);
+			humano.hechizos.get(i).setFuerza(humano.hechizos.get(i).getFuerza() + 5);
 
 		}
 
@@ -253,13 +295,25 @@ public class Humano {
 
 	}
 
-	@Override
 	public String toString() {
-		return "Humano {" + "\n  Nombre= " + nombre + "\n  Vida= " + vida + "\n  Vida total= " + vidaMaxima
-				+ "\n  Fuerza= " + fuerza + "\n  Arma= " + arma + "\n  Energia= " + energia + "\n  Energia total= "
-				+ energiaMaxima + "\n  Hechizos= " + hechizos + "\n  Habilidad= " + habilidad + "\n  Nivel= " + nivel
-				+ "\n  EXP= " + experiencia + "\n  Ganacia de EXP= " + gananciaExperiencia
-				+ "\n  EXP para siguiente nivel= " + experienciaLimite + "\n}";
+	    return "Humano [\n" +
+	           "nombre=" + nombre + "\n" +
+	           "vida=" + vida + "\n" +
+	           "vidaMaxima=" + vidaMaxima + "\n" +
+	           "fuerza=" + fuerza + "\n" +
+	           "arma=" + arma + "\n" +
+	           "energia=" + energia + "\n" +
+	           "energiaMaxima=" + energiaMaxima + "\n" +
+	           "defensa=" + defensa + "\n" +
+	           "hechizos=" + hechizos + "\n" +
+	           "habilidad=" + habilidad + "\n" +
+	           "habilidades=" + habilidades + "\n" +
+	           "nivel=" + nivel + "\n" +
+	           "experiencia=" + experiencia + "\n" +
+	           "gananciaExperiencia=" + gananciaExperiencia + "\n" +
+	           "experienciaLimite=" + experienciaLimite + "\n" +
+	           "]";
 	}
+
 
 }

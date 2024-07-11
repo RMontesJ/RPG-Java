@@ -4,15 +4,20 @@ public class Arma {
 	private String nombre;
 	private int nivel;
 	private int daño;
-
+	private TipoArma tipo;
+	private int peso;
+	
 	public Arma() {
 
 	}
 
-	public Arma(String nombre, int nivel, int daño) {
+	public Arma(String nombre, int nivel, int daño, TipoArma tipo, int peso) {
 		this.nombre = nombre;
 		this.nivel = nivel;
 		this.daño = daño;
+		this.tipo = tipo;
+		this.peso = peso;
+		
 	}
 
 	public String getNombre() {
@@ -39,6 +44,22 @@ public class Arma {
 		this.daño = daño;
 	}
 	
+	public TipoArma getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(TipoArma tipo) {
+		this.tipo = tipo;
+	}
+
+	public int getPeso() {
+		return peso;
+	}
+
+	public void setPeso(int peso) {
+		this.peso = peso;
+	}
+
 	public void subirNivel(Arma arma) {
 
 		arma.setNivel(arma.getNivel() + 1);
@@ -55,8 +76,8 @@ public class Arma {
 
 	@Override
 	public String toString() {
-		return "Arma [nombre=" + nombre + ", nivel=" + nivel + ", daño=" + daño + "]";
+		return "Arma [nombre=" + nombre + ", nivel=" + nivel + ", daño=" + daño + ", tipo=" + tipo + ", peso=" + peso
+				+ "]";
 	}
-
 	
 }
