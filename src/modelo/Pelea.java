@@ -66,6 +66,62 @@ public class Pelea {
 
 	public void enfrentamiento(Humano humano, Monstruo bestia, int numeroCombate) {
 
+		int contadorHojaAfilada = 0;
+		int contadorCabezaPesada = 0;
+		int contadorPuntaDeAcero = 0;
+		int contadorVastagoEstable = 0;
+
+		// este metodo se usa para evaluar una habilidad si requiere varias validaciones
+		// o si se activa al
+		// final o principio del turno
+
+		humano.analizarHabilidad(humano);
+
+		if (humano.analizarHabilidad(humano).equals("Hoja afilada")) {
+			contadorHojaAfilada = 1;
+			if (contadorHojaAfilada == 1) {
+				humano.getArma().setDaño(humano.getArma().getDaño() + humano.getHabilidad().getIntensidad());
+				System.out.println("Tu habilidad ha aumentado el daño de las armas cortantes");
+			}
+			
+			
+		} else {
+			contadorHojaAfilada = 0;
+		}
+
+		if (humano.analizarHabilidad(humano).equals("Cabeza pesada")) {
+			contadorCabezaPesada = 1;
+			if (contadorCabezaPesada == 1) {
+				humano.getArma().setDaño(humano.getArma().getDaño() + humano.getHabilidad().getIntensidad());
+				System.out.println("Tu habilidad ha aumentado el daño de las armas contundentes");
+			}
+
+		} else {
+			contadorCabezaPesada = 0;
+		}
+
+		if (humano.analizarHabilidad(humano).equals("Punta de acero")) {
+			contadorPuntaDeAcero = 1;
+			if (contadorPuntaDeAcero == 1) {
+				humano.getArma().setDaño(humano.getArma().getDaño() + humano.getHabilidad().getIntensidad());
+				System.out.println("Tu habilidad ha aumentado el daño de las armas punzantes");
+			}
+
+		} else {
+			contadorPuntaDeAcero = 0;
+		}
+
+		if (humano.analizarHabilidad(humano).equals("Vastago estable")) {
+			contadorVastagoEstable = 1;
+			if (contadorVastagoEstable == 1) {
+				humano.getArma().setDaño(humano.getArma().getDaño() + humano.getHabilidad().getIntensidad());
+				System.out.println("Tu habilidad ha aumentado el daño de las armas de largo alcance");
+			}
+
+		} else {
+			contadorVastagoEstable = 0;
+		}
+
 		System.out.println("Inicio del combate " + numeroCombate);
 
 		Scanner sc = new Scanner(System.in);
@@ -103,7 +159,6 @@ public class Pelea {
 			}
 
 		}
-
 	}
 
 	public void infoCombate(Humano humano, Monstruo bestia) {
@@ -118,14 +173,13 @@ public class Pelea {
 		monstruo.setVida(monstruo.getVida() - (humano.getFuerza() + humano.getArma().getDaño()));
 		System.out.println(monstruo.getNombre() + " ha perdido " + (humano.getFuerza() + humano.getArma().getDaño())
 				+ " puntos de vida");
-		
-		if(monstruo.getVida() <= 0) {
+
+		if (monstruo.getVida() <= 0) {
 			monstruo.setVida(0);
-		}
-		else {
+		} else {
 			ataqueMonstruo(humano, monstruo);
 		}
-	
+
 		System.out.println("Vida de " + humano.getNombre() + ": " + humano.getVida());
 		System.out.println("Vida de " + monstruo.getNombre() + ": " + monstruo.getVida());
 
@@ -172,37 +226,34 @@ public class Pelea {
 				monstruo.setVida(monstruo.getVida() - humano.hechizos.get(posicion).getFuerza());
 				System.out.println(monstruo.getNombre() + " ha perdido " + humano.hechizos.get(posicion).getFuerza()
 						+ " puntos de vida");
-				
+
 			}
 
-			
 			humano.setEnergia(humano.getEnergia() - humano.hechizos.get(posicion).getCoste());
 
 		}
-		
-		if(monstruo.getVida() <= 0) {
+
+		if (monstruo.getVida() <= 0) {
 			monstruo.setVida(0);
-		}
-		else {
+		} else {
 			ataqueMonstruo(humano, monstruo);
 		}
-		
-		
-		if(humano.getEnergia() <= 0) {
+
+		if (humano.getEnergia() <= 0) {
 			humano.setEnergia(0);
 		}
-		
+
 		System.out.println("Vida de " + humano.getNombre() + ": " + humano.getVida());
 		System.out.println("Vida de " + monstruo.getNombre() + ": " + monstruo.getVida());
 
 	}
-	
+
 	public void ataqueMonstruo(Humano humano, Monstruo bestia) {
-		
+
 		System.out.println("El enemigo te ataca.");
 		humano.setVida(humano.getVida() - (bestia.getFuerza() - humano.getDefensa()));
 		System.out.println("Has perdido " + (bestia.getFuerza() - humano.getDefensa()) + " puntos de vida");
-		
+
 	}
 
 	public void elegirRecompensa(Pelea combate, Humano humano, Arma arma, Hechizo hechizo, Monstruo bestia) {
@@ -285,8 +336,6 @@ public class Pelea {
 		Hechizo recompensa5 = combate.hechizoRecompensa.get(aleatorio5);
 
 		String eleccion = "";
-		
-		
 
 		while (!eleccion.equals("1") && !eleccion.equals("2") && !eleccion.equals("3") && !eleccion.equals("4")
 				&& !eleccion.equals("5")) {
@@ -306,12 +355,11 @@ public class Pelea {
 			eleccion = sc.nextLine();
 
 			// potenciadores
-			
+
 			if (eleccion.equals("1") || eleccion.equals("2") || eleccion.equals("3")) {
-				
-				
-				if(eleccion.equals("1")) {
-					
+
+				if (eleccion.equals("1")) {
+
 					if (recompensa1.getNombre().equals("Pocion")) {
 						humano.setVida(humano.getVida() + pocion.getEfecto());
 						if (humano.getVida() > humano.getVidaMaxima()) {
@@ -353,11 +401,11 @@ public class Pelea {
 					else if (recompensa1.getNombre().equals("RealzaPoder")) {
 						humano.mejorarHabilidad(humano, bestia, humano.getHabilidad());
 					}
-					
+
 				}
 
 				if (eleccion.equals("2")) {
-					
+
 					if (recompensa2.getNombre().equals("Pocion")) {
 						humano.setVida(humano.getVida() + pocion.getEfecto());
 						if (humano.getVida() > humano.getVidaMaxima()) {
@@ -399,9 +447,9 @@ public class Pelea {
 					else if (recompensa2.getNombre().equals("RealzaPoder")) {
 						humano.mejorarHabilidad(humano, bestia, humano.getHabilidad());
 					}
-					
+
 				} else if (eleccion.equals("3")) {
-					
+
 					if (recompensa3.getNombre().equals("Pocion")) {
 						humano.setVida(humano.getVida() + pocion.getEfecto());
 						if (humano.getVida() > humano.getVidaMaxima()) {
@@ -443,13 +491,12 @@ public class Pelea {
 					else if (recompensa3.getNombre().equals("RealzaPoder")) {
 						humano.mejorarHabilidad(humano, bestia, humano.getHabilidad());
 					}
-					
-				
-			} 
-				//armas
-				
+
+				}
+				// armas
+
 			} else if (eleccion.equals("4")) {
-				
+
 				if (recompensa4.getNombre().equals("Cuchillo")) {
 					humano.equiparArma(humano, recompensa4);
 				}
@@ -486,8 +533,20 @@ public class Pelea {
 					humano.equiparArma(humano, recompensa4);
 				}
 				
+				else if (recompensa4.getNombre().equals("Arco")) {
+					humano.equiparArma(humano, recompensa4);
+				}
+
+				else if (recompensa4.getNombre().equals("Ballesta")) {
+					humano.equiparArma(humano, recompensa4);
+				}
+
+				else if (recompensa4.getNombre().equals("Javalina divina")) {
+					humano.equiparArma(humano, recompensa4);
+				}
+
 				// hechizos
-				
+
 			} else if (eleccion.equals("5")) {
 				if (recompensa5.getNombre().equals("Relampago")) {
 					humano.meterHechizo(recompensa5, humano);
