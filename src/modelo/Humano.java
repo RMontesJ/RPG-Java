@@ -150,7 +150,8 @@ public class Humano {
 	public void meterHechizo(Hechizo hechizo, Humano humano) {
 		Scanner sc = new Scanner(System.in);
 		
-		int eleccion = sc.nextInt();
+		int eleccion = 0;
+		int olvido = 0;
 		
 		if (humano.hechizos.size() > 4) {
 			System.out.println("Solo puedes llevar 4 hechizos como maximo, has llegado al limite");
@@ -160,8 +161,76 @@ public class Humano {
 			System.out.println("1. Si");
 			System.out.println("2. No");
 			
+			eleccion = sc.nextInt();
+			
 			if(eleccion == 1) {
 				
+				System.out.println("¿Que hechizo quieres olvidar?");
+				
+				humano.verHechizos();
+				
+				olvido = sc.nextInt();
+				
+				hechizos.remove(humano.hechizos.get(olvido));
+				
+				System.out.println("Has olvidado " + humano.hechizos.get(olvido));
+				
+				humano.meterHechizo(hechizo, humano);
+				
+				System.out.println("Has aprendido " + hechizo);
+				
+			}
+			else if(eleccion == 2){
+				System.out.println("Decides no aprender " + hechizo.getNombre());
+			}
+			
+			while(eleccion != 1 && eleccion != 2) {
+				System.out.println("Solo puedes llevar 4 hechizos como maximo, has llegado al limite");
+				
+				System.out.println("¿Quieres sustituir uno de tus hechizos para aprender " + hechizo.getNombre());
+				
+				System.out.println("1. Si");
+				System.out.println("2. No");
+				
+				eleccion = sc.nextInt();
+				
+				if(eleccion == 1) {
+					
+					System.out.println("¿Que hechizo quieres olvidar?");
+					
+					humano.verHechizos();
+					
+					olvido = sc.nextInt();
+					
+					hechizos.remove(humano.hechizos.get(olvido));
+					
+					System.out.println("Has olvidado " + humano.hechizos.get(olvido));
+					
+					humano.meterHechizo(hechizo, humano);
+					
+					System.out.println("Has aprendido " + hechizo);
+					
+					while(olvido < 0 || olvido > humano.hechizos.size()) {
+						
+						System.out.println("Elige un hechizo valido");
+						
+						humano.verHechizos();
+						
+						olvido = sc.nextInt();
+						
+						hechizos.remove(humano.hechizos.get(olvido));
+						
+						System.out.println("Has olvidado " + humano.hechizos.get(olvido));
+						
+						humano.meterHechizo(hechizo, humano);
+						
+						System.out.println("Has aprendido " + hechizo);
+					}
+					
+				}
+				else if(eleccion == 2){
+					System.out.println("Decides no aprender " + hechizo.getNombre());
+				}
 			}
 			
 		} else {
@@ -187,7 +256,7 @@ public class Humano {
 	public void verHabilidades() {
 		System.out.println("---------------------------------------------");
 		for (int i = 0; i < habilidades.size(); i++) {
-			System.out.println("Tecla " + i + ":" + habilidades.get(i));
+			System.out.println("Tecla " + i + ":" + habilidades.get(i) + "\n");
 		}
 		System.out.println("---------------------------------------------");
 	}
@@ -209,14 +278,6 @@ public class Humano {
 	public void elegirHabilidad(Humano humano, Monstruo bestia) {
 		Scanner sc = new Scanner(System.in);
 
-		Habilidad intimidación = new Habilidad("Intimidación", 1, "Reduce el ataque del enemigo", 5);
-		Habilidad saludable = new Habilidad("Saludable", 1, "Aumenta tu salud maxima", 5);
-		Habilidad potencia = new Habilidad("Potencia", 1, "Aumenta tu ataque", 5);
-
-		humano.meterHabilidad(intimidación);
-		humano.meterHabilidad(saludable);
-		humano.meterHabilidad(potencia);
-
 		System.out.println("Elige una habilidad");
 
 		verHabilidades();
@@ -232,16 +293,16 @@ public class Humano {
 
 			humano.setHabilidad(humano.habilidades.get(habilidad));
 
-			equiparHabilidad(humano, bestia);
+			equiparHabilidad(humano, bestia, humano.getHabilidad());
 		}
 
 		humano.setHabilidad(humano.habilidades.get(habilidad));
 
-		equiparHabilidad(humano, bestia);
+		equiparHabilidad(humano, bestia, humano.getHabilidad());
 
 	}
 
-	public void equiparHabilidad(Humano humano, Monstruo bestia) {
+	public void equiparHabilidad(Humano humano, Monstruo bestia, Habilidad habilidad) {
 
 		if (humano.habilidad.getNombre().equals("Intimidación")) {
 			bestia.setFuerza(bestia.getFuerza() - humano.habilidad.getIntensidad());
@@ -250,8 +311,7 @@ public class Humano {
 
 		else if (humano.habilidad.getNombre().equals("Saludable")) {
 			humano.setVidaMaxima(humano.getVidaMaxima() + humano.habilidad.getIntensidad());
-			humano.setVida(humano.getVidaMaxima());
-			System.out.println("Tu habilidad te ofrece mas vida");
+			System.out.println("Tu habilidad te ofrece mas vida maxima");
 		}
 
 		else if (humano.habilidad.getNombre().equals("Potencia")) {
@@ -261,34 +321,36 @@ public class Humano {
 
 	}
 
-	public void mejorarHabilidad(Habilidad habilidad) {
+	public void mejorarHabilidad(Humano humano, Monstruo bestia, Habilidad habilidad) {
 
-		habilidad.setNivel(habilidad.getNivel() + 1);
+		humano.habilidad.setNivel(habilidad.getNivel() + 1);
 
-		habilidad.setIntensidad(habilidad.getIntensidad() + 5);
+		humano.habilidad.setIntensidad(habilidad.getIntensidad() + 5);
+		
+		equiparHabilidad(humano, bestia, humano.getHabilidad());
 
 	}
 
-	public void ganarExperiencia(Humano humano, Hechizo hechizo) {
+	public void ganarExperiencia(Humano humano) {
 
 		humano.setExperiencia(humano.getExperiencia() + humano.getGananciaExperiencia());
 
 		if (humano.getExperiencia() >= humano.experienciaLimite) {
-			subirNivel(humano, hechizo);
+			subirNivel(humano);
 
 		}
 
 	}
 
-	public void subirNivel(Humano humano, Hechizo hechizo) {
+	public void subirNivel(Humano humano) {
 
 		humano.setNivel(humano.getNivel() + 1);
 		System.out.println("Has subido al nivel " + humano.getNivel());
-		subirEstadisticas(humano, hechizo);
+		subirEstadisticas(humano);
 
 	}
 
-	public void subirEstadisticas(Humano humano, Hechizo hechizo) {
+	public void subirEstadisticas(Humano humano) {
 
 		humano.setVida(humano.getVida() + 5);
 		humano.setVidaMaxima(humano.getVidaMaxima() + 5);
@@ -319,8 +381,8 @@ public class Humano {
 	           "energiaMaxima=" + energiaMaxima + "\n" +
 	           "defensa=" + defensa + "\n" +
 	           "hechizos=" + hechizos + "\n" +
-	           "habilidad=" + habilidad + "\n" +
-	           "habilidades=" + habilidades + "\n" +
+	           "habilidad equipada= " + habilidad + "\n" +
+	           "habilidades diponibles=" + habilidades + "\n" +
 	           "nivel=" + nivel + "\n" +
 	           "experiencia=" + experiencia + "\n" +
 	           "gananciaExperiencia=" + gananciaExperiencia + "\n" +

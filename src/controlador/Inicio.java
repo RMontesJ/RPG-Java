@@ -18,6 +18,14 @@ public class Inicio {
 				"Cubrete de un liquido magico que cura tus heridas");
 
 		Arma martillo = new Arma("Martillo", 1, 5, TipoArma.Contundente, 10);
+		
+		Habilidad intimidación = new Habilidad("Intimidación", 1, "Reduce el ataque del enemigo", 5);
+		Habilidad saludable = new Habilidad("Saludable", 1, "Aumenta tu salud maxima", 5);
+		Habilidad potencia = new Habilidad("Potencia", 1, "Aumenta tu ataque", 5);
+		
+		persona.meterHabilidad(intimidación);
+		persona.meterHabilidad(saludable);
+		persona.meterHabilidad(potencia);
 
 		persona.meterHechizo(bolaDeFuego, persona);
 		persona.meterHechizo(gotaVital, persona);
@@ -32,7 +40,7 @@ public class Inicio {
 
 		while (persona.getVida() > 0) {
 			monstruo.ponerNombre(monstruo);
-			combate.enfrentamiento(persona, monstruo, bolaDeFuego, numeroCombate);
+			combate.enfrentamiento(persona, monstruo, numeroCombate);
 
 			if (persona.getVida() > 0) {
 				combate.elegirRecompensa(combate, persona, martillo, bolaDeFuego, monstruo);

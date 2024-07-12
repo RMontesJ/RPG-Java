@@ -64,7 +64,7 @@ public class Pelea {
 		this.hechizoRecompensa = hechizoRecompensa;
 	}
 
-	public void enfrentamiento(Humano humano, Monstruo bestia, Hechizo hechizo, int numeroCombate) {
+	public void enfrentamiento(Humano humano, Monstruo bestia, int numeroCombate) {
 
 		System.out.println("Inicio del combate " + numeroCombate);
 
@@ -86,7 +86,7 @@ public class Pelea {
 			}
 
 			else if (opcion.equals("2")) {
-				usarHechizo(humano, hechizo, bestia);
+				usarHechizo(humano, bestia);
 			}
 
 			else if (opcion.equals("3")) {
@@ -95,7 +95,7 @@ public class Pelea {
 
 			if (bestia.getVida() <= 0) {
 				bestia.setVida(0);
-				humano.ganarExperiencia(humano, hechizo);
+				humano.ganarExperiencia(humano);
 			}
 
 			else if (humano.getVida() <= 0) {
@@ -118,14 +118,20 @@ public class Pelea {
 		monstruo.setVida(monstruo.getVida() - (humano.getFuerza() + humano.getArma().getDaño()));
 		System.out.println(monstruo.getNombre() + " ha perdido " + (humano.getFuerza() + humano.getArma().getDaño())
 				+ " puntos de vida");
-		humano.setVida(humano.getVida() - (monstruo.getFuerza() - humano.getDefensa()));
-		System.out.println("Has perdido " + (monstruo.getFuerza() - humano.getDefensa()) + " puntos de vida");
+		
+		if(monstruo.getVida() <= 0) {
+			monstruo.setVida(0);
+		}
+		else {
+			ataqueMonstruo(humano, monstruo);
+		}
+	
 		System.out.println("Vida de " + humano.getNombre() + ": " + humano.getVida());
 		System.out.println("Vida de " + monstruo.getNombre() + ": " + monstruo.getVida());
 
 	}
 
-	public void usarHechizo(Humano humano, Hechizo hechizo, Monstruo monstruo) {
+	public void usarHechizo(Humano humano, Monstruo monstruo) {
 		Scanner sc = new Scanner(System.in);
 
 		System.out.println("¿Que hechizo quieres usar?");
@@ -140,8 +146,8 @@ public class Pelea {
 
 		System.out.println();
 
-		if (humano.getEnergia() < hechizo.getCoste()) {
-			System.out.println("No tienes energia suficiente para lanzar " + hechizo.getNombre());
+		if (humano.getEnergia() < humano.hechizos.get(posicion).getCoste()) {
+			System.out.println("No tienes energia suficiente para lanzar " + humano.hechizos.get(posicion).getNombre());
 		}
 
 		else {
@@ -155,6 +161,7 @@ public class Pelea {
 
 				if (humano.hechizos.get(posicion).getNombre().equals("Meditación")) {
 					humano.setVida(humano.getVida() + humano.hechizos.get(posicion).getFuerza());
+					humano.setFuerza(humano.getFuerza() + humano.hechizos.get(posicion).getFuerza());
 				} else if (humano.hechizos.get(posicion).getNombre().equals("Fortaleza")) {
 					humano.setDefensa(humano.getDefensa() + humano.hechizos.get(posicion).getFuerza());
 				}
@@ -162,20 +169,40 @@ public class Pelea {
 
 			else if (humano.hechizos.get(posicion).getTipo() == TipoHechizo.Ofensivo) {
 				System.out.println("Lanzas " + humano.hechizos.get(posicion).getNombre());
+				monstruo.setVida(monstruo.getVida() - humano.hechizos.get(posicion).getFuerza());
 				System.out.println(monstruo.getNombre() + " ha perdido " + humano.hechizos.get(posicion).getFuerza()
 						+ " puntos de vida");
-				monstruo.setVida(monstruo.getVida() - humano.hechizos.get(posicion).getFuerza());
+				
 			}
 
+			
 			humano.setEnergia(humano.getEnergia() - humano.hechizos.get(posicion).getCoste());
-			System.out.println("El enemigo te ataca.");
-			humano.setVida(humano.getVida() - (monstruo.getFuerza() - humano.getDefensa()));
-			System.out.println("Has perdido " + monstruo.getFuerza() + " puntos de vida");
-			System.out.println("Vida de " + humano.getNombre() + ": " + humano.getVida());
-			System.out.println("Vida de " + monstruo.getNombre() + ": " + monstruo.getVida());
 
 		}
+		
+		if(monstruo.getVida() <= 0) {
+			monstruo.setVida(0);
+		}
+		else {
+			ataqueMonstruo(humano, monstruo);
+		}
+		
+		
+		if(humano.getEnergia() <= 0) {
+			humano.setEnergia(0);
+		}
+		
+		System.out.println("Vida de " + humano.getNombre() + ": " + humano.getVida());
+		System.out.println("Vida de " + monstruo.getNombre() + ": " + monstruo.getVida());
 
+	}
+	
+	public void ataqueMonstruo(Humano humano, Monstruo bestia) {
+		
+		System.out.println("El enemigo te ataca.");
+		humano.setVida(humano.getVida() - (bestia.getFuerza() - humano.getDefensa()));
+		System.out.println("Has perdido " + (bestia.getFuerza() - humano.getDefensa()) + " puntos de vida");
+		
 	}
 
 	public void elegirRecompensa(Pelea combate, Humano humano, Arma arma, Hechizo hechizo, Monstruo bestia) {
@@ -185,7 +212,7 @@ public class Pelea {
 		Potenciador polvoMagico = new Potenciador("Polvo magico", "Recupera energia", 15);
 		Potenciador martilloDeHerrero = new Potenciador("Martillo de herrero", "Aumenta el nivel de tu arma", 1);
 		Potenciador maestriaMagica = new Potenciador("Maestria magica", "Aumenta el nivel de uno de tus hechizos", 1);
-		Potenciador mutaPiedra = new Potenciador("MutaPriedra", "Cambia tu habilidad actual", 1);
+		Potenciador mutaPiedra = new Potenciador("MutaPiedra", "Cambia tu habilidad actual", 1);
 		Potenciador realzaPoder = new Potenciador("RealzaPoder", "Mejora el nivel de tu habilidad", 1);
 
 		Arma cuchillo = new Arma("Cuchillo", 1, 5, TipoArma.Cortante, 2);
@@ -267,9 +294,13 @@ public class Pelea {
 			System.out.println("Has ganado.Elige tu recompensa");
 
 			System.out.println("1. " + recompensa1);
+			System.out.println();
 			System.out.println("2. " + recompensa2);
+			System.out.println();
 			System.out.println("3. " + recompensa3);
+			System.out.println();
 			System.out.println("4. " + recompensa4);
+			System.out.println();
 			System.out.println("5. " + recompensa5);
 
 			eleccion = sc.nextLine();
@@ -320,100 +351,101 @@ public class Pelea {
 					}
 
 					else if (recompensa1.getNombre().equals("RealzaPoder")) {
-						humano.mejorarHabilidad(humano.getHabilidad());
+						humano.mejorarHabilidad(humano, bestia, humano.getHabilidad());
 					}
 					
 				}
 
-				
-			} else if (eleccion.equals("2")) {
-				
-				if (recompensa2.getNombre().equals("Pocion")) {
-					humano.setVida(humano.getVida() + pocion.getEfecto());
-					if (humano.getVida() > humano.getVidaMaxima()) {
-						humano.setVida(humano.getVidaMaxima());
+				if (eleccion.equals("2")) {
+					
+					if (recompensa2.getNombre().equals("Pocion")) {
+						humano.setVida(humano.getVida() + pocion.getEfecto());
+						if (humano.getVida() > humano.getVidaMaxima()) {
+							humano.setVida(humano.getVidaMaxima());
+						}
 					}
-				}
 
-				else if (recompensa2.getNombre().equals("Polvo magico")) {
-					humano.setEnergia(humano.getEnergia() + polvoMagico.getEfecto());
-					if (humano.getEnergia() > humano.getEnergiaMaxima()) {
-						humano.setEnergia(humano.getEnergiaMaxima());
+					else if (recompensa2.getNombre().equals("Polvo magico")) {
+						humano.setEnergia(humano.getEnergia() + polvoMagico.getEfecto());
+						if (humano.getEnergia() > humano.getEnergiaMaxima()) {
+							humano.setEnergia(humano.getEnergiaMaxima());
+						}
 					}
-				}
 
-				else if (recompensa2.getNombre().equals("Martillo de herrero")) {
-					arma.subirNivel(arma);
+					else if (recompensa2.getNombre().equals("Martillo de herrero")) {
+						arma.subirNivel(arma);
 
-				}
-
-				else if (recompensa2.getNombre().equals("Maestria magica")) {
-
-					System.out.println("Elige el hechizo que quieres mejorar");
-
-					int posicion = 0;
-
-					humano.verHechizos();
-
-					posicion = sc.nextInt();
-
-					Hechizo hechizoElegido = humano.hechizos.get(posicion);
-
-					hechizo.subirNivel(hechizoElegido);
-				}
-
-				else if (recompensa2.getNombre().equals("MutaPiedra")) {
-					humano.elegirHabilidad(humano, bestia);
-				}
-
-				else if (recompensa2.getNombre().equals("RealzaPoder")) {
-					humano.mejorarHabilidad(humano.getHabilidad());
-				}
-				
-			} else if (eleccion.equals("3")) {
-				
-				if (recompensa3.getNombre().equals("Pocion")) {
-					humano.setVida(humano.getVida() + pocion.getEfecto());
-					if (humano.getVida() > humano.getVidaMaxima()) {
-						humano.setVida(humano.getVidaMaxima());
 					}
-				}
 
-				else if (recompensa3.getNombre().equals("Polvo magico")) {
-					humano.setEnergia(humano.getEnergia() + polvoMagico.getEfecto());
-					if (humano.getEnergia() > humano.getEnergiaMaxima()) {
-						humano.setEnergia(humano.getEnergiaMaxima());
+					else if (recompensa2.getNombre().equals("Maestria magica")) {
+
+						System.out.println("Elige el hechizo que quieres mejorar");
+
+						int posicion = 0;
+
+						humano.verHechizos();
+
+						posicion = sc.nextInt();
+
+						Hechizo hechizoElegido = humano.hechizos.get(posicion);
+
+						hechizo.subirNivel(hechizoElegido);
 					}
-				}
 
-				else if (recompensa3.getNombre().equals("Martillo de herrero")) {
-					arma.subirNivel(arma);
+					else if (recompensa2.getNombre().equals("MutaPiedra")) {
+						humano.elegirHabilidad(humano, bestia);
+					}
 
-				}
+					else if (recompensa2.getNombre().equals("RealzaPoder")) {
+						humano.mejorarHabilidad(humano, bestia, humano.getHabilidad());
+					}
+					
+				} else if (eleccion.equals("3")) {
+					
+					if (recompensa3.getNombre().equals("Pocion")) {
+						humano.setVida(humano.getVida() + pocion.getEfecto());
+						if (humano.getVida() > humano.getVidaMaxima()) {
+							humano.setVida(humano.getVidaMaxima());
+						}
+					}
 
-				else if (recompensa3.getNombre().equals("Maestria magica")) {
+					else if (recompensa3.getNombre().equals("Polvo magico")) {
+						humano.setEnergia(humano.getEnergia() + polvoMagico.getEfecto());
+						if (humano.getEnergia() > humano.getEnergiaMaxima()) {
+							humano.setEnergia(humano.getEnergiaMaxima());
+						}
+					}
 
-					System.out.println("Elige el hechizo que quieres mejorar");
+					else if (recompensa3.getNombre().equals("Martillo de herrero")) {
+						arma.subirNivel(arma);
 
-					int posicion = 0;
+					}
 
-					humano.verHechizos();
+					else if (recompensa3.getNombre().equals("Maestria magica")) {
 
-					posicion = sc.nextInt();
+						System.out.println("Elige el hechizo que quieres mejorar");
 
-					Hechizo hechizoElegido = humano.hechizos.get(posicion);
+						int posicion = 0;
 
-					hechizo.subirNivel(hechizoElegido);
-				}
+						humano.verHechizos();
 
-				else if (recompensa3.getNombre().equals("MutaPiedra")) {
-					humano.elegirHabilidad(humano, bestia);
-				}
+						posicion = sc.nextInt();
 
-				else if (recompensa3.getNombre().equals("RealzaPoder")) {
-					humano.mejorarHabilidad(humano.getHabilidad());
-				}
+						Hechizo hechizoElegido = humano.hechizos.get(posicion);
+
+						hechizo.subirNivel(hechizoElegido);
+					}
+
+					else if (recompensa3.getNombre().equals("MutaPiedra")) {
+						humano.elegirHabilidad(humano, bestia);
+					}
+
+					else if (recompensa3.getNombre().equals("RealzaPoder")) {
+						humano.mejorarHabilidad(humano, bestia, humano.getHabilidad());
+					}
+					
 				
+			} 
 				//armas
 				
 			} else if (eleccion.equals("4")) {
