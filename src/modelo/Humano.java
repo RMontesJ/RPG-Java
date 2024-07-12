@@ -24,8 +24,8 @@ public class Humano {
 		this.vida = 100;
 		this.vidaMaxima = 100;
 		this.fuerza = 0;
-		this.energia = 30;
-		this.energiaMaxima = 30;
+		this.energia = 50;
+		this.energiaMaxima = 50;
 		this.defensa = 5;
 		hechizos = new ArrayList<Hechizo>();
 		habilidades = new ArrayList<Habilidad>();
@@ -307,6 +307,9 @@ public class Humano {
 		if (humano.habilidad.getNombre().equals("Intimidación")) {
 			bestia.setFuerza(bestia.getFuerza() - humano.habilidad.getIntensidad());
 			System.out.println("Tu habilidad ha bajado el ataque del enemigo");
+			if(bestia.getFuerza() < 0) {
+				bestia.setFuerza(0);
+			}
 		}
 
 		else if (humano.habilidad.getNombre().equals("Saludable")) {
