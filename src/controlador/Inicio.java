@@ -22,10 +22,16 @@ public class Inicio {
 		Habilidad intimidación = new Habilidad("Intimidación", 1, "Reduce el ataque del enemigo", 5);
 		Habilidad saludable = new Habilidad("Saludable", 1, "Aumenta tu salud maxima", 5);
 		Habilidad potencia = new Habilidad("Potencia", 1, "Aumenta tu ataque", 5);
+		Habilidad energetico = new Habilidad("Energetico", 1, "Aumenta tu energia maxima", 5);
+		Habilidad eficiente = new Habilidad("Eficiente", 1, "Reduce el coste de todos tus hechizos", 5);
+		Habilidad destrezaMagica = new Habilidad("Destreza magica", 1, "Aumenta el daño de todos tus hechizos", 5);
 		
 		persona.meterHabilidad(intimidación);
 		persona.meterHabilidad(saludable);
 		persona.meterHabilidad(potencia);
+		persona.meterHabilidad(energetico);
+		persona.meterHabilidad(eficiente);
+		persona.meterHabilidad(destrezaMagica);
 
 		persona.meterHechizo(bolaDeFuego, persona);
 		persona.meterHechizo(gotaVital, persona);

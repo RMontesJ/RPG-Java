@@ -148,94 +148,51 @@ public class Humano {
 	}
 
 	public void meterHechizo(Hechizo hechizo, Humano humano) {
-		Scanner sc = new Scanner(System.in);
-		
-		int eleccion = 0;
-		int olvido = 0;
-		
-		if (humano.hechizos.size() > 4) {
-			System.out.println("Solo puedes llevar 4 hechizos como maximo, has llegado al limite");
-			
-			System.out.println("¿Quieres sustituir uno de tus hechizos para aprender " + hechizo.getNombre());
-			
-			System.out.println("1. Si");
-			System.out.println("2. No");
-			
-			eleccion = sc.nextInt();
-			
-			if(eleccion == 1) {
-				
-				System.out.println("¿Que hechizo quieres olvidar?");
-				
-				humano.verHechizos();
-				
-				olvido = sc.nextInt();
-				
-				hechizos.remove(humano.hechizos.get(olvido));
-				
-				System.out.println("Has olvidado " + humano.hechizos.get(olvido));
-				
-				humano.meterHechizo(hechizo, humano);
-				
-				System.out.println("Has aprendido " + hechizo);
-				
-			}
-			else if(eleccion == 2){
-				System.out.println("Decides no aprender " + hechizo.getNombre());
-			}
-			
-			while(eleccion != 1 && eleccion != 2) {
-				System.out.println("Solo puedes llevar 4 hechizos como maximo, has llegado al limite");
-				
-				System.out.println("¿Quieres sustituir uno de tus hechizos para aprender " + hechizo.getNombre());
-				
-				System.out.println("1. Si");
-				System.out.println("2. No");
-				
-				eleccion = sc.nextInt();
-				
-				if(eleccion == 1) {
-					
-					System.out.println("¿Que hechizo quieres olvidar?");
-					
-					humano.verHechizos();
-					
-					olvido = sc.nextInt();
-					
-					hechizos.remove(humano.hechizos.get(olvido));
-					
-					System.out.println("Has olvidado " + humano.hechizos.get(olvido));
-					
-					humano.meterHechizo(hechizo, humano);
-					
-					System.out.println("Has aprendido " + hechizo);
-					
-					while(olvido < 0 || olvido > humano.hechizos.size()) {
-						
-						System.out.println("Elige un hechizo valido");
-						
-						humano.verHechizos();
-						
-						olvido = sc.nextInt();
-						
-						hechizos.remove(humano.hechizos.get(olvido));
-						
-						System.out.println("Has olvidado " + humano.hechizos.get(olvido));
-						
-						humano.meterHechizo(hechizo, humano);
-						
-						System.out.println("Has aprendido " + hechizo);
-					}
-					
-				}
-				else if(eleccion == 2){
-					System.out.println("Decides no aprender " + hechizo.getNombre());
-				}
-			}
-			
-		} else {
-			hechizos.add(hechizo);
-		}
+		 Scanner sc = new Scanner(System.in);
+
+		    int eleccion = 0;
+		    int olvido = 0;
+
+		    if (humano.hechizos.size() >= 4) {
+		        System.out.println("Solo puedes llevar 4 hechizos como máximo, has llegado al límite");
+		        System.out.println("¿Quieres sustituir uno de tus hechizos para aprender " + hechizo.getNombre() + "?");
+		        System.out.println("1. Sí");
+		        System.out.println("2. No");
+
+		        eleccion = sc.nextInt();
+
+		        while (eleccion != 1 && eleccion != 2) {
+		            System.out.println("Opción no válida. Elige 1 para Sí o 2 para No.");
+		            System.out.println("¿Quieres sustituir uno de tus hechizos para aprender " + hechizo.getNombre() + "?");
+		            System.out.println("1. Sí");
+		            System.out.println("2. No");
+		            eleccion = sc.nextInt();
+		        }
+
+		        if (eleccion == 1) {
+		            System.out.println("¿Qué hechizo quieres olvidar?");
+		            humano.verHechizos();
+		            olvido = sc.nextInt();
+
+		            while (olvido < 0 || olvido >= humano.hechizos.size()) {
+		                System.out.println("Elige un hechizo válido.");
+		                humano.verHechizos();
+		                olvido = sc.nextInt();
+		            }
+
+		            System.out.println("Has olvidado " + humano.hechizos.get(olvido).getNombre());
+		            humano.hechizos.remove(olvido);
+		            humano.hechizos.add(hechizo);
+		            System.out.println("Has aprendido " + hechizo.getNombre());
+
+		        } else if (eleccion == 2) {
+		            System.out.println("Decides no aprender " + hechizo.getNombre());
+		        }
+
+		    } else {
+		        humano.hechizos.add(hechizo);
+		        System.out.println("Has aprendido " + hechizo.getNombre());
+		    }
 
 	}
 
@@ -307,7 +264,7 @@ public class Humano {
 		if (humano.habilidad.getNombre().equals("Intimidación")) {
 			bestia.setFuerza(bestia.getFuerza() - humano.habilidad.getIntensidad());
 			System.out.println("Tu habilidad ha bajado el ataque del enemigo");
-			if(bestia.getFuerza() < 0) {
+			if (bestia.getFuerza() < 0) {
 				bestia.setFuerza(0);
 			}
 		}
@@ -322,16 +279,45 @@ public class Humano {
 			System.out.println("Tu habilidad ha aumentado tu ataque");
 		}
 
+		else if (humano.habilidad.getNombre().equals("Energetico")) {
+			humano.setEnergiaMaxima(humano.getEnergiaMaxima() + humano.habilidad.getIntensidad());
+			System.out.println("Tu habilidad ha aumentado tu energia maxima");
+		}
+
+		else if (humano.habilidad.getNombre().equals("Eficiente")) {
+			for (int i = 0; i < humano.hechizos.size(); i++) {
+
+				humano.hechizos.get(i).setCoste(humano.hechizos.get(i).getCoste() - humano.habilidad.getIntensidad());
+
+				if (humano.hechizos.get(i).getCoste() < 5) {
+					humano.hechizos.get(i).setCoste(5);
+				}
+			}
+			System.out.println("Tu habilidad ha reducido el coste de los hechizos");
+		}
+
+		else if (humano.habilidad.getNombre().equals("Destreza magica")) {
+			for (int i = 0; i < humano.hechizos.size(); i++) {
+
+				humano.hechizos.get(i).setFuerza(humano.hechizos.get(i).getFuerza() + humano.habilidad.getIntensidad());
+
+			}
+			System.out.println("Tu habilidad ha aumentado el poder de todos tus hechizos");
+		}
+
 	}
 
 	public void mejorarHabilidad(Humano humano, Monstruo bestia, Habilidad habilidad) {
 
 		humano.habilidad.setNivel(habilidad.getNivel() + 1);
-		
-		System.out.println("La habilidad " + humano.getHabilidad() + " ha subido al nivel " + humano.getHabilidad().getNivel());
+
+		System.out.println(
+				"La habilidad " + humano.getHabilidad().getNombre() + " ha subido al nivel " + humano.getHabilidad().getNivel());
 
 		humano.habilidad.setIntensidad(habilidad.getIntensidad() + 5);
 		
+		System.out.println("Intensidad de la habilidad " + humano.getHabilidad().getNombre() + ": " + humano.getHabilidad().getIntensidad());
+
 		equiparHabilidad(humano, bestia, humano.getHabilidad());
 
 	}
@@ -376,24 +362,12 @@ public class Humano {
 	}
 
 	public String toString() {
-	    return "Humano [\n" +
-	           "nombre=" + nombre + "\n" +
-	           "vida=" + vida + "\n" +
-	           "vidaMaxima=" + vidaMaxima + "\n" +
-	           "fuerza=" + fuerza + "\n" +
-	           "arma=" + arma + "\n" +
-	           "energia=" + energia + "\n" +
-	           "energiaMaxima=" + energiaMaxima + "\n" +
-	           "defensa=" + defensa + "\n" +
-	           "hechizos=" + hechizos + "\n" +
-	           "habilidad equipada= " + habilidad + "\n" +
-	           "habilidades diponibles=" + habilidades + "\n" +
-	           "nivel=" + nivel + "\n" +
-	           "experiencia=" + experiencia + "\n" +
-	           "gananciaExperiencia=" + gananciaExperiencia + "\n" +
-	           "experienciaLimite=" + experienciaLimite + "\n" +
-	           "]";
+		return "Humano [\n" + "nombre=" + nombre + "\n" + "vida=" + vida + "\n" + "vidaMaxima=" + vidaMaxima + "\n"
+				+ "fuerza=" + fuerza + "\n" + "arma=" + arma + "\n" + "energia=" + energia + "\n" + "energiaMaxima="
+				+ energiaMaxima + "\n" + "defensa=" + defensa + "\n" + "hechizos=" + hechizos + "\n"
+				+ "habilidad equipada= " + habilidad + "\n" + "nivel="
+				+ nivel + "\n" + "experiencia=" + experiencia + "\n" + "gananciaExperiencia=" + gananciaExperiencia
+				+ "\n" + "experienciaLimite=" + experienciaLimite + "\n" + "]";
 	}
-
 
 }
