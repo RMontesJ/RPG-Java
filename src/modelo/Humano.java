@@ -327,6 +327,8 @@ public class Humano {
 	public void mejorarHabilidad(Humano humano, Monstruo bestia, Habilidad habilidad) {
 
 		humano.habilidad.setNivel(habilidad.getNivel() + 1);
+		
+		System.out.println("La habilidad " + humano.getHabilidad() + " ha subido al nivel " + humano.getHabilidad().getNivel());
 
 		humano.habilidad.setIntensidad(habilidad.getIntensidad() + 5);
 		
