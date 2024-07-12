@@ -21,8 +21,8 @@ public class Humano {
 	private int experienciaLimite;
 
 	public Humano() {
-		this.vida = 60;
-		this.vidaMaxima = 60;
+		this.vida = 100;
+		this.vidaMaxima = 100;
 		this.fuerza = 0;
 		this.energia = 30;
 		this.energiaMaxima = 30;
@@ -147,12 +147,25 @@ public class Humano {
 		this.experienciaLimite = experienciaLimite;
 	}
 
-	public void meterHechizo(Hechizo a, Humano humano) {
-
+	public void meterHechizo(Hechizo hechizo, Humano humano) {
+		Scanner sc = new Scanner(System.in);
+		
+		int eleccion = sc.nextInt();
+		
 		if (humano.hechizos.size() > 4) {
 			System.out.println("Solo puedes llevar 4 hechizos como maximo, has llegado al limite");
+			
+			System.out.println("¿Quieres sustituir uno de tus hechizos para aprender " + hechizo.getNombre());
+			
+			System.out.println("1. Si");
+			System.out.println("2. No");
+			
+			if(eleccion == 1) {
+				
+			}
+			
 		} else {
-			hechizos.add(a);
+			hechizos.add(hechizo);
 		}
 
 	}
