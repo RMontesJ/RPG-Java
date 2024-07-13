@@ -312,37 +312,6 @@ public class Humano {
 		
 	}
 	
-	// este metodo se usa para evaluar una habilidad si requiere varias validaciones o si se activa al
-	// final del turno
-	
-	public String analizarHabilidad(Humano humano) {
-		String resultado = "";
-		if (humano.habilidad.getNombre().equals("Hoja afilada") && humano.getArma().getTipo() == TipoArma.Cortante) {
-			
-			resultado = "Hoja afilada";
-			
-		}
-		
-		else if (humano.habilidad.getNombre().equals("Cabeza pesada") && humano.getArma().getTipo() == TipoArma.Contundente) {
-			
-			resultado = "Cabeza pesada";
-			
-		}
-		
-		else if (humano.habilidad.getNombre().equals("Punta de acero") && humano.getArma().getTipo() == TipoArma.Punzante) {
-			
-			resultado = "Punta de acero";
-			
-		}
-		
-		else if (humano.habilidad.getNombre().equals("Vastago estable") && humano.getArma().getTipo() == TipoArma.LargaDistancia) {
-			
-			resultado = "Vastago estable";
-			
-		}
-		return resultado;
-	}
-	
 	
 
 	public void mejorarHabilidad(Humano humano, Monstruo bestia, Habilidad habilidad) {

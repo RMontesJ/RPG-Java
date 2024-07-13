@@ -70,45 +70,40 @@ public class Pelea {
 		boolean cabezaPesadaAplicada = false;
 		boolean puntaDeAceroAplicada = false;
 		boolean vastagoEstableAplicada = false;
+		
 
-		// este metodo se usa para evaluar una habilidad si requiere varias validaciones
-		// o si se activa al
-		// final o principio del turno
-
-		String habilidad = humano.analizarHabilidad(humano);
-
-		if (habilidad.equals("Hoja afilada") && humano.getArma().getTipo() == TipoArma.Cortante && !hojaAfiladaAplicada) {
-		    humano.getArma().setDaño(humano.getArma().getDaño() + humano.getHabilidad().getIntensidad());
-		    System.out.println("Tu habilidad ha aumentado el daño de las armas cortantes");
-		    hojaAfiladaAplicada = true;
+		if (humano.getArma().getTipo() == TipoArma.Cortante && humano.getHabilidad().getNombre().equals("Hoja afilada") && !hojaAfiladaAplicada) {
+			humano.getArma().setDaño(humano.getArma().getDaño() + humano.getHabilidad().getIntensidad());
+			System.out.println("Tu habilidad ha aumentado el daño de las armas cortantes");
+			hojaAfiladaAplicada = true;
 		} else {
-			
-		    hojaAfiladaAplicada = false;
-		    
+
+			hojaAfiladaAplicada = false;
+
 		}
 
-		if (habilidad.equals("Cabeza pesada") && humano.getArma().getTipo() == TipoArma.Contundente && !cabezaPesadaAplicada) {
-		    humano.getArma().setDaño(humano.getArma().getDaño() + humano.getHabilidad().getIntensidad());
-		    System.out.println("Tu habilidad ha aumentado el daño de las armas contundentes");
-		    cabezaPesadaAplicada = true;
+		if (humano.getArma().getTipo() == TipoArma.Contundente && humano.getHabilidad().getNombre().equals("Cabeza pesada") && !cabezaPesadaAplicada) {
+			humano.getArma().setDaño(humano.getArma().getDaño() + humano.getHabilidad().getIntensidad());
+			System.out.println("Tu habilidad ha aumentado el daño de las armas contundentes");
+			cabezaPesadaAplicada = true;
 		} else {
-		    cabezaPesadaAplicada = false;
+			cabezaPesadaAplicada = false;
 		}
 
-		if (habilidad.equals("Punta de acero") && humano.getArma().getTipo() == TipoArma.Punzante && !puntaDeAceroAplicada) {
-		    humano.getArma().setDaño(humano.getArma().getDaño() + humano.getHabilidad().getIntensidad());
-		    System.out.println("Tu habilidad ha aumentado el daño de las armas punzantes");
-		    puntaDeAceroAplicada = true;
+		if (humano.getArma().getTipo() == TipoArma.Punzante && humano.getHabilidad().getNombre().equals("Punta de acero") && !puntaDeAceroAplicada) {
+			humano.getArma().setDaño(humano.getArma().getDaño() + humano.getHabilidad().getIntensidad());
+			System.out.println("Tu habilidad ha aumentado el daño de las armas punzantes");
+			puntaDeAceroAplicada = true;
 		} else {
-		    puntaDeAceroAplicada = false;
+			puntaDeAceroAplicada = false;
 		}
 
-		if (habilidad.equals("Vastago estable") && humano.getArma().getTipo() == TipoArma.LargaDistancia && !vastagoEstableAplicada) {
-		    humano.getArma().setDaño(humano.getArma().getDaño() + humano.getHabilidad().getIntensidad());
-		    System.out.println("Tu habilidad ha aumentado el daño de las armas de largo alcance");
-		    vastagoEstableAplicada = true;
+		if (humano.getArma().getTipo() == TipoArma.LargaDistancia && humano.getHabilidad().getNombre().equals("Vastago estable") && !vastagoEstableAplicada) {
+			humano.getArma().setDaño(humano.getArma().getDaño() + humano.getHabilidad().getIntensidad());
+			System.out.println("Tu habilidad ha aumentado el daño de las armas de largo alcance");
+			vastagoEstableAplicada = true;
 		} else {
-		    vastagoEstableAplicada = false;
+			vastagoEstableAplicada = false;
 		}
 
 		System.out.println("Inicio del combate " + numeroCombate);
@@ -369,18 +364,30 @@ public class Pelea {
 					}
 
 					else if (recompensa1.getNombre().equals("Maestria magica")) {
+						
+						int posicion = -1; // Inicializamos con un valor fuera del rango válido
 
-						System.out.println("Elige el hechizo que quieres mejorar");
+						do {
+						    System.out.println("Elige el hechizo que quieres mejorar");
 
-						int posicion = 0;
+						    humano.verHechizos();
 
-						humano.verHechizos();
+						    if (sc.hasNextInt()) { // Verificar si la entrada es un entero
+						        posicion = sc.nextInt();
+						        if (posicion >= 0 && posicion < humano.hechizos.size()) {
+						            Hechizo hechizoElegido = humano.hechizos.get(posicion);
+						            hechizo.subirNivel(hechizoElegido);
+						        } else {
+						            System.out.println("Posición inválida. Por favor, elige un número entre 0 y " + (humano.hechizos.size() - 1));
+						            humano.verHechizos();
+						        }
+						    } else {
+						        System.out.println("Entrada inválida. Por favor, ingresa un número.");
+						        sc.next(); // Limpiar la entrada inválida
+						    }
+						} while (posicion < 0 || posicion >= humano.hechizos.size());
 
-						posicion = sc.nextInt();
-
-						Hechizo hechizoElegido = humano.hechizos.get(posicion);
-
-						hechizo.subirNivel(hechizoElegido);
+						
 					}
 
 					else if (recompensa1.getNombre().equals("MutaPiedra")) {
@@ -416,17 +423,29 @@ public class Pelea {
 
 					else if (recompensa2.getNombre().equals("Maestria magica")) {
 
-						System.out.println("Elige el hechizo que quieres mejorar");
+						int posicion = -1; // Inicializamos con un valor fuera del rango válido
 
-						int posicion = 0;
+						do {
+						    System.out.println("Elige el hechizo que quieres mejorar");
 
-						humano.verHechizos();
+						    humano.verHechizos();
 
-						posicion = sc.nextInt();
+						    if (sc.hasNextInt()) { // Verificar si la entrada es un entero
+						        posicion = sc.nextInt();
+						        if (posicion >= 0 && posicion < humano.hechizos.size()) {
+						            Hechizo hechizoElegido = humano.hechizos.get(posicion);
+						            hechizo.subirNivel(hechizoElegido);
+						        } else {
+						            System.out.println("Posición inválida. Por favor, elige un número entre 0 y " + (humano.hechizos.size() - 1));
+						            humano.verHechizos();
+						        }
+						    } else {
+						        System.out.println("Entrada inválida. Por favor, ingresa un número.");
+						        sc.next(); // Limpiar la entrada inválida
+						    }
+						} while (posicion < 0 || posicion >= humano.hechizos.size());
 
-						Hechizo hechizoElegido = humano.hechizos.get(posicion);
-
-						hechizo.subirNivel(hechizoElegido);
+						
 					}
 
 					else if (recompensa2.getNombre().equals("MutaPiedra")) {
@@ -460,17 +479,29 @@ public class Pelea {
 
 					else if (recompensa3.getNombre().equals("Maestria magica")) {
 
-						System.out.println("Elige el hechizo que quieres mejorar");
+						int posicion = -1; // Inicializamos con un valor fuera del rango válido
 
-						int posicion = 0;
+						do {
+						    System.out.println("Elige el hechizo que quieres mejorar");
 
-						humano.verHechizos();
+						    humano.verHechizos();
 
-						posicion = sc.nextInt();
+						    if (sc.hasNextInt()) { // Verificar si la entrada es un entero
+						        posicion = sc.nextInt();
+						        if (posicion >= 0 && posicion < humano.hechizos.size()) {
+						            Hechizo hechizoElegido = humano.hechizos.get(posicion);
+						            hechizo.subirNivel(hechizoElegido);
+						        } else {
+						            System.out.println("Posición inválida. Por favor, elige un número entre 0 y " + (humano.hechizos.size() - 1));
+						            humano.verHechizos();
+						        }
+						    } else {
+						        System.out.println("Entrada inválida. Por favor, ingresa un número.");
+						        sc.next(); // Limpiar la entrada inválida
+						    }
+						} while (posicion < 0 || posicion >= humano.hechizos.size());
 
-						Hechizo hechizoElegido = humano.hechizos.get(posicion);
-
-						hechizo.subirNivel(hechizoElegido);
+						
 					}
 
 					else if (recompensa3.getNombre().equals("MutaPiedra")) {
@@ -521,7 +552,7 @@ public class Pelea {
 				else if (recompensa4.getNombre().equals("Maza demoniaca")) {
 					humano.equiparArma(humano, recompensa4);
 				}
-				
+
 				else if (recompensa4.getNombre().equals("Arco")) {
 					humano.equiparArma(humano, recompensa4);
 				}

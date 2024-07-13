@@ -64,7 +64,7 @@ public class Hechizo {
 	public void setDescripción(String descripción) {
 		this.descripción = descripción;
 	}
-	
+
 	public void subirNivel(Hechizo hechizo) {
 
 		hechizo.setNivel(hechizo.getNivel() + 1);
@@ -81,8 +81,8 @@ public class Hechizo {
 
 	@Override
 	public String toString() {
-		return "Hechizo [nombre=" + nombre + ", nivel=" + nivel + ", tipo=" + tipo + ", fuerza=" + fuerza + ", coste=" + coste
-				+ "\n" + ", descripción=" + descripción + "]" + "\n";
+		return "Hechizo [nombre=" + nombre + ", nivel=" + nivel + ", tipo=" + tipo + ", fuerza=" + fuerza + ", coste="
+				+ coste + ", descripción=" + descripción + "]" + "\n";
 	}
 
 }
