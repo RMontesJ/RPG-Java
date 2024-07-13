@@ -219,9 +219,10 @@ public class Humano {
 	}
 
 	public void equiparArma(Humano humano, Arma arma) {
-		humano.setFuerza(arma.getDaño() + humano.getFuerza());
-		humano.setEnergia(humano.getEnergia() - arma.getPeso());
 		humano.setArma(arma);
+		humano.setFuerza(humano.getArma().getDaño() + humano.getFuerza());
+		humano.setEnergia(humano.getEnergiaMaxima() - humano.getArma().getPeso());
+		
 	}
 
 	public void ponerNombre(Humano humano) {
@@ -242,10 +243,9 @@ public class Humano {
 		Habilidad reforzado = new Habilidad("Reforzado", 1, "Aumenta tu defensa", 5);
 		Habilidad eficiente = new Habilidad("Eficiente", 1, "Reduce el coste de todos tus hechizos", 5);
 		Habilidad destrezaMagica = new Habilidad("Destreza magica", 1, "Aumenta el daño de todos tus hechizos", 5);
-		Habilidad hojaAfilada = new Habilidad("Hoja afilada", 1, "Aumenta el daño de las armas cortantes", 5);
-		Habilidad cabezaPesada = new Habilidad("Cabeza pesada", 1, "Aumenta el daño de las armas contundentes", 5);
-		Habilidad puntaDeAcero = new Habilidad("Punta de acero", 1, "Aumenta el daño de las armas punzantes", 5);
-		Habilidad vastagoEstable = new Habilidad("Vastago estable", 1, "Aumenta el daño de las armas de largo alcance", 5);
+		Habilidad expertoEnArmas = new Habilidad("Experto en armas", 1, "Aumenta el daño de tu arma", 5);
+		Habilidad cuerpoFuerte = new Habilidad("Cuerpo fuerte", 1, "Reduce el peso de tu arma", 5);
+		
 		
 		humano.meterHabilidad(intimidación);
 		humano.meterHabilidad(saludable);
@@ -254,10 +254,9 @@ public class Humano {
 		humano.meterHabilidad(reforzado);
 		humano.meterHabilidad(eficiente);
 		humano.meterHabilidad(destrezaMagica);
-		humano.meterHabilidad(hojaAfilada);
-		humano.meterHabilidad(cabezaPesada);
-		humano.meterHabilidad(puntaDeAcero);
-		humano.meterHabilidad(vastagoEstable);
+		humano.meterHabilidad(expertoEnArmas);
+		humano.meterHabilidad(cuerpoFuerte);
+		
 
 		System.out.println("Elige una habilidad");
 
@@ -314,19 +313,11 @@ public class Humano {
 			humano.setHabilidad(habilidad);
 		}
 		
-		else if (humano.getHabilidad().getNombre().equals("Hoja afilada")) {
+		else if (humano.getHabilidad().getNombre().equals("Experto en armas")) {
 			humano.setHabilidad(habilidad);
 		}
 		
-		else if (humano.getHabilidad().getNombre().equals("Cabeza pesada")) {
-			humano.setHabilidad(habilidad);
-		}
-		
-		else if (humano.getHabilidad().getNombre().equals("Punta de acero")) {
-			humano.setHabilidad(habilidad);
-		}
-		
-		else if (humano.getHabilidad().getNombre().equals("Vastago estable")) {
+		else if (humano.getHabilidad().getNombre().equals("Cuerpo fuerte")) {
 			humano.setHabilidad(habilidad);
 		}
 		

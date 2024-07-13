@@ -66,10 +66,6 @@ public class Pelea {
 
 	public void enfrentamiento(Humano humano, Monstruo bestia, int numeroCombate) {
 
-		boolean hojaAfiladaAplicada = false;
-		boolean cabezaPesadaAplicada = false;
-		boolean puntaDeAceroAplicada = false;
-		boolean vastagoEstableAplicada = false;
 		boolean intimidaciónAplicada = false;
 		boolean saludableAplicada = false;
 		boolean potenciaAplicada = false;
@@ -77,42 +73,9 @@ public class Pelea {
 		boolean reforzadoAplicada = false;
 		boolean eficienteAplicada = false;
 		boolean destrezaMagicaAplicada = false;
+		boolean expertoEnArmasAplicada = false;
+		boolean cuerpoFuerteAplicada = false;
 		
-		
-
-		if (humano.getArma().getTipo() == TipoArma.Cortante && humano.getHabilidad().getNombre().equals("Hoja afilada") && !hojaAfiladaAplicada) {
-			humano.getArma().setDaño(humano.getArma().getDaño() + humano.getHabilidad().getIntensidad());
-			System.out.println("Tu habilidad ha aumentado el daño de las armas cortantes");
-			hojaAfiladaAplicada = true;
-		} else {
-
-			hojaAfiladaAplicada = false;
-
-		}
-
-		if (humano.getArma().getTipo() == TipoArma.Contundente && humano.getHabilidad().getNombre().equals("Cabeza pesada") && !cabezaPesadaAplicada) {
-			humano.getArma().setDaño(humano.getArma().getDaño() + humano.getHabilidad().getIntensidad());
-			System.out.println("Tu habilidad ha aumentado el daño de las armas contundentes");
-			cabezaPesadaAplicada = true;
-		} else {
-			cabezaPesadaAplicada = false;
-		}
-
-		if (humano.getArma().getTipo() == TipoArma.Punzante && humano.getHabilidad().getNombre().equals("Punta de acero") && !puntaDeAceroAplicada) {
-			humano.getArma().setDaño(humano.getArma().getDaño() + humano.getHabilidad().getIntensidad());
-			System.out.println("Tu habilidad ha aumentado el daño de las armas punzantes");
-			puntaDeAceroAplicada = true;
-		} else {
-			puntaDeAceroAplicada = false;
-		}
-
-		if (humano.getArma().getTipo() == TipoArma.LargaDistancia && humano.getHabilidad().getNombre().equals("Vastago estable") && !vastagoEstableAplicada) {
-			humano.getArma().setDaño(humano.getArma().getDaño() + humano.getHabilidad().getIntensidad());
-			System.out.println("Tu habilidad ha aumentado el daño de las armas de largo alcance");
-			vastagoEstableAplicada = true;
-		} else {
-			vastagoEstableAplicada = false;
-		}
 		
 		if(humano.getHabilidad().getNombre().equals("Intimidación") && !intimidaciónAplicada) {
 			bestia.setFuerza(bestia.getFuerza() - humano.getHabilidad().getIntensidad());
@@ -185,6 +148,30 @@ public class Pelea {
 			destrezaMagicaAplicada = true;
 		}else {
 			destrezaMagicaAplicada = false;
+		}
+		
+		if(humano.getHabilidad().getNombre().equals("Experto en armas") && !expertoEnArmasAplicada) {
+			humano.getArma().setDaño(humano.getArma().getDaño() + humano.getHabilidad().getIntensidad());
+			System.out.println("Tu habilidad ha aumentado el ataque tu arma");
+			if (bestia.getFuerza() < 0) {
+				bestia.setFuerza(0);
+			}
+			expertoEnArmasAplicada = true;
+		}else {
+			expertoEnArmasAplicada = false;
+		}
+		
+		if(humano.getHabilidad().getNombre().equals("Cuerpo fuerte") && !cuerpoFuerteAplicada) {
+			humano.getArma().setPeso(humano.getArma().getPeso() - humano.getHabilidad().getIntensidad());
+			humano.equiparArma(humano, humano.getArma());
+			System.out.println("Tu habilidad ha reducido el peso de tu arma");
+			if(humano.getArma().getPeso() < 0) {
+				humano.getArma().setPeso(0);
+				System.out.println("No se puede reducir mas el peso de esta arma");
+			}
+			cuerpoFuerteAplicada = true;
+		}else {
+			cuerpoFuerteAplicada = false;
 		}
 		
 
