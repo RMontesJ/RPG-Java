@@ -66,60 +66,49 @@ public class Pelea {
 
 	public void enfrentamiento(Humano humano, Monstruo bestia, int numeroCombate) {
 
-		int contadorHojaAfilada = 0;
-		int contadorCabezaPesada = 0;
-		int contadorPuntaDeAcero = 0;
-		int contadorVastagoEstable = 0;
+		boolean hojaAfiladaAplicada = false;
+		boolean cabezaPesadaAplicada = false;
+		boolean puntaDeAceroAplicada = false;
+		boolean vastagoEstableAplicada = false;
 
 		// este metodo se usa para evaluar una habilidad si requiere varias validaciones
 		// o si se activa al
 		// final o principio del turno
 
-		humano.analizarHabilidad(humano);
+		String habilidad = humano.analizarHabilidad(humano);
 
-		if (humano.analizarHabilidad(humano).equals("Hoja afilada")) {
-			contadorHojaAfilada = 1;
-			if (contadorHojaAfilada == 1) {
-				humano.getArma().setDaño(humano.getArma().getDaño() + humano.getHabilidad().getIntensidad());
-				System.out.println("Tu habilidad ha aumentado el daño de las armas cortantes");
-			}
+		if (habilidad.equals("Hoja afilada") && humano.getArma().getTipo() == TipoArma.Cortante && !hojaAfiladaAplicada) {
+		    humano.getArma().setDaño(humano.getArma().getDaño() + humano.getHabilidad().getIntensidad());
+		    System.out.println("Tu habilidad ha aumentado el daño de las armas cortantes");
+		    hojaAfiladaAplicada = true;
+		} else {
 			
-			
-		} else {
-			contadorHojaAfilada = 0;
+		    hojaAfiladaAplicada = false;
+		    
 		}
 
-		if (humano.analizarHabilidad(humano).equals("Cabeza pesada")) {
-			contadorCabezaPesada = 1;
-			if (contadorCabezaPesada == 1) {
-				humano.getArma().setDaño(humano.getArma().getDaño() + humano.getHabilidad().getIntensidad());
-				System.out.println("Tu habilidad ha aumentado el daño de las armas contundentes");
-			}
-
+		if (habilidad.equals("Cabeza pesada") && humano.getArma().getTipo() == TipoArma.Contundente && !cabezaPesadaAplicada) {
+		    humano.getArma().setDaño(humano.getArma().getDaño() + humano.getHabilidad().getIntensidad());
+		    System.out.println("Tu habilidad ha aumentado el daño de las armas contundentes");
+		    cabezaPesadaAplicada = true;
 		} else {
-			contadorCabezaPesada = 0;
+		    cabezaPesadaAplicada = false;
 		}
 
-		if (humano.analizarHabilidad(humano).equals("Punta de acero")) {
-			contadorPuntaDeAcero = 1;
-			if (contadorPuntaDeAcero == 1) {
-				humano.getArma().setDaño(humano.getArma().getDaño() + humano.getHabilidad().getIntensidad());
-				System.out.println("Tu habilidad ha aumentado el daño de las armas punzantes");
-			}
-
+		if (habilidad.equals("Punta de acero") && humano.getArma().getTipo() == TipoArma.Punzante && !puntaDeAceroAplicada) {
+		    humano.getArma().setDaño(humano.getArma().getDaño() + humano.getHabilidad().getIntensidad());
+		    System.out.println("Tu habilidad ha aumentado el daño de las armas punzantes");
+		    puntaDeAceroAplicada = true;
 		} else {
-			contadorPuntaDeAcero = 0;
+		    puntaDeAceroAplicada = false;
 		}
 
-		if (humano.analizarHabilidad(humano).equals("Vastago estable")) {
-			contadorVastagoEstable = 1;
-			if (contadorVastagoEstable == 1) {
-				humano.getArma().setDaño(humano.getArma().getDaño() + humano.getHabilidad().getIntensidad());
-				System.out.println("Tu habilidad ha aumentado el daño de las armas de largo alcance");
-			}
-
+		if (habilidad.equals("Vastago estable") && humano.getArma().getTipo() == TipoArma.LargaDistancia && !vastagoEstableAplicada) {
+		    humano.getArma().setDaño(humano.getArma().getDaño() + humano.getHabilidad().getIntensidad());
+		    System.out.println("Tu habilidad ha aumentado el daño de las armas de largo alcance");
+		    vastagoEstableAplicada = true;
 		} else {
-			contadorVastagoEstable = 0;
+		    vastagoEstableAplicada = false;
 		}
 
 		System.out.println("Inicio del combate " + numeroCombate);
