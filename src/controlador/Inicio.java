@@ -19,29 +19,7 @@ public class Inicio {
 
 		Arma martillo = new Arma("Martillo", 1, 5, TipoArma.Contundente, 10);
 		
-		Habilidad intimidación = new Habilidad("Intimidación", 1, "Reduce el ataque del enemigo", 5);
-		Habilidad saludable = new Habilidad("Saludable", 1, "Aumenta tu salud maxima", 5);
-		Habilidad potencia = new Habilidad("Potencia", 1, "Aumenta tu ataque", 5);
-		Habilidad energetico = new Habilidad("Energetico", 1, "Aumenta tu energia maxima", 5);
-		Habilidad reforzado = new Habilidad("Reforzado", 1, "Aumenta tu defensa", 5);
-		Habilidad eficiente = new Habilidad("Eficiente", 1, "Reduce el coste de todos tus hechizos", 5);
-		Habilidad destrezaMagica = new Habilidad("Destreza magica", 1, "Aumenta el daño de todos tus hechizos", 5);
-		Habilidad hojaAfilada = new Habilidad("Hoja afilada", 1, "Aumenta el daño de las armas cortantes", 5);
-		Habilidad cabezaPesada = new Habilidad("Cabeza pesada", 1, "Aumenta el daño de las armas contundentes", 5);
-		Habilidad puntaDeAcero = new Habilidad("Punta de acero", 1, "Aumenta el daño de las armas punzantes", 5);
-		Habilidad vastagoEstable = new Habilidad("Vastago estable", 1, "Aumenta el daño de las armas de largo alcance", 5);
 		
-		persona.meterHabilidad(intimidación);
-		persona.meterHabilidad(saludable);
-		persona.meterHabilidad(potencia);
-		persona.meterHabilidad(energetico);
-		persona.meterHabilidad(reforzado);
-		persona.meterHabilidad(eficiente);
-		persona.meterHabilidad(destrezaMagica);
-		persona.meterHabilidad(hojaAfilada);
-		persona.meterHabilidad(cabezaPesada);
-		persona.meterHabilidad(puntaDeAcero);
-		persona.meterHabilidad(vastagoEstable);
 
 		persona.meterHechizo(bolaDeFuego, persona);
 		persona.meterHechizo(gotaVital, persona);

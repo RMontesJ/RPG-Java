@@ -234,6 +234,30 @@ public class Humano {
 
 	public void elegirHabilidad(Humano humano, Monstruo bestia) {
 		Scanner sc = new Scanner(System.in);
+		
+		Habilidad intimidación = new Habilidad("Intimidación", 1, "Reduce el ataque del enemigo", 5);
+		Habilidad saludable = new Habilidad("Saludable", 1, "Aumenta tu salud maxima", 5);
+		Habilidad potencia = new Habilidad("Potencia", 1, "Aumenta tu ataque", 5);
+		Habilidad energetico = new Habilidad("Energetico", 1, "Aumenta tu energia maxima", 5);
+		Habilidad reforzado = new Habilidad("Reforzado", 1, "Aumenta tu defensa", 5);
+		Habilidad eficiente = new Habilidad("Eficiente", 1, "Reduce el coste de todos tus hechizos", 5);
+		Habilidad destrezaMagica = new Habilidad("Destreza magica", 1, "Aumenta el daño de todos tus hechizos", 5);
+		Habilidad hojaAfilada = new Habilidad("Hoja afilada", 1, "Aumenta el daño de las armas cortantes", 5);
+		Habilidad cabezaPesada = new Habilidad("Cabeza pesada", 1, "Aumenta el daño de las armas contundentes", 5);
+		Habilidad puntaDeAcero = new Habilidad("Punta de acero", 1, "Aumenta el daño de las armas punzantes", 5);
+		Habilidad vastagoEstable = new Habilidad("Vastago estable", 1, "Aumenta el daño de las armas de largo alcance", 5);
+		
+		humano.meterHabilidad(intimidación);
+		humano.meterHabilidad(saludable);
+		humano.meterHabilidad(potencia);
+		humano.meterHabilidad(energetico);
+		humano.meterHabilidad(reforzado);
+		humano.meterHabilidad(eficiente);
+		humano.meterHabilidad(destrezaMagica);
+		humano.meterHabilidad(hojaAfilada);
+		humano.meterHabilidad(cabezaPesada);
+		humano.meterHabilidad(puntaDeAcero);
+		humano.meterHabilidad(vastagoEstable);
 
 		System.out.println("Elige una habilidad");
 
@@ -260,54 +284,50 @@ public class Humano {
 	}
 
 	public void equiparHabilidad(Humano humano, Monstruo bestia, Habilidad habilidad) {
-
-		if (humano.habilidad.getNombre().equals("Intimidación")) {
-			bestia.setFuerza(bestia.getFuerza() - humano.habilidad.getIntensidad());
-			System.out.println("Tu habilidad ha bajado el ataque del enemigo");
-			if (bestia.getFuerza() < 0) {
-				bestia.setFuerza(0);
-			}
+		
+		
+		if (humano.getHabilidad().getNombre().equals("Intimidación")) {
+			humano.setHabilidad(habilidad);
 		}
 
-		else if (humano.habilidad.getNombre().equals("Saludable")) {
-			humano.setVidaMaxima(humano.getVidaMaxima() + humano.habilidad.getIntensidad());
-			System.out.println("Tu habilidad te ofrece mas vida maxima");
+		else if (humano.getHabilidad().getNombre().equals("Saludable")) {
+			humano.setHabilidad(habilidad);
 		}
 
-		else if (humano.habilidad.getNombre().equals("Potencia")) {
-			humano.setFuerza(humano.getFuerza() + humano.habilidad.getIntensidad());
-			System.out.println("Tu habilidad ha aumentado tu ataque");
+		else if (humano.getHabilidad().getNombre().equals("Potencia")) {
+			humano.setHabilidad(habilidad);
 		}
 
-		else if (humano.habilidad.getNombre().equals("Energetico")) {
-			humano.setEnergiaMaxima(humano.getEnergiaMaxima() + humano.habilidad.getIntensidad());
-			System.out.println("Tu habilidad ha aumentado tu energia maxima");
+		else if (humano.getHabilidad().getNombre().equals("Energetico")) {
+			humano.setHabilidad(habilidad);
 		}
 		
-		else if (humano.habilidad.getNombre().equals("Reforzado")) {
-			humano.setDefensa(humano.getDefensa() + humano.habilidad.getIntensidad());
-			System.out.println("Tu habilidad ha aumentado tu defensa");
+		else if (humano.getHabilidad().getNombre().equals("Reforzado")) {
+			humano.setHabilidad(habilidad);
 		}
 
-		else if (humano.habilidad.getNombre().equals("Eficiente")) {
-			for (int i = 0; i < humano.hechizos.size(); i++) {
-
-				humano.hechizos.get(i).setCoste(humano.hechizos.get(i).getCoste() - humano.habilidad.getIntensidad());
-
-				if (humano.hechizos.get(i).getCoste() < 5) {
-					humano.hechizos.get(i).setCoste(5);
-				}
-			}
-			System.out.println("Tu habilidad ha reducido el coste de los hechizos");
+		else if (humano.getHabilidad().getNombre().equals("Eficiente")) {
+			humano.setHabilidad(habilidad);
 		}
 
-		else if (humano.habilidad.getNombre().equals("Destreza magica")) {
-			for (int i = 0; i < humano.hechizos.size(); i++) {
-
-				humano.hechizos.get(i).setFuerza(humano.hechizos.get(i).getFuerza() + humano.habilidad.getIntensidad());
-
-			}
-			System.out.println("Tu habilidad ha aumentado el poder de todos tus hechizos");
+		else if (humano.getHabilidad().getNombre().equals("Destreza magica")) {
+			humano.setHabilidad(habilidad);
+		}
+		
+		else if (humano.getHabilidad().getNombre().equals("Hoja afilada")) {
+			humano.setHabilidad(habilidad);
+		}
+		
+		else if (humano.getHabilidad().getNombre().equals("Cabeza pesada")) {
+			humano.setHabilidad(habilidad);
+		}
+		
+		else if (humano.getHabilidad().getNombre().equals("Punta de acero")) {
+			humano.setHabilidad(habilidad);
+		}
+		
+		else if (humano.getHabilidad().getNombre().equals("Vastago estable")) {
+			humano.setHabilidad(habilidad);
 		}
 		
 	}

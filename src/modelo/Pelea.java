@@ -70,6 +70,14 @@ public class Pelea {
 		boolean cabezaPesadaAplicada = false;
 		boolean puntaDeAceroAplicada = false;
 		boolean vastagoEstableAplicada = false;
+		boolean intimidaciónAplicada = false;
+		boolean saludableAplicada = false;
+		boolean potenciaAplicada = false;
+		boolean energeticoAplicada = false;
+		boolean reforzadoAplicada = false;
+		boolean eficienteAplicada = false;
+		boolean destrezaMagicaAplicada = false;
+		
 		
 
 		if (humano.getArma().getTipo() == TipoArma.Cortante && humano.getHabilidad().getNombre().equals("Hoja afilada") && !hojaAfiladaAplicada) {
@@ -105,6 +113,80 @@ public class Pelea {
 		} else {
 			vastagoEstableAplicada = false;
 		}
+		
+		if(humano.getHabilidad().getNombre().equals("Intimidación") && !intimidaciónAplicada) {
+			bestia.setFuerza(bestia.getFuerza() - humano.getHabilidad().getIntensidad());
+			System.out.println("Tu habilidad ha bajado el ataque del enemigo");
+			if (bestia.getFuerza() < 0) {
+				bestia.setFuerza(0);
+			}
+			intimidaciónAplicada = true;
+		}else {
+			intimidaciónAplicada = false;
+		}
+		
+		if(humano.getHabilidad().getNombre().equals("Saludable") && !saludableAplicada) {
+			humano.setVidaMaxima(humano.getVidaMaxima() + humano.getHabilidad().getIntensidad());
+			System.out.println("Tu habilidad te ofrece mas vida maxima");
+			saludableAplicada = true;
+		}else {
+			saludableAplicada = false;
+		}
+		
+		if(humano.getHabilidad().getNombre().equals("Potencia") && !potenciaAplicada) {
+			humano.setFuerza(humano.getFuerza() + humano.getHabilidad().getIntensidad());
+			System.out.println("Tu habilidad ha aumentado tu ataque");
+			intimidaciónAplicada = true;
+		}else {
+			intimidaciónAplicada = false;
+		}
+		
+		if(humano.getHabilidad().getNombre().equals("Energetico") && !energeticoAplicada) {
+			humano.setEnergiaMaxima(humano.getEnergiaMaxima() + humano.getHabilidad().getIntensidad());
+			System.out.println("Tu habilidad ha aumentado tu energia maxima");
+			energeticoAplicada = true;
+		}else {
+			energeticoAplicada = false;
+		}
+		
+		if(humano.getHabilidad().getNombre().equals("Reforzado") && !reforzadoAplicada) {
+			humano.setDefensa(humano.getDefensa() + humano.getHabilidad().getIntensidad());
+			System.out.println("Tu habilidad ha aumentado tu defensa");
+			reforzadoAplicada = true;
+		}else {
+			reforzadoAplicada = false;
+		}
+		
+		if(humano.getHabilidad().getNombre().equals("Eficiente") && !eficienteAplicada) {
+			for (int i = 0; i < humano.hechizos.size(); i++) {
+
+				humano.hechizos.get(i).setCoste(humano.hechizos.get(i).getCoste() - humano.getHabilidad().getIntensidad());
+
+				if (humano.hechizos.get(i).getCoste() < 5) {
+					humano.hechizos.get(i).setCoste(5);
+				}
+			}
+			System.out.println("Tu habilidad ha reducido el coste de los hechizos");
+			eficienteAplicada = true;
+		}else {
+			eficienteAplicada = false;
+		}
+		
+		if(humano.getHabilidad().getNombre().equals("Destreza magica") && !destrezaMagicaAplicada) {
+			for (int i = 0; i < humano.hechizos.size(); i++) {
+
+				humano.hechizos.get(i).setFuerza(humano.hechizos.get(i).getFuerza() + humano.getHabilidad().getIntensidad());
+
+				if (humano.hechizos.get(i).getCoste() < 5) {
+					humano.hechizos.get(i).setCoste(5);
+				}
+			}
+			System.out.println("Tu habilidad ha aumentado el daño de tus hechizos");
+			destrezaMagicaAplicada = true;
+		}else {
+			destrezaMagicaAplicada = false;
+		}
+		
 
 		System.out.println("Inicio del combate " + numeroCombate);
 
