@@ -271,6 +271,7 @@ public class Humano {
 		if (humano.getHabilidad().getNombre().equals("Intimidación")) {
 			bestia.setFuerza(bestia.getFuerza() - humano.getHabilidad().getIntensidad());
 			System.out.println("Tu habilidad ha reducido el ataque del enemigo");
+			System.out.println("Ataque de " + bestia.getNombre() + ": " + bestia.getFuerza());
 			if(bestia.getFuerza() <= humano.getDefensa()) {
 				bestia.setFuerza(humano.getDefensa() + 5);
 				System.out.println("No se puede bajar mas el ataque del enemigo");
@@ -280,22 +281,26 @@ public class Humano {
 		if (humano.getHabilidad().getNombre().equals("Saludable")) {
 			humano.setVidaMaxima(humano.getVidaMaxima() + humano.getHabilidad().getIntensidad());
 			System.out.println("Tu habilidad te ofrece más vida máxima");
+			System.out.println("Vida maxima de " + humano.getNombre() + ": " + humano.getVidaMaxima());
 			
 		}
 
 		if (humano.getHabilidad().getNombre().equals("Potencia")) {
 			humano.setFuerza(humano.getFuerza() + humano.getHabilidad().getIntensidad());
 			System.out.println("Tu habilidad ha aumentado tu ataque");
+			System.out.println("Ataque de " + humano.getNombre() + ": " + humano.getFuerza());
 		}
 
 		if (humano.getHabilidad().getNombre().equals("Energetico")) {
 			humano.setEnergiaMaxima(humano.getEnergiaMaxima() + humano.getHabilidad().getIntensidad());
 			System.out.println("Tu habilidad ha aumentado tu energía máxima");
+			System.out.println("Energia maxima de " + humano.getNombre() + ": " + humano.getEnergiaMaxima());
 		}
 
 		if (humano.getHabilidad().getNombre().equals("Reforzado")) {
 			humano.setDefensa(humano.getDefensa() + humano.getHabilidad().getIntensidad());
 			System.out.println("Tu habilidad ha aumentado tu defensa");
+			System.out.println("Defensa de " + humano.getNombre() + ": " + humano.getDefensa());
 			if(humano.getDefensa() >= bestia.getFuerza()) {
 				humano.setDefensa(bestia.getFuerza() - 5);
 				System.out.println("No se puede aumentar mas tu defensa");
@@ -324,12 +329,14 @@ public class Humano {
 		if (humano.getHabilidad().getNombre().equals("Experto en armas")) {
 			humano.getArma().setDaño(humano.getArma().getDaño() + humano.getHabilidad().getIntensidad());
 			System.out.println("Tu habilidad ha aumentado el daño de tu arma");
+			System.out.println("Daño de " + humano.getArma().getNombre() + ": " + humano.getArma().getDaño());
 		}
 
 		if (humano.getHabilidad().getNombre().equals("Cuerpo fuerte")) {
 			humano.getArma().setPeso(humano.getArma().getPeso() - humano.getHabilidad().getIntensidad());
 			humano.setEnergia(humano.getEnergiaMaxima() - humano.getArma().getPeso());
 			System.out.println("Tu habilidad ha reducido el peso de tu arma");
+			System.out.println("Peso de " + humano.getArma().getNombre() + ": " + humano.getArma().getPeso());
 			if(humano.getArma().getPeso() < 0) {
 				humano.getArma().setPeso(0);
 				System.out.println("No se puede reducir mas el peso de esta arma");
