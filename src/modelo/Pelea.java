@@ -92,12 +92,6 @@ public class Pelea {
 			else if (opcion.equals("3")) {
 				infoCombate(humano, bestia);
 			}
-			
-			if(numeroCombate % 10 == 0) {
-				bestia.setVidaMaxima(bestia.getVidaMaxima() * 2);
-				bestia.setVida(bestia.getVidaMaxima());
-				System.out.println("Combate contra jefe " + bestia.getNombre());
-			}
 
 			if (bestia.getVida() <= 0) {
 				bestia.setVida(0);

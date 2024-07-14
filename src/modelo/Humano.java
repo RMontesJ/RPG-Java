@@ -23,7 +23,7 @@ public class Humano {
 	public Humano() {
 		this.vida = 100;
 		this.vidaMaxima = 100;
-		this.fuerza = 0;
+		this.fuerza = 5;
 		this.energia = 50;
 		this.energiaMaxima = 50;
 		this.defensa = 0;
@@ -31,7 +31,7 @@ public class Humano {
 		habilidades = new ArrayList<Habilidad>();
 		this.nivel = 1;
 		this.experiencia = 0;
-		this.gananciaExperiencia = 0;
+		this.gananciaExperiencia = 5;
 		this.experienciaLimite = 10;
 	}
 
