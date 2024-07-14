@@ -98,11 +98,32 @@ public class Pelea {
 				humano.ganarExperiencia(humano);
 			}
 			
-			if(humano.getVida() > humano.getVidaMaxima()) {
+			// limitar el efecto de Intimidacion
+			if(bestia.getFuerza() <= humano.getDefensa()) {
+				bestia.setFuerza(humano.getDefensa() + 5);
+				System.out.println("No se puede bajar mas el ataque del enemigo");
+			}
+			
+			// limitar el efecto de Saludable
+			if (humano.getVida() > humano.getVidaMaxima()) {
 				humano.setVida(humano.getVidaMaxima());
 			}
+			// limitar el efecto de Energetico
+			if (humano.getEnergia() > humano.getEnergiaMaxima()) {
+				humano.setEnergia(humano.getEnergiaMaxima());
+			}
+			// limitar el efecto de Reforzado
+			if(humano.getDefensa() >= bestia.getFuerza()) {
+				humano.setDefensa(bestia.getFuerza() - 5);
+				System.out.println("No se puede aumentar mas tu defensa");
+			}
+			// limitar el efecto de Cuerpo fuerte
+			if (humano.getArma().getPeso() < 0) {
+				humano.getArma().setPeso(0);
+				System.out.println("No se puede reducir mas el peso de esta arma");
+			}
 
-			else if (humano.getVida() <= 0) {
+			if (humano.getVida() <= 0) {
 				System.out.println("Has muerto. Fin de la partida");
 			}
 
@@ -129,7 +150,7 @@ public class Pelea {
 		}
 
 		System.out.println("Vida de " + humano.getNombre() + ": " + humano.getVida());
-		System.out.println("Vida de " + humano.getNombre() + ": " + humano.getEnergia());
+		System.out.println("Energia de " + humano.getNombre() + ": " + humano.getEnergia());
 		System.out.println("Vida de " + monstruo.getNombre() + ": " + monstruo.getVida());
 
 	}
@@ -167,7 +188,7 @@ public class Pelea {
 					humano.setFuerza(humano.getFuerza() + humano.hechizos.get(posicion).getFuerza());
 				} else if (humano.hechizos.get(posicion).getNombre().equals("Fortaleza")) {
 					humano.setDefensa(humano.getDefensa() + humano.hechizos.get(posicion).getFuerza());
-					if(humano.getDefensa() >= monstruo.getFuerza()) {
+					if (humano.getDefensa() >= monstruo.getFuerza()) {
 						humano.setDefensa(humano.getDefensa() - 5);
 						System.out.println("No se puede aumentar mas tu defensa");
 					}
@@ -333,30 +354,30 @@ public class Pelea {
 					}
 
 					else if (recompensa1.getNombre().equals("Maestria magica")) {
-						
+
 						int posicion = -1; // Inicializamos con un valor fuera del rango válido
 
 						do {
-						    System.out.println("Elige el hechizo que quieres mejorar");
+							System.out.println("Elige el hechizo que quieres mejorar");
 
-						    humano.verHechizos();
+							humano.verHechizos();
 
-						    if (sc.hasNextInt()) { // Verificar si la entrada es un entero
-						        posicion = sc.nextInt();
-						        if (posicion >= 0 && posicion < humano.hechizos.size()) {
-						            Hechizo hechizoElegido = humano.hechizos.get(posicion);
-						            hechizo.subirNivel(hechizoElegido);
-						        } else {
-						            System.out.println("Posición inválida. Por favor, elige un número entre 0 y " + (humano.hechizos.size() - 1));
-						            humano.verHechizos();
-						        }
-						    } else {
-						        System.out.println("Entrada inválida. Por favor, ingresa un número.");
-						        sc.next(); // Limpiar la entrada inválida
-						    }
+							if (sc.hasNextInt()) { // Verificar si la entrada es un entero
+								posicion = sc.nextInt();
+								if (posicion >= 0 && posicion < humano.hechizos.size()) {
+									Hechizo hechizoElegido = humano.hechizos.get(posicion);
+									hechizo.subirNivel(hechizoElegido);
+								} else {
+									System.out.println("Posición inválida. Por favor, elige un número entre 0 y "
+											+ (humano.hechizos.size() - 1));
+									humano.verHechizos();
+								}
+							} else {
+								System.out.println("Entrada inválida. Por favor, ingresa un número.");
+								sc.next(); // Limpiar la entrada inválida
+							}
 						} while (posicion < 0 || posicion >= humano.hechizos.size());
 
-						
 					}
 
 					else if (recompensa1.getNombre().equals("MutaPiedra")) {
@@ -396,26 +417,26 @@ public class Pelea {
 						int posicion = -1; // Inicializamos con un valor fuera del rango válido
 
 						do {
-						    System.out.println("Elige el hechizo que quieres mejorar");
+							System.out.println("Elige el hechizo que quieres mejorar");
 
-						    humano.verHechizos();
+							humano.verHechizos();
 
-						    if (sc.hasNextInt()) { // Verificar si la entrada es un entero
-						        posicion = sc.nextInt();
-						        if (posicion >= 0 && posicion < humano.hechizos.size()) {
-						            Hechizo hechizoElegido = humano.hechizos.get(posicion);
-						            hechizo.subirNivel(hechizoElegido);
-						        } else {
-						            System.out.println("Posición inválida. Por favor, elige un número entre 0 y " + (humano.hechizos.size() - 1));
-						            humano.verHechizos();
-						        }
-						    } else {
-						        System.out.println("Entrada inválida. Por favor, ingresa un número.");
-						        sc.next(); // Limpiar la entrada inválida
-						    }
+							if (sc.hasNextInt()) { // Verificar si la entrada es un entero
+								posicion = sc.nextInt();
+								if (posicion >= 0 && posicion < humano.hechizos.size()) {
+									Hechizo hechizoElegido = humano.hechizos.get(posicion);
+									hechizo.subirNivel(hechizoElegido);
+								} else {
+									System.out.println("Posición inválida. Por favor, elige un número entre 0 y "
+											+ (humano.hechizos.size() - 1));
+									humano.verHechizos();
+								}
+							} else {
+								System.out.println("Entrada inválida. Por favor, ingresa un número.");
+								sc.next(); // Limpiar la entrada inválida
+							}
 						} while (posicion < 0 || posicion >= humano.hechizos.size());
 
-						
 					}
 
 					else if (recompensa2.getNombre().equals("MutaPiedra")) {
@@ -453,26 +474,26 @@ public class Pelea {
 						int posicion = -1; // Inicializamos con un valor fuera del rango válido
 
 						do {
-						    System.out.println("Elige el hechizo que quieres mejorar");
+							System.out.println("Elige el hechizo que quieres mejorar");
 
-						    humano.verHechizos();
+							humano.verHechizos();
 
-						    if (sc.hasNextInt()) { // Verificar si la entrada es un entero
-						        posicion = sc.nextInt();
-						        if (posicion >= 0 && posicion < humano.hechizos.size()) {
-						            Hechizo hechizoElegido = humano.hechizos.get(posicion);
-						            hechizo.subirNivel(hechizoElegido);
-						        } else {
-						            System.out.println("Posición inválida. Por favor, elige un número entre 0 y " + (humano.hechizos.size() - 1));
-						            humano.verHechizos();
-						        }
-						    } else {
-						        System.out.println("Entrada inválida. Por favor, ingresa un número.");
-						        sc.next(); // Limpiar la entrada inválida
-						    }
+							if (sc.hasNextInt()) { // Verificar si la entrada es un entero
+								posicion = sc.nextInt();
+								if (posicion >= 0 && posicion < humano.hechizos.size()) {
+									Hechizo hechizoElegido = humano.hechizos.get(posicion);
+									hechizo.subirNivel(hechizoElegido);
+								} else {
+									System.out.println("Posición inválida. Por favor, elige un número entre 0 y "
+											+ (humano.hechizos.size() - 1));
+									humano.verHechizos();
+								}
+							} else {
+								System.out.println("Entrada inválida. Por favor, ingresa un número.");
+								sc.next(); // Limpiar la entrada inválida
+							}
 						} while (posicion < 0 || posicion >= humano.hechizos.size());
 
-						
 					}
 
 					else if (recompensa3.getNombre().equals("MutaPiedra")) {

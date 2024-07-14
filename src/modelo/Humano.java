@@ -265,11 +265,16 @@ public class Humano {
 		if (humano.getHabilidad().getNombre().equals("Intimidación")) {
 			bestia.setFuerza(bestia.getFuerza() - humano.getHabilidad().getIntensidad());
 			System.out.println("Tu habilidad ha reducido el ataque del enemigo");
+			if(bestia.getFuerza() <= humano.getDefensa()) {
+				bestia.setFuerza(humano.getDefensa() + 5);
+				System.out.println("No se puede bajar mas el ataque del enemigo");
+			}
 		}
 
 		if (humano.getHabilidad().getNombre().equals("Saludable")) {
 			humano.setVidaMaxima(humano.getVidaMaxima() + humano.getHabilidad().getIntensidad());
 			System.out.println("Tu habilidad te ofrece más vida máxima");
+			
 		}
 
 		if (humano.getHabilidad().getNombre().equals("Potencia")) {
@@ -286,7 +291,7 @@ public class Humano {
 			humano.setDefensa(humano.getDefensa() + humano.getHabilidad().getIntensidad());
 			System.out.println("Tu habilidad ha aumentado tu defensa");
 			if(humano.getDefensa() >= bestia.getFuerza()) {
-				humano.setDefensa(humano.getDefensa() - 5);
+				humano.setDefensa(bestia.getFuerza() - 5);
 				System.out.println("No se puede aumentar mas tu defensa");
 			}
 		}
@@ -316,11 +321,10 @@ public class Humano {
 		}
 
 		if (humano.getHabilidad().getNombre().equals("Cuerpo fuerte")) {
-			humano.equiparArma(humano, humano.getArma());
 			humano.getArma().setPeso(humano.getArma().getPeso() - humano.getHabilidad().getIntensidad());
 			System.out.println("Tu habilidad ha reducido el peso de tu arma");
 			if(humano.getArma().getPeso() < 0) {
-				humano.getArma().setPeso(5);
+				humano.getArma().setPeso(0);
 				System.out.println("No se puede reducir mas el peso de esta arma");
 			}
 		}
@@ -380,8 +384,8 @@ public class Humano {
 
 		if (humano.getHabilidad().getNombre().equals("Saludable")) {
 			humano.setVidaMaxima(humano.getVidaMaxima() - humano.getHabilidad().getIntensidad());
-
-		}
+			
+			}
 
 		if (humano.getHabilidad().getNombre().equals("Potencia")) {
 			humano.setFuerza(humano.getFuerza() - humano.getHabilidad().getIntensidad());
@@ -395,6 +399,7 @@ public class Humano {
 
 		if (humano.getHabilidad().getNombre().equals("Reforzado")) {
 			humano.setDefensa(humano.getDefensa() - humano.getHabilidad().getIntensidad());
+			
 
 		}
 
@@ -422,6 +427,7 @@ public class Humano {
 		if (humano.getHabilidad().getNombre().equals("Cuerpo fuerte")) {
 			humano.equiparArma(humano, humano.getArma());
 			humano.getArma().setPeso(humano.getArma().getPeso() + humano.getHabilidad().getIntensidad());
+			
 		}
 
 		elegirHabilidad(humano, bestia);
