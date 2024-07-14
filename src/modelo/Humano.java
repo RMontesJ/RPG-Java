@@ -26,11 +26,11 @@ public class Humano {
 		this.fuerza = 0;
 		this.energia = 50;
 		this.energiaMaxima = 50;
-		this.defensa = 5;
+		this.defensa = 0;
 		hechizos = new ArrayList<Hechizo>();
 		habilidades = new ArrayList<Habilidad>();
 		this.nivel = 1;
-		this.experiencia = 5;
+		this.experiencia = 0;
 		this.gananciaExperiencia = 0;
 		this.experienciaLimite = 10;
 	}
@@ -285,6 +285,10 @@ public class Humano {
 		if (humano.getHabilidad().getNombre().equals("Reforzado")) {
 			humano.setDefensa(humano.getDefensa() + humano.getHabilidad().getIntensidad());
 			System.out.println("Tu habilidad ha aumentado tu defensa");
+			if(humano.getDefensa() >= bestia.getFuerza()) {
+				humano.setDefensa(humano.getDefensa() - 5);
+				System.out.println("No se puede aumentar mas tu defensa");
+			}
 		}
 
 		if (humano.getHabilidad().getNombre().equals("Eficiente")) {
@@ -315,6 +319,10 @@ public class Humano {
 			humano.equiparArma(humano, humano.getArma());
 			humano.getArma().setPeso(humano.getArma().getPeso() - humano.getHabilidad().getIntensidad());
 			System.out.println("Tu habilidad ha reducido el peso de tu arma");
+			if(humano.getArma().getPeso() < 0) {
+				humano.getArma().setPeso(5);
+				System.out.println("No se puede reducir mas el peso de esta arma");
+			}
 		}
 
 	}

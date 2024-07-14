@@ -103,6 +103,10 @@ public class Pelea {
 				bestia.setVida(0);
 				humano.ganarExperiencia(humano);
 			}
+			
+			if(humano.getVida() > humano.getVidaMaxima()) {
+				humano.setVida(humano.getVidaMaxima());
+			}
 
 			else if (humano.getVida() <= 0) {
 				System.out.println("Has muerto. Fin de la partida");
@@ -168,6 +172,10 @@ public class Pelea {
 					humano.setFuerza(humano.getFuerza() + humano.hechizos.get(posicion).getFuerza());
 				} else if (humano.hechizos.get(posicion).getNombre().equals("Fortaleza")) {
 					humano.setDefensa(humano.getDefensa() + humano.hechizos.get(posicion).getFuerza());
+					if(humano.getDefensa() >= monstruo.getFuerza()) {
+						humano.setDefensa(humano.getDefensa() - 5);
+						System.out.println("No se puede aumentar mas tu defensa");
+					}
 				}
 			}
 
