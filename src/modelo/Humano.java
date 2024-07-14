@@ -30,8 +30,8 @@ public class Humano {
 		hechizos = new ArrayList<Hechizo>();
 		habilidades = new ArrayList<Habilidad>();
 		this.nivel = 1;
-		this.experiencia = 0;
-		this.gananciaExperiencia = 5;
+		this.experiencia = 5;
+		this.gananciaExperiencia = 0;
 		this.experienciaLimite = 10;
 	}
 
@@ -254,7 +254,6 @@ public class Humano {
 			equiparHabilidad(humano, bestia, humano.getHabilidad());
 		}
 
-		
 		equiparHabilidad(humano, bestia, humano.habilidades.get(habilidad));
 
 	}
@@ -262,7 +261,6 @@ public class Humano {
 	public void equiparHabilidad(Humano humano, Monstruo bestia, Habilidad habilidad) {
 
 		humano.setHabilidad(habilidad);
-
 
 		if (humano.getHabilidad().getNombre().equals("Intimidación")) {
 			bestia.setFuerza(bestia.getFuerza() - humano.getHabilidad().getIntensidad());
@@ -321,6 +319,104 @@ public class Humano {
 
 	}
 
+	// actualiza el hechizo que acabas de aprender si tienes estas habilidades
+
+	public void actualizarHechizo(Humano humano, Hechizo hechizo) {
+
+		if (humano.getHabilidad().getNombre().equals("Eficiente")) {
+
+			hechizo.setCoste(hechizo.getCoste() - humano.getHabilidad().getIntensidad());
+
+			if (hechizo.getCoste() < 5) {
+				hechizo.setCoste(5);
+			}
+			System.out.println("Tu habilidad ha reducido el coste de tus hechizos");
+		}
+
+		if (humano.getHabilidad().getNombre().equals("Destreza magica")) {
+
+			hechizo.setFuerza(hechizo.getFuerza() + (humano.getHabilidad().getIntensidad()));
+
+			System.out.println("Tu habilidad ha aumentado el poder de este hechizo: " + hechizo.getNombre());
+		}
+
+	}
+	
+	// actualiza el arma que acabas de equiparte si tienes estas habilidades
+
+	public void actualizarArma(Humano humano, Arma arma) {
+
+		if (humano.getHabilidad().getNombre().equals("Experto en armas")) {
+			humano.getArma().setDaño(humano.getArma().getDaño() + (humano.getHabilidad().getIntensidad()));
+			System.out.println("Tu habilidad ha aumentado el daño de tu arma");
+		}
+		
+		if (humano.getHabilidad().getNombre().equals("Cuerpo fuerte")) {
+			humano.equiparArma(humano, arma);
+			humano.getArma().setPeso(humano.getArma().getPeso() - humano.getHabilidad().getIntensidad());
+			System.out.println("Tu habilidad ha reducido el peso de tu arma");
+		}
+
+	}
+
+	public void quitarHabilidad(Humano humano, Monstruo bestia) {
+
+		if (humano.getHabilidad().getNombre().equals("Intimidación")) {
+			bestia.setFuerza(bestia.getFuerza() + humano.getHabilidad().getIntensidad());
+		}
+
+		if (humano.getHabilidad().getNombre().equals("Saludable")) {
+			humano.setVidaMaxima(humano.getVidaMaxima() - humano.getHabilidad().getIntensidad());
+
+		}
+
+		if (humano.getHabilidad().getNombre().equals("Potencia")) {
+			humano.setFuerza(humano.getFuerza() - humano.getHabilidad().getIntensidad());
+
+		}
+
+		if (humano.getHabilidad().getNombre().equals("Energetico")) {
+			humano.setEnergiaMaxima(humano.getEnergiaMaxima() - humano.getHabilidad().getIntensidad());
+
+		}
+
+		if (humano.getHabilidad().getNombre().equals("Reforzado")) {
+			humano.setDefensa(humano.getDefensa() - humano.getHabilidad().getIntensidad());
+
+		}
+
+		if (humano.getHabilidad().getNombre().equals("Eficiente")) {
+			for (int i = 0; i < humano.hechizos.size(); i++) {
+				humano.hechizos.get(i)
+						.setCoste(humano.hechizos.get(i).getCoste() + humano.getHabilidad().getIntensidad());
+				if (humano.hechizos.get(i).getCoste() < 5) {
+					humano.hechizos.get(i).setCoste(5);
+				}
+			}
+		}
+
+		if (humano.getHabilidad().getNombre().equals("Destreza magica")) {
+			for (int i = 0; i < humano.hechizos.size(); i++) {
+				humano.hechizos.get(i)
+						.setFuerza(humano.hechizos.get(i).getFuerza() - humano.getHabilidad().getIntensidad());
+			}
+		}
+
+		if (humano.getHabilidad().getNombre().equals("Experto en armas")) {
+			humano.getArma().setDaño(humano.getArma().getDaño() - humano.getHabilidad().getIntensidad());
+		}
+
+		if (humano.getHabilidad().getNombre().equals("Cuerpo fuerte")) {
+			humano.equiparArma(humano, humano.getArma());
+			humano.getArma().setPeso(humano.getArma().getPeso() + humano.getHabilidad().getIntensidad());
+		}
+
+	}
+
+	// metodo que se usa por ejemplo cuando eliges un hechizo a añadir, cancelas el
+	// efecto de la habilidad
+	// para luego llamar al metodo actualizarHabilidad y volver a aplicarlo
+
 	public void desequiparHabilidad(Humano humano, Monstruo bestia) {
 
 		if (humano.getHabilidad().getNombre().equals("Intimidación")) {
@@ -372,24 +468,76 @@ public class Humano {
 			humano.equiparArma(humano, humano.getArma());
 			humano.getArma().setPeso(humano.getArma().getPeso() + humano.getHabilidad().getIntensidad());
 		}
-		
+
 		elegirHabilidad(humano, bestia);
+
+	}
+
+	public void actualizarHabilidad(Humano humano, Monstruo bestia, Habilidad habilidad) {
+
+		if (humano.getHabilidad().getNombre().equals("Intimidación")) {
+			bestia.setFuerza(bestia.getFuerza() + humano.getHabilidad().getIntensidad());
+		}
+
+		if (humano.getHabilidad().getNombre().equals("Saludable")) {
+			humano.setVidaMaxima(humano.getVidaMaxima() - humano.getHabilidad().getIntensidad());
+
+		}
+
+		if (humano.getHabilidad().getNombre().equals("Potencia")) {
+			humano.setFuerza(humano.getFuerza() - humano.getHabilidad().getIntensidad());
+
+		}
+
+		if (humano.getHabilidad().getNombre().equals("Energetico")) {
+			humano.setEnergiaMaxima(humano.getEnergiaMaxima() - humano.getHabilidad().getIntensidad());
+
+		}
+
+		if (humano.getHabilidad().getNombre().equals("Reforzado")) {
+			humano.setDefensa(humano.getDefensa() - humano.getHabilidad().getIntensidad());
+
+		}
+
+		if (humano.getHabilidad().getNombre().equals("Eficiente")) {
+			for (int i = 0; i < humano.hechizos.size(); i++) {
+				humano.hechizos.get(i)
+						.setCoste(humano.hechizos.get(i).getCoste() + humano.getHabilidad().getIntensidad());
+				if (humano.hechizos.get(i).getCoste() < 5) {
+					humano.hechizos.get(i).setCoste(5);
+				}
+			}
+		}
+
+		if (humano.getHabilidad().getNombre().equals("Destreza magica")) {
+			for (int i = 0; i < humano.hechizos.size(); i++) {
+				humano.hechizos.get(i)
+						.setFuerza(humano.hechizos.get(i).getFuerza() - humano.getHabilidad().getIntensidad());
+			}
+		}
+
+		if (humano.getHabilidad().getNombre().equals("Experto en armas")) {
+			humano.getArma().setDaño(humano.getArma().getDaño() - humano.getHabilidad().getIntensidad());
+		}
+
+		if (humano.getHabilidad().getNombre().equals("Cuerpo fuerte")) {
+			humano.equiparArma(humano, humano.getArma());
+			humano.getArma().setPeso(humano.getArma().getPeso() + humano.getHabilidad().getIntensidad());
+		}
 
 	}
 
 	public void mejorarHabilidad(Humano humano, Monstruo bestia, Habilidad habilidad) {
 
-		humano.habilidad.setNivel(habilidad.getNivel() + 1);
+		humano.getHabilidad().setNivel(habilidad.getNivel() + 1);
 
 		System.out.println("La habilidad " + humano.getHabilidad().getNombre() + " ha subido al nivel "
 				+ humano.getHabilidad().getNivel());
 
-		humano.habilidad.setIntensidad(habilidad.getIntensidad() + 5);
+		humano.getHabilidad().setIntensidad(habilidad.getIntensidad() + 5);
 
 		System.out.println("Intensidad de la habilidad " + humano.getHabilidad().getNombre() + ": "
 				+ humano.getHabilidad().getIntensidad());
-
-		equiparHabilidad(humano, bestia, humano.getHabilidad());
 
 	}
 

@@ -362,6 +362,7 @@ public class Pelea {
 
 					else if (recompensa1.getNombre().equals("RealzaPoder")) {
 						humano.mejorarHabilidad(humano, bestia, humano.getHabilidad());
+						humano.equiparHabilidad(humano, bestia, humano.getHabilidad());
 					}
 
 				}
@@ -420,6 +421,7 @@ public class Pelea {
 
 					else if (recompensa2.getNombre().equals("RealzaPoder")) {
 						humano.mejorarHabilidad(humano, bestia, humano.getHabilidad());
+						humano.equiparHabilidad(humano, bestia, humano.getHabilidad());
 					}
 
 				} else if (eleccion.equals("3")) {
@@ -476,6 +478,7 @@ public class Pelea {
 
 					else if (recompensa3.getNombre().equals("RealzaPoder")) {
 						humano.mejorarHabilidad(humano, bestia, humano.getHabilidad());
+						humano.equiparHabilidad(humano, bestia, humano.getHabilidad());
 					}
 
 				}
@@ -485,50 +488,62 @@ public class Pelea {
 
 				if (recompensa4.getNombre().equals("Cuchillo")) {
 					humano.equiparArma(humano, recompensa4);
+					humano.actualizarArma(humano, recompensa4);
 				}
 
 				else if (recompensa4.getNombre().equals("Espada")) {
 					humano.equiparArma(humano, recompensa4);
+					humano.actualizarArma(humano, recompensa4);
 				}
 
 				else if (recompensa4.getNombre().equals("Filo celestial")) {
 					humano.equiparArma(humano, recompensa4);
+					humano.actualizarArma(humano, recompensa4);
 				}
 
 				else if (recompensa4.getNombre().equals("Sai")) {
 					humano.equiparArma(humano, recompensa4);
+					humano.actualizarArma(humano, recompensa4);
 				}
 
 				else if (recompensa4.getNombre().equals("Lanza")) {
 					humano.equiparArma(humano, recompensa4);
+					humano.actualizarArma(humano, recompensa4);
 				}
 
 				else if (recompensa4.getNombre().equals("Punta del destino")) {
 					humano.equiparArma(humano, recompensa4);
+					humano.actualizarArma(humano, recompensa4);
 				}
 
 				else if (recompensa4.getNombre().equals("Porra")) {
 					humano.equiparArma(humano, recompensa4);
+					humano.actualizarArma(humano, recompensa4);
 				}
 
 				else if (recompensa4.getNombre().equals("Martillo")) {
 					humano.equiparArma(humano, recompensa4);
+					humano.actualizarArma(humano, recompensa4);
 				}
 
 				else if (recompensa4.getNombre().equals("Maza demoniaca")) {
 					humano.equiparArma(humano, recompensa4);
+					humano.actualizarArma(humano, recompensa4);
 				}
 
 				else if (recompensa4.getNombre().equals("Arco")) {
 					humano.equiparArma(humano, recompensa4);
+					humano.actualizarArma(humano, recompensa4);
 				}
 
 				else if (recompensa4.getNombre().equals("Ballesta")) {
 					humano.equiparArma(humano, recompensa4);
+					humano.actualizarArma(humano, recompensa4);
 				}
 
 				else if (recompensa4.getNombre().equals("Javalina divina")) {
 					humano.equiparArma(humano, recompensa4);
+					humano.actualizarArma(humano, recompensa4);
 				}
 
 				// hechizos
@@ -536,26 +551,32 @@ public class Pelea {
 			} else if (eleccion.equals("5")) {
 				if (recompensa5.getNombre().equals("Relampago")) {
 					humano.meterHechizo(recompensa5, humano);
+					humano.actualizarHechizo(humano, recompensa5);
 				}
 
 				else if (recompensa5.getNombre().equals("Pedrada")) {
 					humano.meterHechizo(recompensa5, humano);
+					humano.actualizarHechizo(humano, recompensa5);
 				}
 
 				else if (recompensa5.getNombre().equals("Golpe oscuro")) {
 					humano.meterHechizo(recompensa5, humano);
+					humano.actualizarHechizo(humano, recompensa5);
 				}
 
 				else if (recompensa5.getNombre().equals("Onda psiquica")) {
 					humano.meterHechizo(recompensa5, humano);
+					humano.actualizarHechizo(humano, recompensa5);
 				}
 
 				else if (recompensa5.getNombre().equals("Meditación")) {
 					humano.meterHechizo(recompensa5, humano);
+					humano.actualizarHechizo(humano, recompensa5);
 				}
 
 				else if (recompensa5.getNombre().equals("Fortaleza")) {
 					humano.meterHechizo(recompensa5, humano);
+					humano.actualizarHechizo(humano, recompensa5);
 				}
 
 			}
