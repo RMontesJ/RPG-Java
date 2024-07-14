@@ -129,6 +129,7 @@ public class Pelea {
 		}
 
 		System.out.println("Vida de " + humano.getNombre() + ": " + humano.getVida());
+		System.out.println("Vida de " + humano.getNombre() + ": " + humano.getEnergia());
 		System.out.println("Vida de " + monstruo.getNombre() + ": " + monstruo.getVida());
 
 	}
