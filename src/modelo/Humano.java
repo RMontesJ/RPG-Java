@@ -224,6 +224,12 @@ public class Humano {
 		humano.setEnergia(humano.getEnergiaMaxima() - humano.getArma().getPeso());
 
 	}
+	
+	public void desEquiparArma(Humano humano, Arma arma) {
+		humano.setArma(null);
+		humano.setEnergia(humano.getEnergiaMaxima());
+
+	}
 
 	public void ponerNombre(Humano humano) {
 		Scanner sc = new Scanner(System.in);
@@ -322,16 +328,20 @@ public class Humano {
 
 		if (humano.getHabilidad().getNombre().equals("Cuerpo fuerte")) {
 			humano.getArma().setPeso(humano.getArma().getPeso() - humano.getHabilidad().getIntensidad());
+			humano.setEnergia(humano.getEnergiaMaxima() - humano.getArma().getPeso());
 			System.out.println("Tu habilidad ha reducido el peso de tu arma");
 			if(humano.getArma().getPeso() < 0) {
 				humano.getArma().setPeso(0);
 				System.out.println("No se puede reducir mas el peso de esta arma");
 			}
+			if (humano.getEnergia() > humano.getEnergiaMaxima()) {
+				humano.setEnergia(humano.getEnergiaMaxima());
+			}
 		}
 
 	}
 
-	// actualiza el hechizo que acabas de aprender si tienes estas habilidades
+	// actualiza el hechizo que acabas de aprender si tienes estas habilidades (habilidades que afecten a hechizos)
 
 	public void actualizarHechizo(Humano humano, Hechizo hechizo) {
 
@@ -354,7 +364,7 @@ public class Humano {
 
 	}
 	
-	// actualiza el arma que acabas de equiparte si tienes estas habilidades
+	// actualiza el arma que acabas de equiparte si tienes estas habilidades (habilidades que afecten a armas)
 
 	public void actualizarArma(Humano humano, Arma arma) {
 
