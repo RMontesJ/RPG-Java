@@ -254,15 +254,15 @@ public class Humano {
 			equiparHabilidad(humano, bestia, humano.getHabilidad());
 		}
 
-		humano.setHabilidad(humano.habilidades.get(habilidad));
-
-		equiparHabilidad(humano, bestia, humano.getHabilidad());
+		
+		equiparHabilidad(humano, bestia, humano.habilidades.get(habilidad));
 
 	}
 
 	public void equiparHabilidad(Humano humano, Monstruo bestia, Habilidad habilidad) {
 
 		humano.setHabilidad(habilidad);
+
 
 		if (humano.getHabilidad().getNombre().equals("Intimidación")) {
 			bestia.setFuerza(bestia.getFuerza() - humano.getHabilidad().getIntensidad());
