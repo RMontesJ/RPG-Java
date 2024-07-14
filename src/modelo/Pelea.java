@@ -357,7 +357,7 @@ public class Pelea {
 					}
 
 					else if (recompensa1.getNombre().equals("MutaPiedra")) {
-						humano.elegirHabilidad(humano, bestia);
+						humano.desequiparHabilidad(humano, bestia);
 					}
 
 					else if (recompensa1.getNombre().equals("RealzaPoder")) {
@@ -415,7 +415,7 @@ public class Pelea {
 					}
 
 					else if (recompensa2.getNombre().equals("MutaPiedra")) {
-						humano.elegirHabilidad(humano, bestia);
+						humano.desequiparHabilidad(humano, bestia);
 					}
 
 					else if (recompensa2.getNombre().equals("RealzaPoder")) {
@@ -471,7 +471,7 @@ public class Pelea {
 					}
 
 					else if (recompensa3.getNombre().equals("MutaPiedra")) {
-						humano.elegirHabilidad(humano, bestia);
+						humano.desequiparHabilidad(humano, bestia);
 					}
 
 					else if (recompensa3.getNombre().equals("RealzaPoder")) {
