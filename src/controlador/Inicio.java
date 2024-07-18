@@ -14,8 +14,7 @@ public class Inicio {
 		Pelea combate = new Pelea(persona, monstruo);
 
 		Hechizo llamarada = new Hechizo("Llamarada", 1, TipoHechizo.Ofensivo, 20, 10, "Lanza una rafaga de fuego");
-		Hechizo gotaVital = new Hechizo("Gota vital", 1, TipoHechizo.Curativo, 5, 5,
-				"Cubrete de un liquido magico que cura tus heridas");
+		Hechizo gotaVital = new Hechizo("Gota vital", 1, TipoHechizo.Curativo, 5, 5,"Cubrete de un liquido magico que cura tus heridas");
 
 		Arma martillo = new Arma("Martillo", 1, 5, TipoArma.Contundente, 10);
 		

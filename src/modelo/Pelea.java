@@ -97,13 +97,13 @@ public class Pelea {
 				bestia.setVida(0);
 				humano.ganarExperiencia(humano);
 			}
-			
+
 			// limitar el efecto de Intimidacion
-			if(bestia.getFuerza() <= humano.getDefensa()) {
+			if (bestia.getFuerza() <= humano.getDefensa()) {
 				bestia.setFuerza(humano.getDefensa() + 5);
 				System.out.println("No se puede bajar mas el ataque del enemigo");
 			}
-			
+
 			// limitar el efecto de Saludable
 			if (humano.getVida() > humano.getVidaMaxima()) {
 				humano.setVida(humano.getVidaMaxima());
@@ -113,7 +113,7 @@ public class Pelea {
 				humano.setEnergia(humano.getEnergiaMaxima());
 			}
 			// limitar el efecto de Reforzado
-			if(humano.getDefensa() >= bestia.getFuerza()) {
+			if (humano.getDefensa() >= bestia.getFuerza()) {
 				humano.setDefensa(bestia.getFuerza() - 5);
 				System.out.println("No se puede aumentar mas tu defensa");
 			}
@@ -258,14 +258,13 @@ public class Pelea {
 
 		Hechizo relampago = new Hechizo("Relampago", 1, TipoHechizo.Ofensivo, 30, 15, "Lanza una descarga electrica");
 		Hechizo pedrada = new Hechizo("Pedrada", 1, TipoHechizo.Ofensivo, 30, 5, "Usa rocas para atacar");
-		Hechizo golpeOscuro = new Hechizo("Golpe oscuro", 1, TipoHechizo.Ofensivo, 20, 10,
-				"Concentra energia oscura para lanzar un golpe");
-		Hechizo ondaPsiquica = new Hechizo("Onda psiquica", 1, TipoHechizo.Ofensivo, 40, 25,
-				"Ataca con unas ondas de energia psiquica");
-		Hechizo meditación = new Hechizo("Meditación", 1, TipoHechizo.Refuerzo, 10, 10,
-				"Relaja tu mente para recuperar vida y aumentar tu ataque");
-		Hechizo fortaleza = new Hechizo("Fortaleza", 1, TipoHechizo.Refuerzo, 10, 10,
-				"Endurece tu cuerpo para aumentar tu defensa");
+		Hechizo golpeOscuro = new Hechizo("Golpe oscuro", 1, TipoHechizo.Ofensivo, 20, 10,"Concentra energia oscura para lanzar un golpe");
+		Hechizo ondaPsiquica = new Hechizo("Onda psiquica", 1, TipoHechizo.Ofensivo, 40, 25,"Ataca con unas ondas de energia psiquica");
+		Hechizo meditación = new Hechizo("Meditación", 1, TipoHechizo.Refuerzo, 10, 10,"Relaja tu mente para recuperar vida y aumentar tu ataque");
+		Hechizo fortaleza = new Hechizo("Fortaleza", 1, TipoHechizo.Refuerzo, 10, 10,"Endurece tu cuerpo para aumentar tu defensa");
+		
+		Hechizo llamarada = new Hechizo("Llamarada", 1, TipoHechizo.Ofensivo, 20, 10, "Lanza una rafaga de fuego");
+		Hechizo gotaVital = new Hechizo("Gota vital", 1, TipoHechizo.Curativo, 5, 5,"Cubrete de un liquido magico que cura tus heridas");
 
 		combate.insertarPotenciador(pocion);
 		combate.insertarPotenciador(polvoMagico);
@@ -296,6 +295,8 @@ public class Pelea {
 		combate.insertarHechizoRecompensa(ondaPsiquica);
 		combate.insertarHechizoRecompensa(meditación);
 		combate.insertarHechizoRecompensa(fortaleza);
+		combate.insertarHechizoRecompensa(llamarada);
+		combate.insertarHechizoRecompensa(gotaVital);
 
 		int aleatorio1 = (int) (Math.random() * potenciadores.size());
 		int aleatorio2 = (int) (Math.random() * potenciadores.size());
@@ -599,6 +600,16 @@ public class Pelea {
 				}
 
 				else if (recompensa5.getNombre().equals("Fortaleza")) {
+					humano.meterHechizo(recompensa5, humano);
+					humano.actualizarHechizo(humano, recompensa5);
+				}
+
+				else if (recompensa5.getNombre().equals("Gota vital")) {
+					humano.meterHechizo(recompensa5, humano);
+					humano.actualizarHechizo(humano, recompensa5);
+				}
+
+				else if (recompensa5.getNombre().equals("Llamarada")) {
 					humano.meterHechizo(recompensa5, humano);
 					humano.actualizarHechizo(humano, recompensa5);
 				}
