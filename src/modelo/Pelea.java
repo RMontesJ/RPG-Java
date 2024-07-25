@@ -99,21 +99,21 @@ public class Pelea {
 			}
 
 			// limitar el efecto de Intimidacion
-			if (bestia.getFuerza() <= humano.getDefensa()) {
+			if (bestia.getFuerza() <= humano.getDefensa() && humano.getHabilidad().equals("Intimidación")) {
 				bestia.setFuerza(humano.getDefensa() + 5);
 				System.out.println("No se puede bajar mas el ataque del enemigo");
 			}
 
-			// limitar el efecto de Saludable
+			// limitar el efecto de Saludable y pocion
 			if (humano.getVida() > humano.getVidaMaxima()) {
 				humano.setVida(humano.getVidaMaxima());
 			}
-			// limitar el efecto de Energetico
+			// limitar el efecto de Energetico y polvo magico
 			if (humano.getEnergia() > humano.getEnergiaMaxima()) {
 				humano.setEnergia(humano.getEnergiaMaxima());
 			}
 			// limitar el efecto de Reforzado
-			if (humano.getDefensa() >= bestia.getFuerza()) {
+			if (humano.getDefensa() >= bestia.getFuerza() && humano.getHabilidad().equals("Reforzado")) {
 				humano.setDefensa(bestia.getFuerza() - 5);
 				System.out.println("No se puede aumentar mas tu defensa");
 			}
