@@ -23,8 +23,8 @@ public class Inicio {
 		Habilidad potencia = new Habilidad("Potencia", 1, "Aumenta tu ataque", 5);
 		Habilidad energetico = new Habilidad("Energetico", 1, "Aumenta tu energia maxima", 5);
 		Habilidad reforzado = new Habilidad("Reforzado", 1, "Aumenta tu defensa", 5);
-		Habilidad eficiente = new Habilidad("Eficiente", 1, "Reduce el coste de todos tus hechizos", 5);
-		Habilidad destrezaMagica = new Habilidad("Destreza magica", 1, "Aumenta el daño de todos tus hechizos", 5);
+		Habilidad eficiente = new Habilidad("Eficiente", 1, "Reduce el coste de tus hechizos", 5);
+		Habilidad destrezaMagica = new Habilidad("Destreza magica", 1, "Aumenta el daño de tus hechizos", 5);
 		Habilidad expertoEnArmas = new Habilidad("Experto en armas", 1, "Aumenta el daño de tu arma", 5);
 		Habilidad cuerpoFuerte = new Habilidad("Cuerpo fuerte", 1, "Reduce el peso de tu arma", 5);
 		
