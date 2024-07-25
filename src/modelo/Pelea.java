@@ -257,7 +257,7 @@ public class Pelea {
 		Arma mazaDemoniaca = new Arma("Maza demoniaca", 1, 20, TipoArma.Contundente, 15);
 
 		Hechizo relampago = new Hechizo("Relampago", 1, TipoHechizo.Ofensivo, 30, 15, "Lanza una descarga electrica");
-		Hechizo pedrada = new Hechizo("Pedrada", 1, TipoHechizo.Ofensivo, 30, 5, "Usa rocas para atacar");
+		Hechizo pedrada = new Hechizo("Pedrada", 1, TipoHechizo.Ofensivo, 30, 15, "Usa rocas para atacar");
 		Hechizo golpeOscuro = new Hechizo("Golpe oscuro", 1, TipoHechizo.Ofensivo, 20, 10,"Concentra energia oscura para lanzar un golpe");
 		Hechizo ondaPsiquica = new Hechizo("Onda psiquica", 1, TipoHechizo.Ofensivo, 40, 25,"Ataca con unas ondas de energia psiquica");
 		Hechizo meditación = new Hechizo("Meditación", 1, TipoHechizo.Refuerzo, 10, 10,"Relaja tu mente para recuperar vida y aumentar tu ataque");
