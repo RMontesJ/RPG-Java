@@ -514,7 +514,7 @@ public class Humano {
 	public String toString() {
 		return "Humano [\n" + "nombre=" + nombre + "\n" + "vida=" + vida + "\n" + "vidaMaxima=" + vidaMaxima + "\n"
 				+ "fuerza=" + fuerza + "\n" + "arma=" + arma + "\n" + "energia=" + energia + "\n" + "energiaMaxima="
-				+ energiaMaxima + "\n" + "defensa=" + defensa + "\n" + "hechizos=" + hechizos + "\n"
+				+ energiaMaxima + "\n" + "defensa=" + defensa + "\n" + "hechizos=" + "\n" + hechizos + "\n"
 				+ "habilidad equipada= " + habilidad + "\n" + "nivel=" + nivel + "\n" + "experiencia=" + experiencia
 				+ "\n" + "gananciaExperiencia=" + gananciaExperiencia + "\n" + "experienciaLimite=" + experienciaLimite
 				+ "\n" + "]";

@@ -18,14 +18,14 @@ public class Inicio {
 
 		Arma martillo = new Arma("Martillo", 1, 5, TipoArma.Contundente, 10);
 		
-		Habilidad intimidación = new Habilidad("Intimidación", 1, "Reduce el ataque del enemigo", 5);
-		Habilidad saludable = new Habilidad("Saludable", 1, "Aumenta tu salud maxima", 5);
-		Habilidad potencia = new Habilidad("Potencia", 1, "Aumenta tu ataque", 5);
-		Habilidad energetico = new Habilidad("Energetico", 1, "Aumenta tu energia maxima", 5);
+		Habilidad intimidación = new Habilidad("Intimidación", 1, "Reduce el ataque del enemigo", 10);
+		Habilidad saludable = new Habilidad("Saludable", 1, "Aumenta tu salud maxima", 10);
+		Habilidad potencia = new Habilidad("Potencia", 1, "Aumenta tu ataque", 10);
+		Habilidad energetico = new Habilidad("Energetico", 1, "Aumenta tu energia maxima", 10);
 		Habilidad reforzado = new Habilidad("Reforzado", 1, "Aumenta tu defensa", 5);
 		Habilidad eficiente = new Habilidad("Eficiente", 1, "Reduce el coste de tus hechizos", 5);
-		Habilidad destrezaMagica = new Habilidad("Destreza magica", 1, "Aumenta el daño de tus hechizos", 5);
-		Habilidad expertoEnArmas = new Habilidad("Experto en armas", 1, "Aumenta el daño de tu arma", 5);
+		Habilidad destrezaMagica = new Habilidad("Destreza magica", 1, "Aumenta el daño de tus hechizos", 10);
+		Habilidad expertoEnArmas = new Habilidad("Experto en armas", 1, "Aumenta el daño de tu arma", 10);
 		Habilidad cuerpoFuerte = new Habilidad("Cuerpo fuerte", 1, "Reduce el peso de tu arma", 5);
 		
 		
