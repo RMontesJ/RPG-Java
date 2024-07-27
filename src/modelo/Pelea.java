@@ -104,13 +104,16 @@ public class Pelea {
 				System.out.println("No se puede bajar mas el ataque del enemigo");
 			}
 
-			// limitar el efecto de Saludable y pocion
+			// limitar el efecto de Saludable, pocion o hechizos curativos
 			if (humano.getVida() > humano.getVidaMaxima()) {
 				humano.setVida(humano.getVidaMaxima());
 			}
 			// limitar el efecto de Energetico y polvo magico
 			if (humano.getEnergia() > humano.getEnergiaMaxima()) {
 				humano.setEnergia(humano.getEnergiaMaxima());
+			}
+			if(humano.getEnergia() < 0) {
+				humano.setEnergia(0);
 			}
 			// limitar el efecto de Reforzado
 			if (humano.getDefensa() >= bestia.getFuerza() && humano.getHabilidad().equals("Reforzado")) {
@@ -230,9 +233,11 @@ public class Pelea {
 
 	}
 
-	public void elegirRecompensa(Pelea combate, Humano humano, Arma arma, Hechizo hechizo, Monstruo bestia) {
+	public void elegirRecompensa(Pelea combate, Humano humano, Arma arma, Hechizo hechizo, Monstruo bestia, int numeroCombate) {
 		Scanner sc = new Scanner(System.in);
 
+		
+		
 		Potenciador pocion = new Potenciador("Pocion", "Recupera salud", 20);
 		Potenciador polvoMagico = new Potenciador("Polvo magico", "Recupera energia", 15);
 		Potenciador martilloDeHerrero = new Potenciador("Martillo de herrero", "Aumenta el nivel de tu arma", 1);
@@ -311,6 +316,11 @@ public class Pelea {
 		Hechizo recompensa5 = combate.hechizoRecompensa.get(aleatorio5);
 
 		String eleccion = "";
+		
+		if(numeroCombate >= 10) {
+			pocion.setEfecto(pocion.getEfecto() * 2);
+			polvoMagico.setEfecto(polvoMagico.getEfecto() * 2);
+		}
 
 		while (!eleccion.equals("1") && !eleccion.equals("2") && !eleccion.equals("3") && !eleccion.equals("4")
 				&& !eleccion.equals("5")) {
@@ -512,61 +522,73 @@ public class Pelea {
 			} else if (eleccion.equals("4")) {
 
 				if (recompensa4.getNombre().equals("Cuchillo")) {
+					humano.desEquiparArma(humano, humano.getArma());
 					humano.equiparArma(humano, recompensa4);
 					humano.actualizarArma(humano, recompensa4);
 				}
 
 				else if (recompensa4.getNombre().equals("Espada")) {
+					humano.desEquiparArma(humano, humano.getArma());
 					humano.equiparArma(humano, recompensa4);
 					humano.actualizarArma(humano, recompensa4);
 				}
 
 				else if (recompensa4.getNombre().equals("Filo celestial")) {
+					humano.desEquiparArma(humano, humano.getArma());
 					humano.equiparArma(humano, recompensa4);
 					humano.actualizarArma(humano, recompensa4);
 				}
 
 				else if (recompensa4.getNombre().equals("Sai")) {
+					humano.desEquiparArma(humano, humano.getArma());
 					humano.equiparArma(humano, recompensa4);
 					humano.actualizarArma(humano, recompensa4);
 				}
 
 				else if (recompensa4.getNombre().equals("Lanza")) {
+					humano.desEquiparArma(humano, humano.getArma());
 					humano.equiparArma(humano, recompensa4);
 					humano.actualizarArma(humano, recompensa4);
 				}
 
 				else if (recompensa4.getNombre().equals("Punta del destino")) {
+					humano.desEquiparArma(humano, humano.getArma());
 					humano.equiparArma(humano, recompensa4);
 					humano.actualizarArma(humano, recompensa4);
 				}
 
 				else if (recompensa4.getNombre().equals("Porra")) {
+					humano.desEquiparArma(humano, humano.getArma());
 					humano.equiparArma(humano, recompensa4);
 					humano.actualizarArma(humano, recompensa4);
 				}
 
 				else if (recompensa4.getNombre().equals("Martillo")) {
+					humano.desEquiparArma(humano, humano.getArma());
 					humano.equiparArma(humano, recompensa4);
 					humano.actualizarArma(humano, recompensa4);
 				}
 
 				else if (recompensa4.getNombre().equals("Maza demoniaca")) {
+					humano.desEquiparArma(humano, humano.getArma());
 					humano.equiparArma(humano, recompensa4);
 					humano.actualizarArma(humano, recompensa4);
 				}
 
 				else if (recompensa4.getNombre().equals("Arco")) {
+					humano.desEquiparArma(humano, humano.getArma());
 					humano.equiparArma(humano, recompensa4);
 					humano.actualizarArma(humano, recompensa4);
 				}
 
 				else if (recompensa4.getNombre().equals("Ballesta")) {
+					humano.desEquiparArma(humano, humano.getArma());
 					humano.equiparArma(humano, recompensa4);
 					humano.actualizarArma(humano, recompensa4);
 				}
 
 				else if (recompensa4.getNombre().equals("Javalina divina")) {
+					humano.desEquiparArma(humano, humano.getArma());
 					humano.equiparArma(humano, recompensa4);
 					humano.actualizarArma(humano, recompensa4);
 				}

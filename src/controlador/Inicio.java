@@ -55,7 +55,7 @@ public class Inicio {
 			combate.enfrentamiento(persona, monstruo, numeroCombate);
 
 			if (persona.getVida() > 0) {
-				combate.elegirRecompensa(combate, persona, martillo, llamarada, monstruo);
+				combate.elegirRecompensa(combate, persona, martillo, llamarada, monstruo, numeroCombate);
 				monstruo.ganarExperiencia(monstruo);
 				monstruo.setVida(monstruo.getVidaMaxima());
 				numeroCombate++;

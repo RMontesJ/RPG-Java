@@ -221,13 +221,13 @@ public class Humano {
 	public void equiparArma(Humano humano, Arma arma) {
 		humano.setArma(arma);
 		humano.setFuerza(humano.getArma().getDaño() + humano.getFuerza());
-		humano.setEnergia(humano.getEnergiaMaxima() - humano.getArma().getPeso());
+		humano.setEnergia(humano.getEnergia() - humano.getArma().getPeso());
 
 	}
 
 	public void desEquiparArma(Humano humano, Arma arma) {
+		humano.setEnergia(humano.getEnergia() + humano.getArma().getPeso());
 		humano.setArma(null);
-		humano.setEnergia(humano.getEnergiaMaxima());
 
 	}
 
