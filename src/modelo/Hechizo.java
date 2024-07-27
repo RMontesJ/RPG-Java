@@ -94,7 +94,7 @@ public class Hechizo {
 	@Override
 	public String toString() {
 		return "Hechizo [nombre=" + nombre + ", nivel=" + nivel + ", tipo=" + tipo + ", fuerza=" + fuerza
-				+ ", fuerza maxima= " + fuerzaMaxima + ", coste=" + coste + ", descripción=" + descripción + "]" + "\n";
+				+ "/" + fuerzaMaxima + ", coste=" + coste + ", descripción=" + descripción + "]" + "\n";
 	}
 
 }

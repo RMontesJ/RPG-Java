@@ -129,9 +129,9 @@ public class Monstruo {
 	    return "Monstruo {" + 
 	           "\n  nombre=" + nombre + 
 	           "\n  vida=" + vida + 
-	           "\n  vida Maxima=" + vidaMaxima + 
+	           "/" + vidaMaxima + 
 	           "\n  fuerza=" + fuerza + 
-	           "\n  fuerza maxima=" + fuerzaMaxima + 
+	           "/" + fuerzaMaxima + 
 	           "\n  nivel=" + nivel + 
 	           "\n  EXP= " + experiencia + 
 	           "\n  EXP para siguiente nivel= " + experienciaLimite + 
