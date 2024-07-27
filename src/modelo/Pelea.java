@@ -104,14 +104,19 @@ public class Pelea {
 				System.out.println("No se puede bajar mas el ataque del enemigo");
 			}
 
-			// limitar el efecto de Saludable, pocion o hechizos curativos
+			// impide que sobrepase el limite de vida
 			if (humano.getVida() > humano.getVidaMaxima()) {
 				humano.setVida(humano.getVidaMaxima());
 			}
-			// limitar el efecto de Energetico y polvo magico
+			// impide que sobrepase el limite de energia
 			if (humano.getEnergia() > humano.getEnergiaMaxima()) {
 				humano.setEnergia(humano.getEnergiaMaxima());
 			}
+			// impide que sobrepase el limite de fuerza
+			if(humano.getFuerza() > humano.getFuerzaMaxima()) {
+				humano.setFuerza(humano.getFuerzaMaxima());
+			}
+			
 			if(humano.getEnergia() < 0) {
 				humano.setEnergia(0);
 			}
@@ -187,8 +192,12 @@ public class Pelea {
 				System.out.println("Lanzas " + humano.hechizos.get(posicion).getNombre());
 
 				if (humano.hechizos.get(posicion).getNombre().equals("Meditación")) {
+					
 					humano.setVida(humano.getVida() + humano.hechizos.get(posicion).getFuerza());
 					humano.setFuerza(humano.getFuerza() + humano.hechizos.get(posicion).getFuerza());
+					System.out.println("Tu ataque ha aumentado " + humano.hechizos.get(posicion).getFuerza() + " puntos");
+					System.out.println("Te has curado " + humano.hechizos.get(posicion).getFuerza() + " puntos de vida");
+					
 				} else if (humano.hechizos.get(posicion).getNombre().equals("Fortaleza")) {
 					humano.setDefensa(humano.getDefensa() + humano.hechizos.get(posicion).getFuerza());
 					if (humano.getDefensa() >= monstruo.getFuerza()) {
@@ -236,8 +245,6 @@ public class Pelea {
 	public void elegirRecompensa(Pelea combate, Humano humano, Arma arma, Hechizo hechizo, Monstruo bestia, int numeroCombate) {
 		Scanner sc = new Scanner(System.in);
 
-		
-		
 		Potenciador pocion = new Potenciador("Pocion", "Recupera salud", 20);
 		Potenciador polvoMagico = new Potenciador("Polvo magico", "Recupera energia", 15);
 		Potenciador martilloDeHerrero = new Potenciador("Martillo de herrero", "Aumenta el nivel de tu arma", 1);

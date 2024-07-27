@@ -8,6 +8,7 @@ public class Humano {
 	private int vida;
 	private int vidaMaxima;
 	private int fuerza;
+	private int fuerzaMaxima;
 	private Arma arma;
 	private int energia;
 	private int energiaMaxima;
@@ -24,6 +25,7 @@ public class Humano {
 		this.vida = 100;
 		this.vidaMaxima = 100;
 		this.fuerza = 5;
+		this.fuerzaMaxima = 15;
 		this.energia = 100;
 		this.energiaMaxima = 100;
 		this.defensa = 0;
@@ -65,6 +67,14 @@ public class Humano {
 
 	public void setFuerza(int fuerza) {
 		this.fuerza = fuerza;
+	}
+
+	public int getFuerzaMaxima() {
+		return fuerzaMaxima;
+	}
+
+	public void setFuerzaMaxima(int fuerzaMaxima) {
+		this.fuerzaMaxima = fuerzaMaxima;
 	}
 
 	public Arma getArma() {
@@ -289,6 +299,11 @@ public class Humano {
 		if (humano.getHabilidad().getNombre().equals("Potencia")) {
 			humano.setFuerza(humano.getFuerza() + humano.getHabilidad().getIntensidad());
 			System.out.println("Tu habilidad ha aumentado tu ataque");
+			
+			if(humano.getFuerza() > humano.getFuerzaMaxima()) {
+				humano.setFuerza(humano.getFuerzaMaxima());
+			}
+			
 			System.out.println("Ataque de " + humano.getNombre() + ": " + humano.getFuerza());
 		}
 
@@ -327,8 +342,9 @@ public class Humano {
 			for (int i = 0; i < humano.hechizos.size(); i++) {
 				humano.hechizos.get(i)
 						.setFuerza(humano.hechizos.get(i).getFuerza() + humano.getHabilidad().getIntensidad());
+				
 			}
-			System.out.println("Tu habilidad ha aumentado el daño de tus hechizos");
+			System.out.println("Tu habilidad ha aumentado el poder de tus hechizos");
 		}
 
 		if (humano.getHabilidad().getNombre().equals("Experto en armas")) {
@@ -496,6 +512,7 @@ public class Humano {
 		humano.setVida(humano.getVida() + 5);
 		humano.setVidaMaxima(humano.getVidaMaxima() + 5);
 		humano.setFuerza(humano.getFuerza() + 5);
+		humano.setFuerzaMaxima(humano.getFuerzaMaxima() + 10);
 		humano.setEnergia(humano.getEnergia() + 5);
 		humano.setEnergiaMaxima(humano.getEnergiaMaxima() + 5);
 
@@ -513,7 +530,7 @@ public class Humano {
 
 	public String toString() {
 		return "Humano [\n" + "nombre=" + nombre + "\n" + "vida=" + vida + "\n" + "vidaMaxima=" + vidaMaxima + "\n"
-				+ "fuerza=" + fuerza + "\n" + "arma=" + arma + "\n" + "energia=" + energia + "\n" + "energiaMaxima="
+				+ "fuerza=" + fuerza + "\n" + "fuerza maxima=" + fuerzaMaxima + "\n" + "arma=" + arma + "\n" + "energia=" + energia + "\n" + "energiaMaxima="
 				+ energiaMaxima + "\n" + "defensa=" + defensa + "\n" + "hechizos=" + "\n" + hechizos + "\n"
 				+ "habilidad equipada= " + habilidad + "\n" + "nivel=" + nivel + "\n" + "experiencia=" + experiencia
 				+ "\n" + "gananciaExperiencia=" + gananciaExperiencia + "\n" + "experienciaLimite=" + experienciaLimite
