@@ -343,6 +343,11 @@ public class Humano {
 				humano.hechizos.get(i)
 						.setFuerza(humano.hechizos.get(i).getFuerza() + humano.getHabilidad().getIntensidad());
 				
+					
+					if(humano.getHechizos().get(i).getFuerza() > humano.getHechizos().get(i).getFuerzaMaxima()) {
+						humano.getHechizos().get(i).setFuerza(humano.getHechizos().get(i).getFuerzaMaxima());
+					}
+					
 			}
 			System.out.println("Tu habilidad ha aumentado el poder de tus hechizos");
 		}
@@ -447,6 +452,14 @@ public class Humano {
 		System.out.println("Intensidad de la habilidad " + humano.getHabilidad().getNombre() + ": "
 				+ humano.getHabilidad().getIntensidad());
 
+		for(int i = 0; i < humano.getHechizos().size(); i++) {
+			
+			if(humano.getHechizos().get(i).getFuerza() > humano.getHechizos().get(i).getFuerzaMaxima()) {
+				humano.getHechizos().get(i).setFuerza(humano.getHechizos().get(i).getFuerzaMaxima());
+			}
+			
+		}
+		
 	}
 	
 	public void actualizarHechizo(Humano humano, Hechizo hechizo) {
@@ -519,6 +532,7 @@ public class Humano {
 		for (int i = 0; i < hechizos.size(); i++) {
 
 			humano.hechizos.get(i).setFuerza(humano.hechizos.get(i).getFuerza() + 5);
+			humano.hechizos.get(i).setFuerzaMaxima(humano.hechizos.get(i).getFuerzaMaxima() + 10);
 
 		}
 
